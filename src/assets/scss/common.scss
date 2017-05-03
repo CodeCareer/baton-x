@@ -1,0 +1,157 @@
+html {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+body {
+  // font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: 'Helvetica Neue', 'Helvetica', tahoma, 'Hiragino Sans GB', 'PingFang SC', 'STHeitiSC-Light', 'Microsoft YaHei', Arial, sans-serif;
+  background: #fff;
+  min-width: 1200px;
+  min-height: 100%;
+  color: #55627b;
+  font-size: 13px;
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+.mr-0_5em {
+  margin-right: .5em;
+}
+
+.mr-1em {
+  margin-right: 1em;
+}
+
+.mr5 {
+  margin-right: 5px;
+}
+
+.ml5 {
+  margin-left: 5px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.ib {
+  display: inline-block;
+}
+
+.dn {
+  display: none;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.clfix {
+  &:after {
+    content: '';
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+.cl-b {
+  clear: both;
+}
+
+.lh1_5 {
+  line-height: 1.5em;
+}
+
+.dn-by-h {
+  overflow: hidden;
+  height: 0!important;
+  padding: 0!important;
+}
+
+.dn-imp {
+  display: none!important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ov-h {
+  overflow: hidden;
+}
+
+.va-r1 {
+  vertical-align: -.1em;
+}
+
+.blank:after {
+  content: '空';
+  color: transparent;
+  opacity: 0;
+}
+.em-money{
+  font-style: normal;
+  color: #66cebe;
+  margin-left: 8px;
+  &:before {
+    content: "￥";
+    font-size: 12px;
+    color: #c4c4c4;
+    margin-right: 3px;
+  }
+}
+.update-data{
+  .update-status{
+    font-size:13px;
+    i{
+      font-size:12px;
+      margin:0 3px;
+      vertical-align:middle;
+    }
+    em{
+      font-style:normal;
+      vertical-align:middle;
+    }
+  }
+  .update-time{
+    vertical-align:middle;
+    font-size:13px;
+    margin-left:10px;
+    em{
+      margin-left:5px;
+    }
+  }
+}
