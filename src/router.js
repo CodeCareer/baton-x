@@ -19,6 +19,12 @@ let router = new VueRouter({
   routes
 })
 
+router.afterEach((to) => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+})
+
 export default {
   run() {
     new Vue({

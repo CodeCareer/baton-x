@@ -1,0 +1,88 @@
+.el-button {
+  .icon-batonx {
+    margin-right: 3px;
+    vertical-align: -1px;
+  }
+}
+
+.el-button--gray {
+  $gray-color: #96a3ba;
+  color: white;
+  background-color: $gray-color;
+  border-color: $gray-color;
+  &:hover {
+    color: white;
+    background-color: lighten($gray-color, 5%);
+    border-color: lighten($gray-color, 5%);
+  }
+  &:active,
+  &:focus {
+    color: white;
+    background-color: darken($gray-color, 5%);
+    border-color: darken($gray-color, 5%);
+  }
+}
+
+.el-button--primary {
+  $primary-color: #538cc0;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &:hover {
+    background-color: lighten($primary-color, 5%);
+    border-color: lighten($primary-color, 5%);
+  }
+  &:active,
+  &:focus {
+    background-color: darken($primary-color, 5%);
+    border-color: darken($primary-color, 5%);
+  }
+}
+
+.el-table {
+  font-size: 12px;
+  color: #626473;
+  border: 1px solid #e7eaed;
+  border-bottom: 0;
+  &:after,
+  &:before {
+    display: none;
+  }
+  th {
+    background-color: #f3f6f8;
+    &.is-leaf {
+      border-bottom: 1px solid #e7eaed;
+    }
+  }
+  .cell {
+    white-space: nowrap;
+  }
+  th>.cell {
+    color: #657286;
+    white-space: nowrap;
+    background-color: #f3f6f8;
+    font-weight: normal;
+  }
+  td {
+    border-bottom: 1px solid #e7eaed;
+  }
+}
+
+.el-pager li.active {
+  background-color: #96a3ba;
+  border-color: #96a3ba;
+}
+
+.el-select-dropdown__item.selected {
+  background-color: #96a3ba;
+  &.hover {
+    background-color: #96a3ba;
+  }
+}
+
+.el-pagination .el-select .el-input input {
+  &:focus,
+  &:active,
+  &:hover {
+    border-color: #96a3ba;
+  }
+}

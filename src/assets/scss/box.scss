@@ -1,0 +1,81 @@
+.box {
+  border-radius: 4px;
+  border: 1px solid #e7eaed;
+  position: relative;
+  .box-tab-header {
+    position: absolute;
+    right: 10px;
+    z-index: 9;
+    top: 6px;
+  }
+  .box-header {
+    height: 40px;
+    line-height: 40px;
+    background: #f3f6f8;
+    padding-left: 10px;
+    overflow: hidden;
+    border-radius: 4px 4px 0 0;
+    .buttons {
+      float: right;
+      button {
+        margin-right: 10px;
+      }
+    }
+    h3 {
+      line-height: 40px;
+      color: #595f67;
+      font-weight: bold;
+      font-size: 13px;
+      float: left;
+      margin-right: 20px;
+    }
+    small {
+      font-size: 12px;
+      color: #595f67;
+      margin-right: 20px;
+    }
+  }
+  .box-content {
+    .el-table {
+      // border: 0;
+    }
+    // padding: 10px;
+  }
+  .el-tabs__item {
+    height: 30px;
+    line-height: 30px;
+  }
+  .el-tabs__header {
+    margin-bottom: 0;
+    border-bottom: 0;
+    height: 40px;
+    line-height: 51px;
+    background: #f3f6f8;
+    padding-left: 10px;
+    border-radius: 4px 4px 0 0;
+  }
+  .el-tabs__content {
+    background: white;
+    padding: 15px;
+    border-radius: 0 0 4px 4px;
+    .el-input {
+      width: 200px;
+      height: 30px;
+      input {
+        background: #f3f6f8;
+        height: 30px;
+        border: 0;
+        font-size: 12px;
+      }
+    }
+  }
+  .el-tabs--card>.el-tabs__header .el-tabs__item {
+    color: #657286;
+    font-size: 13px;
+    &.is-active {
+      border: 1px solid white;
+      background: white;
+      color: #262c38;
+    }
+  }
+}

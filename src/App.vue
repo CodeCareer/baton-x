@@ -3,8 +3,10 @@
     router-view
 </template>
 <style lang="scss">
+  @import './assets/fonts/style.css';
+  @import './assets/scss/base.scss';
   @import './assets/scss/common.scss';
   @import './assets/scss/table.scss';
-  @import './assets/fonts/style.css';
+  @import './assets/scss/box.scss';
   @import './assets/scss/element-ui.scss';
 </style>
