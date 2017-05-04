@@ -3,7 +3,9 @@ import routes from './routers'
 import Vue from 'vue'
 import App from './App.vue'
 import store from './vuex/store'
+
 Vue.use(VueRouter)
+
 let router = new VueRouter({
   mode: 'history',
   base: __dirname,
@@ -16,6 +18,7 @@ let router = new VueRouter({
   },
   routes
 })
+
 export default {
   run() {
     new Vue({
@@ -27,4 +30,5 @@ export default {
     }).$mount('#app')
   }
 }
+
 export { router }
