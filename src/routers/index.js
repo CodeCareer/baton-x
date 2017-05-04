@@ -4,16 +4,16 @@ export default [{
 }, {
   path: '/login',
   name: 'login',
-  component: reslove => require(['../views/login.vue'], reslove),
-  meat: {title: '开通金融-交易所产品管理系统', needLogin: false}
+  component: reslove => require(['../views/Login.vue'], reslove),
+  meat: { title: '开通金融-交易所产品管理系统', needLogin: false }
 }, {
   path: '/ex',
   name: 'ex',
   // redirect: 'ex/overview',
-  component: reslove => require(['../views/ex-layout.vue'], reslove),
+  component: reslove => require(['../views/ExLayout.vue'], reslove),
   children: [{
     path: 'overview',
     name: 'overview',
-    component: reslove => require(['../views/productManagement/overview.vue'], reslove)
+    component: reslove => require(['../views/product_management/Overview.vue'], reslove)
   }]
 }]

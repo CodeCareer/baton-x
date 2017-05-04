@@ -1,12 +1,13 @@
-# vue-demo
+# kt-batonx-frontend
 
-> A Vue.js project
+> 开通金融-交易所产品管理系统
 
 ## Build Setup
 
 ``` bash
 # install dependencies
-npm install
+recommand: npm i yarn -g & yarn install
+fallback: npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
