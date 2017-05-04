@@ -12,7 +12,7 @@ export default [{
   // redirect: 'ex/overview',
   component: reslove => require(['../views/ex-layout.vue'], reslove),
   children: [{
-    path: '/overview',
+    path: 'overview',
     name: 'overview',
     component: reslove => require(['../views/productManagement/overview.vue'], reslove)
   }]

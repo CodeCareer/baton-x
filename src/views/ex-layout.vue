@@ -165,6 +165,7 @@ export default {
     }
     .body{
       position: relative;
+      padding:0 15px;
     }
     footer{
       position: absolute;
