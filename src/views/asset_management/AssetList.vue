@@ -12,9 +12,24 @@
             el-input(placeholder='发行方', icon='search', v-model.lazy='filter.publisher')
             el-input(placeholder='增信措施', icon='search', v-model.lazy='filter.credit')
             el-button(size="small", type="primary", @click="clearFilter")  清除
-        el-tab-pane(label='基金', name='second') 基金
-        el-tab-pane(label='股票', name='third') 股票
-        el-tab-pane(label='债权', name='fourth') 债权
+        el-tab-pane(label='基金', name='second')
+          .filters
+            el-input(placeholder='资产名称', icon='search', v-model.lazy='filter.name')
+            el-input(placeholder='发行方', icon='search', v-model.lazy='filter.publisher')
+            el-input(placeholder='增信措施', icon='search', v-model.lazy='filter.credit')
+            el-button(size="small", type="primary", @click="clearFilter")  清除
+        el-tab-pane(label='股票', name='third')
+          .filters
+            el-input(placeholder='资产名称', icon='search', v-model.lazy='filter.name')
+            el-input(placeholder='发行方', icon='search', v-model.lazy='filter.publisher')
+            el-input(placeholder='增信措施', icon='search', v-model.lazy='filter.credit')
+            el-button(size="small", type="primary", @click="clearFilter")  清除
+        el-tab-pane(label='债权', name='fourth')
+          .filters
+            el-input(placeholder='资产名称', icon='search', v-model.lazy='filter.name')
+            el-input(placeholder='发行方', icon='search', v-model.lazy='filter.publisher')
+            el-input(placeholder='增信措施', icon='search', v-model.lazy='filter.credit')
+            el-button(size="small", type="primary", @click="clearFilter")  清除
     .table-container
       el-table(:data='filterTableData', style='width: 100%', @row-click='goToDetail')
         el-table-column(prop='name' label='资产名称', width='220')
