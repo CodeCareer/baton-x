@@ -36,7 +36,7 @@
                 .stock-title-name.fl 今日存量产品占比分析
                 .stock-title-select.fr
                   el-select(v-model="name")
-                    el-option(v-for="item in items", :value="item.name")
+                    el-option(v-for="item in items", :key="item.value", :value="item.name")
               .stock-echart
                 kt-pie-chart(:chart-option="pieEchartOption")
     .ov-todo.all-padding

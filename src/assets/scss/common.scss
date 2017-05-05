@@ -15,7 +15,7 @@ body {
   background: #fff;
   min-width: 1200px;
   min-height: 100%;
-  color: #55627b;
+  color: #595f67;
   font-size: 13px;
   padding: 0;
   margin: 0;
@@ -23,6 +23,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+.color-green {
+  color: #16a474;
+}
+
+.color-red {
+  color: #de3569;
+}
 
 .mr-0_5em {
   margin-right: .5em;
@@ -122,7 +129,8 @@ body {
   color: transparent;
   opacity: 0;
 }
-.em-money{
+
+.em-money {
   font-style: normal;
   color: #66cebe;
   margin-left: 8px;
@@ -133,25 +141,26 @@ body {
     margin-right: 3px;
   }
 }
-.update-data{
-  .update-status{
-    font-size:13px;
-    i{
-      font-size:12px;
-      margin:0 3px;
-      vertical-align:middle;
+
+.update-data {
+  .update-status {
+    font-size: 13px;
+    i {
+      font-size: 12px;
+      margin: 0 3px;
+      vertical-align: middle;
     }
-    em{
-      font-style:normal;
-      vertical-align:middle;
+    em {
+      font-style: normal;
+      vertical-align: middle;
     }
   }
-  .update-time{
-    vertical-align:middle;
-    font-size:13px;
-    margin-left:10px;
-    em{
-      margin-left:5px;
+  .update-time {
+    vertical-align: middle;
+    font-size: 13px;
+    margin-left: 10px;
+    em {
+      margin-left: 5px;
     }
   }
 }

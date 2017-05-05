@@ -1,9 +1,45 @@
 $primary-color: #538cc0;
+$border-color: #e7eaed;
 body {
   .el-button {
     .icon-batonx {
       margin-right: 3px;
       vertical-align: -1px;
+    }
+    &>* {
+      cursor: pointer;
+    }
+  }
+  .el-dialog__close {
+    font-size: 12px;
+    &:hover,
+    &:focus,
+    &:active {
+      color: $primary-color;
+    }
+  }
+  .el-dialog__header {
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    color: #595f67;
+    text-align: center;
+    padding: 0 20px;
+    border-bottom: 1px solid $border-color;
+    font-weight: normal;
+    span {
+      font-weight: normal;
+    }
+  }
+  .el-button--text {
+    cursor: pointer;
+    color: $primary-color;
+    &:hover {
+      color: lighten($primary-color, 5%);
+    }
+    &:active,
+    &:focus {
+      color: darken($primary-color, 5%);
     }
   }
   .el-textarea.is-disabled {

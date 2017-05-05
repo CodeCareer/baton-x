@@ -98,8 +98,79 @@
               span(v-show='noteVisibleCount >= demo.notes.length')
                 | 没有更多了
     .box.box-normal
-      .box-header 资产详情
+      .box-header  资产详情
       .box-content
+        .asset-panel
+          .asset-panel-dashboard
+            el-row
+              el-col(:span="8")
+                .panel-cell 持有总金额：￥33,816,000.00
+              el-col(:span="8")
+                .panel-cell 总发行金额：￥200,897,170.00
+              el-col(:span="8")
+                .panel-cell 持有金额占总发行比：16.8%
+            el-row
+              el-col(:span="8")
+                .panel-cell
+                  | 今日总收益：￥
+                  em 311,900.00
+              el-col(:span="8")
+                .panel-cell
+                  | 累计总收益：￥
+                  em 1,043,900.00
+          .asset-panel-products
+            .header
+              | 持有产品列表
+              .buttons
+                el-button(type="text", icon="time", @click="historyDealVisible = true") 历史交易记录
+            .table
+              table
+                thead
+                  tr
+                    th 产品名称
+                    th 数量
+                    th 金额（元）
+                    th 比例
+                    th 今日收益（元）
+                    th 累计收益（元）
+                tbody
+                  tr(v-for="p in demo.products")
+                    td {{p.name}}
+                    td {{p.count}}
+                    td {{p.amount | ktCurrency('')}}
+                    td {{p.ratio}}
+                    td {{p.todayEarning | ktCurrency('')}}
+                    td {{p.totalEarning | ktCurrency('')}}
+    .box.box-normal
+      .box-header 账户列表
+      .box-content.accounts
+        el-row(:gutter="20")
+          el-col(:span="8")
+            .account-card
+              table
+                tr
+                  th 账户类型：
+                  td.bd 资产账户
+                tr
+                  th 账户名：
+                  td 天津旭达有限公司
+                tr
+                  th 账户：
+                  td.em 2310 8372 6532 098
+                tr
+                  th 开户行：
+                  td 招商银行天津滨海新区支行
+    el-dialog(title='历史交易记录' v-model='historyDealVisible')
+      el-table(:data='demo.historyDeals')
+        el-table-column(label='时间')
+          template(scope='scope') {{scope.row.dealAt | moment('YYYY-MM-DD')}}
+        el-table-column(property='name', label='产品名称', width='200')
+        el-table-column(property='opType', label='操作类型')
+        el-table-column(label='变动金额')
+          template(scope='scope')
+            span.color-green(v-if="scope.row.opType === '卖出'") -{{scope.row.amount | ktCurrency('')}}
+            span.color-red(v-if="scope.row.opType === '买入'") +{{scope.row.amount | ktCurrency('')}}
+
 </template>
 
 <script>
@@ -198,6 +269,7 @@ export default {
 
   data() {
     return {
+      historyDealVisible: false,
       addNoteFocus: false,
       noteVisibleCount: 2,
       noteMoreStep: 5,
@@ -234,6 +306,32 @@ export default {
           name: '资产合同'
         }, {
           name: '资产说明书'
+        }],
+        products: [{
+          name: '甜橙起航理财计划D2',
+          count: 1000,
+          amount: 4715000,
+          ratio: 0.14,
+          todayEarning: 30000,
+          totalEarning: 150000
+        }, {
+          name: '甜橙起航理财计划C2',
+          count: 300,
+          amount: 3905000,
+          ratio: 0.12,
+          todayEarning: 28000,
+          totalEarning: 168000
+        }],
+        historyDeals: [{
+          dealAt: new Date(),
+          name: '甜橙起航理财计划D2',
+          opType: '卖出',
+          amount: '100020'
+        }, {
+          dealAt: new Date(),
+          name: '甜橙起航理财计划C2',
+          opType: '买入',
+          amount: '180623'
         }]
       }
     }
@@ -263,6 +361,10 @@ export default {
 
 .attachments-box {
   font-size: 13px;
+  .el-upload-list__item {
+    float: left;
+    width: auto;
+  }
   h3 {
     font-size: 13px;
     small {
@@ -367,8 +469,83 @@ export default {
   margin-left: 10px;
 }
 
-.el-upload-list__item {
-  float: left;
-  width: auto;
+.asset-panel {
+  border-radius: 4px;
+  border: 1px solid #e7eaed;
+  em {
+    color: #de3569;
+  }
+}
+
+.asset-panel-dashboard {
+  .el-row {
+    border-bottom: 1px solid #e7eaed;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .panel-cell {
+    padding: 35px;
+  }
+}
+
+.asset-panel-products {
+  .header {
+    background: #e2f1f8;
+    padding-left: 15px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    color: #364f77;
+    .buttons {
+      float: right;
+      button {
+        font-size: 13px;
+        margin-right: 10px;
+      }
+    }
+  }
+  table {
+    width: 100%;
+    th,
+    td {
+      color: #929aa3;
+      font-weight: normal;
+      text-align: left;
+      padding: 15px;
+      border-bottom: 1px solid #e7eaed;
+    }
+    tbody tr:last-child {
+      th,
+      td {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+.accounts {
+  border-radius: 4px;
+  border: 1px solid #e7eaed;
+  padding: 30px 15px;
+}
+
+.account-card {
+  border-radius: 4px;
+  border: 1px solid #e7eaed;
+  padding: 15px;
+  table {
+    width: 100%;
+    th,
+    td {
+      &.em {
+        color: #538cc0!important;
+      }
+      &.bd {
+        color: #595f67;
+        font-weight: bold!important;
+      }
+    }
+  }
 }
 </style>

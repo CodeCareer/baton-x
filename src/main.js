@@ -17,7 +17,8 @@ import {
   Pagination,
   Row,
   Col,
-  Upload
+  Upload,
+  Dialog
 } from 'element-ui'
 
 Vue.component(Button.name, Button)
@@ -32,5 +33,6 @@ Vue.component(Pagination.name, Pagination)
 Vue.component(Row.name, Row)
 Vue.component(Col.name, Col)
 Vue.component(Upload.name, Upload)
+Vue.component(Dialog.name, Dialog)
 
 router.run()
