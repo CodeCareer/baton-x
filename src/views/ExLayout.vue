@@ -169,6 +169,7 @@ export default {
     }
     .body {
       position: relative;
+
       padding-bottom: 140px;
     }
     .body-container {

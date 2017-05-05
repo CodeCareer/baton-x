@@ -33,5 +33,4 @@ Vue.component(Row.name, Row)
 Vue.component(Col.name, Col)
 Vue.component(Upload.name, Upload)
 
-/* eslint-disable no-new */
 router.run()

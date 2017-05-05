@@ -65,8 +65,8 @@
             h3
               | 附件：
               small *最多支持添加20个文件，每个文件不得超过20M
-              el-upload.upload-attachment(action='//jsonplaceholder.typicode.com/posts/' :file-list='demo.attachments')
-                el-button(size='mini' type='primary') 增加
+              el-upload.upload-attachment(action='//jsonplaceholder.typicode.com/posts/', :file-list='demo.attachments')
+                el-button(size='mini', type='primary') 增加
         .box-section
           .notes-box
             el-row
