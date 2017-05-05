@@ -82,7 +82,7 @@ export default {
 <style lang="scss">
 .pie-echart {
   height: 140px;
-  width:400px;
+  width:390px;
   margin:0 auto;
 //   position: absolute;
 //   left: 50%;

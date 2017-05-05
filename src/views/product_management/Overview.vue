@@ -1,7 +1,7 @@
 <template lang="pug">
   .overview
     .ov-today
-      h3.all-padding 今日总览
+      .overview-title 今日总览
       .ov-today-content
         .stock-width.fl
           .stock-width-pad
@@ -409,21 +409,58 @@
             tr
               td.first-td 京东活期理财计划丰银宝a
               td
-
+                .nature
+                 | 开放
+                .remarks(v-if="isclose")
+                  span 备注:预计净赎回五千万左右货币基金
+                  i.icon-batonx.icon-close(@click="closeRemarks")
               td
-              td
+              td  3月01日12：00--3月02日11：00
             tr
               td.first-td 京东活期理财计划丰银宝a
               td
+                .nature
+                 | 募集期
+                .remarks
+                  span 备注:预计净赎回五千万左右货币基金
               td
-              td
+                .issue-amount 发行金额：
+                  span.afp-num {{ 188184258 | ktCurrency}}
+                .trial-amount(v-if="false") 试算金额：
+                  span  {{ 200184258 | ktCurrency}}
+              td 3月01日12：00--3月02日11：00
             tr
               td.first-td 京东活期理财计划丰银宝a
               td
+                .nature
+                 | 到期
+                .remarks
+                  span 备注:预计净赎回五千万左右货币基金
               td
-              td
+                .issue-amount 发行金额：
+                  span.afp-num {{ 188184258 | ktCurrency}}
+                .trial-amount(v-if="false") 试算金额：
+                  span  {{ 200184258 | ktCurrency}}
+              td 3月01日12：00--3月02日11：00
     .ov-calendar.all-padding
       h3 日历
+      .ov-calendar-content
+        .calendar-top
+          i.icon-batonx.icon-left
+          span {{2}}月 &nbsp 第{{1}}周
+          i.icon-batonx.icon-right
+        .calendar-middle
+          .calender-cell.fl 周日
+          .calender-cell.fl  周一
+          .calender-cell.fl 周二
+          .calender-cell.fl  周三
+          .calender-cell.fl  周四
+          .calender-cell.fl  周五
+          .calender-cell.fl  周六
+        .calendar-bottom
+          .calendar-bottom-y
+            .calendar-bottom-z
+              .calendar-bottom-n
 </template>
 
 <script>
@@ -445,6 +482,7 @@ export default {
   },
   data() {
     return {
+      isclose: true,
       pieEchartOption: {
         legend: {
           data: [
@@ -502,14 +540,32 @@ export default {
       }],
       name: '平台分布'
     }
+  },
+  methods: {
+    closeRemarks() {
+      debugger
+      this.isclose = false
+    }
   }
 }
 </script>
 <style lang="scss">
 .overview {
+  .overview-title{
+    font-size:15px;
+    color:#595f67;
+    padding:10px 5px;
+  }
   h3 {
     font-size:15px;
     color:#595f67;
+    padding:10px 0;
+  }
+  .afp-num{
+     color:#e98da4;
+  }
+  .redeem-num{
+    color:#82c5aa;
   }
   .all-padding{
     padding:0 5px;
@@ -644,12 +700,6 @@ export default {
             .afp,.redeem{
               color:#595f67;
             }
-            .afp-num{
-              color:#e98da4;
-            }
-            .redeem-num{
-              color:#82c5aa;
-            }
             .ov-table-last-td{
               .n-operation{
                 padding:2px 0;
@@ -677,9 +727,73 @@ export default {
   }
   .ov-remind{
     .ov-remind-table{
+      border:1px solid #e3e6ea;
+      padding:15px 20px;
+      border-radius: 5px;
       table{
         width:100%;
         table-layout:fixed;
+        .first-td{
+          font-size:13px;
+          color:#595f67;
+          font-weight:bold;
+        }
+        td{
+          padding:5px 0;
+          color:#595f67;
+        }
+        .remarks{
+          background: #f3f6f8;
+          padding:0px 5px;
+          display: inline-block;
+          border-radius: 3px;
+          margin:5px 0;
+          i{
+            font-size:12px;
+            color:#929aa3;
+            margin-left: 20px;
+            vertical-align: -1px;
+            cursor:pointer;
+          }
+        }
+      }
+    }
+  }
+  .ov-calendar{
+    .ov-calendar-content{
+      border:1px solid #f3f6f8;
+      border-radius: 5px;
+      .calendar-top{
+        background: #f3f6f8;
+        height:40px;
+        line-height: 40px;
+        text-align: center;
+        span{
+
+        }
+        i{
+          padding:0 20px;
+          font-size:12px;
+          color:#939ba4;
+          cursor:pointer;
+          &:hover,
+          &:focus{
+            color:#538cc0;
+          }
+        }
+      }
+      .calendar-middle{
+        width:100%;
+        overflow: hidden;
+        height:40px;
+        line-height: 40px;
+      }
+      .calender-cell{
+        width:14.28%;
+        text-align: center;
+      }
+      .calendar-bottom{
+        overflow: hidden;
       }
     }
   }
