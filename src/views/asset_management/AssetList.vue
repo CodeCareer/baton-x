@@ -73,6 +73,9 @@ export default {
         name: 'AssetDetail',
         params: {
           id: row.id || row.name
+        },
+        query: {
+          type: row.type
         }
       })
     },
@@ -114,6 +117,7 @@ export default {
         startDate: '2017-01-05',
         endDate: '2017-06-05',
         term: '96天',
+        type: 1,
         publisher: '中信集团',
         credit: '责任担保'
       }, {
@@ -122,6 +126,7 @@ export default {
         startDate: '2017-01-13',
         endDate: '2017-07-05',
         term: '26天',
+        type: 0,
         publisher: '广西中小担保有限公司',
         credit: '平台风险备用金'
       }, {
@@ -130,6 +135,7 @@ export default {
         startDate: '2017-01-20',
         endDate: '2017-04-20',
         term: '56天',
+        type: 0,
         publisher: '武汉新港城建设投资企业',
         credit: '到期回购'
       }, {
@@ -138,6 +144,7 @@ export default {
         startDate: '2017-01-22',
         endDate: '2017-05-22',
         term: '87天',
+        type: 0,
         publisher: '广西万宁投资集团',
         credit: '全额回购担保'
       }, {
@@ -146,6 +153,7 @@ export default {
         startDate: '2017-01-28',
         endDate: '2017-02-28',
         term: '4天',
+        type: 0,
         publisher: '创元开发建设投资企业',
         credit: '连带责任担保'
       }, {
@@ -154,6 +162,7 @@ export default {
         startDate: '2017-01-30',
         endDate: '2017-06-30',
         term: '26天',
+        type: 0,
         publisher: '宝信国际有限公司',
         credit: '风险保证金'
       }, {
@@ -162,6 +171,7 @@ export default {
         startDate: '2017-02-05',
         endDate: '2017-07-05',
         term: '31天',
+        type: 0,
         publisher: '福州郑和发展有限公司',
         credit: '承诺回购'
       }, {
@@ -170,6 +180,7 @@ export default {
         startDate: '2017-02-15',
         endDate: '2017-04-15',
         term: '50天',
+        type: 0,
         publisher: '天津旭达有限公司',
         credit: '到期还款'
       }, {
@@ -178,6 +189,7 @@ export default {
         startDate: '2017-02-18',
         endDate: '2017-03-18',
         term: '22天',
+        type: 0,
         publisher: '阳光城责任有限公司',
         credit: '无限责任担保'
       }, {
@@ -186,6 +198,7 @@ export default {
         startDate: '2017-02-24',
         endDate: '2018-02-24',
         term: '10天',
+        type: 0,
         publisher: '沂山实业责任有限公司',
         credit: '风险保证金'
       }]

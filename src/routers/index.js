@@ -23,5 +23,9 @@ export default [{
     path: 'asset_detail/:id',
     name: 'AssetDetail',
     component: resolve => require(['../views/asset_management/AssetDetail.vue'], resolve)
+  }, {
+    path: 'asset/:id',
+    name: 'AssetForm',
+    component: resolve => require(['../views/asset_management/AssetForm.vue'], resolve)
   }]
 }]
