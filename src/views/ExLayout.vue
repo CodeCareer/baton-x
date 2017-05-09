@@ -14,9 +14,9 @@
             template(slot='title')
               i.icon-batonx.icon-proman.icon-color
               | 产品管理
-            el-menu-item(index='1-1') 今日总览
-            el-menu-item(index='1-2') 产品列表
-            el-menu-item(index='1-3') 登记产品列表
+            el-menu-item(index='1-1',:route="{name: 'overview'}") 今日总览
+            el-menu-item(index='1-2',:route="{name: 'productList'}") 产品列表
+            el-menu-item(index='1-3',:route="{name: 'registerProduct'}") 登记产品列表
           el-submenu(index='2')
             template(slot="title")
               i.icon-batonx.icon-assetman.icon-color

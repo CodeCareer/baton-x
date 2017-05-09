@@ -41,8 +41,8 @@
                 i.icon-batonx.icon-explain
             span(v-if="!scope.row.note") {{scope.row.name}}
         el-table-column(prop='amount' label='持有金额', width='150')
-        el-table-column(prop='startDate' label='起息日')
-        el-table-column(prop='endDate', label='到期日', :sortable='true')
+        el-table-column(prop='start_date' label='起息日')
+        el-table-column(prop='end_date', label='到期日', :sortable='true')
         el-table-column(prop='term' label='剩余期限')
         el-table-column(prop='publisher' label='发行方', width='180')
         el-table-column(prop='credit' label='增信措施', width="150")
@@ -114,8 +114,8 @@ export default {
         note: '基金总额的30%需在2017年03月06日变现',
         name: '中信信托回购项目',
         amount: '￥13,098,781.00',
-        startDate: '2017-01-05',
-        endDate: '2017-06-05',
+        start_date: '2017-01-05',
+        end_date: '2017-06-05',
         term: '96天',
         type: 1,
         publisher: '中信集团',
@@ -123,8 +123,8 @@ export default {
       }, {
         name: '广西中小担-象翌融资项目',
         amount: '￥20,231.00',
-        startDate: '2017-01-13',
-        endDate: '2017-07-05',
+        start_date: '2017-01-13',
+        end_date: '2017-07-05',
         term: '26天',
         type: 0,
         publisher: '广西中小担保有限公司',
@@ -132,8 +132,8 @@ export default {
       }, {
         name: '武汉新港城建设投资企业融资项目',
         amount: '￥45,632,98.00',
-        startDate: '2017-01-20',
-        endDate: '2017-04-20',
+        start_date: '2017-01-20',
+        end_date: '2017-04-20',
         term: '56天',
         type: 0,
         publisher: '武汉新港城建设投资企业',
@@ -141,8 +141,8 @@ export default {
       }, {
         name: '广西万宁投资集团融资项目',
         amount: '￥870,654,256.00',
-        startDate: '2017-01-22',
-        endDate: '2017-05-22',
+        start_date: '2017-01-22',
+        end_date: '2017-05-22',
         term: '87天',
         type: 0,
         publisher: '广西万宁投资集团',
@@ -150,8 +150,8 @@ export default {
       }, {
         name: '创元开发建设投资企业融资项目',
         amount: '￥12,098,653.00',
-        startDate: '2017-01-28',
-        endDate: '2017-02-28',
+        start_date: '2017-01-28',
+        end_date: '2017-02-28',
         term: '4天',
         type: 0,
         publisher: '创元开发建设投资企业',
@@ -159,8 +159,8 @@ export default {
       }, {
         name: '宝信国际ABS集合信托项目',
         amount: '￥34,892.00',
-        startDate: '2017-01-30',
-        endDate: '2017-06-30',
+        start_date: '2017-01-30',
+        end_date: '2017-06-30',
         term: '26天',
         type: 0,
         publisher: '宝信国际有限公司',
@@ -168,8 +168,8 @@ export default {
       }, {
         name: '武汉信用-福州郑和发展融资项目',
         amount: '￥23,673,88.00',
-        startDate: '2017-02-05',
-        endDate: '2017-07-05',
+        start_date: '2017-02-05',
+        end_date: '2017-07-05',
         term: '31天',
         type: 0,
         publisher: '福州郑和发展有限公司',
@@ -177,8 +177,8 @@ export default {
       }, {
         name: '天津旭达过桥资金项目',
         amount: '￥12,872.00',
-        startDate: '2017-02-15',
-        endDate: '2017-04-15',
+        start_date: '2017-02-15',
+        end_date: '2017-04-15',
         term: '50天',
         type: 0,
         publisher: '天津旭达有限公司',
@@ -186,8 +186,8 @@ export default {
       }, {
         name: '阳光城保证金基金项目',
         amount: '￥76,897,882.00',
-        startDate: '2017-02-18',
-        endDate: '2017-03-18',
+        start_date: '2017-02-18',
+        end_date: '2017-03-18',
         term: '22天',
         type: 0,
         publisher: '阳光城责任有限公司',
@@ -195,8 +195,8 @@ export default {
       }, {
         name: '沂山实业企业融资项目',
         amount: '￥27,653,21.00',
-        startDate: '2017-02-24',
-        endDate: '2018-02-24',
+        start_date: '2017-02-24',
+        end_date: '2018-02-24',
         term: '10天',
         type: 0,
         publisher: '沂山实业责任有限公司',

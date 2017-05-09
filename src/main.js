@@ -47,8 +47,6 @@ Vue.component(Dialog.name, Dialog)
 Vue.component(DatePicker.name, DatePicker)
 Vue.component(Collapse.name, Collapse)
 Vue.component(CollapseTransition.name, CollapseTransition)
-
-// Vue.use(ElementUI)
+  // Vue.use(ElementUI)
 Vue.use(Filters)
-
 router.run()

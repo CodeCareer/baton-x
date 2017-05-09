@@ -16,6 +16,14 @@ export default [{
     name: 'overview',
     component: resolve => require(['../views/product_management/Overview.vue'], resolve)
   }, {
+    path: 'register_product',
+    name: 'registerProduct',
+    component: resolve => require(['../views/product_management/RegisterProduct.vue'], resolve)
+  }, {
+    path: 'product_list',
+    name: 'productList',
+    component: resolve => require(['../views/product_management/ProductList.vue'], resolve)
+  }, {
     path: 'asset_list',
     name: 'AssetList',
     component: resolve => require(['../views/asset_management/AssetList.vue'], resolve)

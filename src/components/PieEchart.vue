@@ -27,7 +27,7 @@ export default {
         trigger: 'item',
         formatter: '{a} <br/>{b}: {c} ({d}%)'
       },
-      color: ['#21a9e1', '#35cbef', '#1fdab1', '#92e68d', '877989', '343523'],
+      color: ['#21a9e1', '#35cbef', '#1fdab1', '#92e68d', '#877989', '#343523'],
       legend: {
         orient: 'vertical',
         x: '20px',
@@ -57,7 +57,7 @@ export default {
           emphasis: {
             show: true,
             textStyle: {
-              fontSize: '25',
+              fontSize: '10',
               fontWeight: 'bold'
             }
           }

@@ -89,9 +89,9 @@
                               td 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
                                 .y-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
                             tr
                               td.ov-table-zc 资产
                               td
@@ -229,6 +229,7 @@
                                   span 操作
                                 .y-operation
                                   span 操作
+
             el-tab-pane
               a(slot="label")
                 img(src="../../assets/images/ov-tn.png")
@@ -446,9 +447,9 @@
       h3 日历
       .ov-calendar-content
         .calendar-top
-          i.icon-batonx.icon-left
+          i.icon-batonx.icon-left(@click="addweek(-1)")
           span {{2}}月 &nbsp 第{{1}}周
-          i.icon-batonx.icon-right
+          i.icon-batonx.icon-right(@click="addweek(+1)")
         .calendar-middle
           .calender-cell.fl 周日
           .calender-cell.fl  周一
@@ -458,9 +459,10 @@
           .calender-cell.fl  周五
           .calender-cell.fl  周六
         .calendar-bottom
-          .calendar-bottom-y
+          .calendar-bottom-y.fl
             .calendar-bottom-z
               .calendar-bottom-n
+    public-dialog(:visible-show="dialogShow")
 </template>
 
 <script>
@@ -470,18 +472,61 @@ import {
   Tabs,
   TabPane
 } from 'element-ui'
-import PieChart from '../../components/pie-echart'
-
+import PieChart from '../../components/PieEchart'
+import Dialog from '../../components/PublicDialog.vue'
 export default {
   components: {
     ElSelect: Select,
     ElOption: Option,
     KtPieChart: PieChart,
     ElTabs: Tabs,
-    ElTabPane: TabPane
+    ElTabPane: TabPane,
+    PublicDialog: Dialog
   },
+  // computed: {
+  //   weeks() {
+  //     let date = new Date(`${this.year}/${this.month + 1}/1`)
+  //     let first = date.getDay() // 第一天星期几
+  //     let done = false // 本月是否已遍历完成
+  //     let weeks = [1, 2, 3, 4, 5, 6].map((week, weekIndex) => { // 一月最多6周
+  //       return [1, 2, 3, 4, 5, 6, 7].map((day, dayIndex) => { // 每周7天
+  //         // 如果是本月1日之前
+  //         if ((weekIndex === 0 && dayIndex < first) || done) {
+  //           return null
+  //         }
+
+  //         let today = new Date(date.getTime())
+  //         today.setDate(today.getDate() + weekIndex * 7 + dayIndex - first)
+
+  //         let dayNumber = today.getDate()
+
+  //         if (dayNumber === 1 && weekIndex > 0) {
+  //           done = true
+  //           return null
+  //         } else {
+  //           return dayNumber
+  //         }
+  //       })
+  //     }).filter(week => week.filter(day => day).length > 0) // 过滤空数组，因为不是每个月都能有6周
+  //     console.warn(weeks)
+  //     return weeks
+  //   }
+  //   },
+
+  methods: {
+    findDialog() {
+      this.dialogShow = true
+    },
+    closeRemarks() {
+      this.isclose = false
+    }
+  },
+
   data() {
     return {
+      dialogShow: false,
+      year: 2017,
+      moment: 5,
       isclose: true,
       pieEchartOption: {
         legend: {
@@ -539,12 +584,6 @@ export default {
         value: '选项3'
       }],
       name: '平台分布'
-    }
-  },
-  methods: {
-    closeRemarks() {
-      debugger
-      this.isclose = false
     }
   }
 }
