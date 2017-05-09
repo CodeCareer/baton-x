@@ -19,6 +19,19 @@ let router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.name !== undefined) {
+    document.body.setAttribute('class', to.name)
+  }
+
+  let user = store.getters.user
+  let token = store.getters.token
+  if (to.meta.needLogin && (!token || !user.email)) {
+    next({ name: 'login' })
+  }
+  next()
+})
+
 router.afterEach((to) => {
   if (to.meta.title) {
     document.title = to.meta.title

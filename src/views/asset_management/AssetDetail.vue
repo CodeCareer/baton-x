@@ -218,6 +218,9 @@ import {
   remove,
   uniqueId
 } from 'lodash'
+import {
+  updateCrumbs
+} from '../../common/crossers.js'
 import Vue from 'vue'
 
 export default {
@@ -227,9 +230,13 @@ export default {
   mounted: function() {
     this.demo.name = this.demo.shortName = this.$route.params.id
     this.demo.type = +this.$route.query.type || this.demo.type
+    updateCrumbs.$emit('update-crumbs', [{
+      id: 'assetName',
+      name: this.demo.name
+    }])
     setTimeout(() => {
       this.demo.rateChartOpt = merge({}, this.demo.rateChartOpt, {
-        color: ['#538cc0'],
+        color: ['#f1b277'],
         legend: {
           data: ['收益率']
         },

@@ -5,51 +5,23 @@
       .user-info.fr
         span
           i.icon-batonx.icon-user.icon-color
-          | hi,广交所
-        span.log-out(@click="logOut()") 退出
+          | hi，{{user.name}}
+        span.log-out(@click="logout()") 退出
     section.container(:style='containerStyles')
       aside
-        el-menu(:unique-opened='true',:default-openeds="['1']", :router='true')
-          el-submenu(index='1')
-            template(slot='title')
-              i.icon-batonx.icon-proman.icon-color
-              | 产品管理
-            el-menu-item(index='1-1',:route="{name: 'overview'}") 今日总览
-            el-menu-item(index='1-2',:route="{name: 'productList'}") 产品列表
-            el-menu-item(index='1-3',:route="{name: 'registerProduct'}") 登记产品列表
-          el-submenu(index='2')
-            template(slot="title")
-              i.icon-batonx.icon-assetman.icon-color
-              | 资产管理
-            el-menu-item(index='2-1', :route="{name: 'AssetList'}") 资产列表
-          el-submenu(index='3')
-            template(slot='title')
-              i.icon-batonx.icon-platformman.icon-color
-              | 平台管理
-            el-menu-item(index='3-1') 机构列表
-          el-submenu(index='4')
-            template(slot='title')
-              i.icon-batonx.icon-customer.icon-color
-              | 客户管理
-            el-menu-item(index='4-1') 客户列表
-          el-submenu(index='5')
-            template(slot='title')
-              i.icon-batonx.icon-capitalman.icon-color
-              | 资金账户管理
-            el-menu-item(index='5-1') 资金账户列表
-          el-submenu(index='6')
-            template(slot='title')
-              i.icon-batonx.icon-approval.icon-color
-              | 审批管理
-            el-menu-item(index='5-1') 1111
-          el-submenu(index='7')
-            template(slot='title')
-              i.icon-batonx.icon-jurisdiction.icon-color
-              | 权限管理
-            el-menu-item(index='5-1') 22
+        el-menu(:unique-opened='true',:default-openeds="defaultOpeneds", :default-active="defaultActive"  :router='true', ref="menus")
+          template(v-for="menu in menus")
+            el-submenu(v-if="menu.menus", :index="menu.index")
+              template(slot='title')
+                i.icon-batonx.icon-color(:class="menu.icon")
+                | {{menu.name}}
+              el-menu-item( v-for="item in menu.menus", :index='item.index',:route="item.route") {{item.name}}
+            el-menu-item(v-else, :index='menu.index',:route="menu.route")
+              i.icon-batonx.icon-color(:class="menu.icon")
+              | {{menu.name}}
       .body(:style='containerStyles')
         el-breadcrumb
-          el-breadcrumb-item
+          el-breadcrumb-item(v-for="crumb in crumbs", :to="crumb.to") {{crumb.name}}
         router-view.body-container
         footer
           p(style="margin-bottom: 10px;") 联系电话：010-84554188   京ICP备150220058号-1
@@ -64,6 +36,22 @@ import {
   Breadcrumb,
   BreadcrumbItem
 } from 'element-ui'
+import {
+  startsWith,
+  each,
+  every,
+  includes,
+  find
+} from 'lodash'
+import {
+  updateCrumbs
+} from '../common/crossers.js'
+import {
+  mapGetters,
+  mapActions
+} from 'vuex'
+
+const headerH = 60 // header高度
 
 export default {
   components: {
@@ -73,27 +61,194 @@ export default {
     ElBreadcrumb: Breadcrumb,
     ElBreadcrumbItem: BreadcrumbItem
   },
+
+  watch: {
+    '$route' (to, from) {
+      this.breadcrumbRefresh()
+    }
+  },
+
+  mounted() {
+    // 更新面包屑中的占位符
+    updateCrumbs.$on('update-crumbs', crumbs => {
+      each(crumbs, cr => {
+        let co = find(this.crumbs, c => c.id === cr.id)
+        if (co) {
+          co.name = cr.name
+          co.placeholder = ''
+        }
+      })
+    })
+
+    window.addEventListener('resize', e => {
+      this.containerStyles.minHeight = `${window.innerHeight - headerH}px`
+    })
+  },
+
+  created() {
+    this.breadcrumbRefresh()
+  },
+
+  computed: {
+    ...mapGetters(['user'])
+  },
+
   data() {
-    return {
+    const _self = this
+    const data = {
+      defaultOpeneds: [],
+      defaultActive: '',
+      crumbs: [],
+      menus: [{
+        name: '产品管理',
+        index: '1',
+        icon: 'icon-proman',
+        menus: [{
+          name: '今日总览',
+          index: '1-1',
+          route: {
+            name: 'overview'
+          }
+        }, {
+          name: '产品列表',
+          index: '1-2',
+          route: {
+            name: 'ProductList'
+          }
+        }, {
+          name: '登记产品列表',
+          index: '1-3',
+          route: {
+            name: 'RegisterProductList'
+          }
+        }]
+      }, {
+        name: '资产管理',
+        index: '2',
+        icon: 'icon-assetman',
+        menus: [{
+          name: '资产列表',
+          index: '2-1',
+          route: {
+            name: 'AssetList'
+          },
+          activeIncludes: ['AssetList', 'AssetForm', 'AssetDetail']
+        }]
+      }, {
+        name: '机构管理',
+        index: '3',
+        icon: 'icon-platformman',
+        menus: [{
+          name: '机构列表',
+          index: '3-1',
+          route: {
+            name: 'InstList'
+          },
+          activeIncludes: ['InstList', 'InstForm', 'InstDetail']
+        }]
+      }, {
+        name: '客户管理',
+        index: '4',
+        icon: 'icon-customer',
+        menus: [{
+          name: '客户列表',
+          index: '4-1',
+          route: {
+            name: ''
+          }
+        }]
+      }, {
+        name: '账户管理',
+        index: '5',
+        icon: 'icon-capitalman',
+        menus: [{
+          name: '资金账户列表',
+          index: '5-1',
+          route: {
+            name: ''
+          }
+        }]
+      }, {
+        name: '审批管理',
+        index: '6',
+        icon: 'icon-approval',
+        route: {
+          name: ''
+        }
+      }, {
+        name: '权限管理',
+        index: '7',
+        icon: 'icon-jurisdiction',
+        route: {
+          name: ''
+        }
+      }, {
+        name: '行为日志',
+        index: '8',
+        icon: 'icon-date',
+        route: {
+          name: ''
+        }
+      }],
+
       containerStyles: {
         minHeight: (window.innerHeight - 60) + 'px'
       }
     }
+
+    function getActive(menus) {
+      every(menus, v => {
+        if (v.route && (v.route.name === _self.$route.name || includes(v.activeIncludes || [], _self.$route.name))) {
+          data.defaultActive = v.index
+          if (~v.index.indexOf('-')) {
+            data.defaultOpeneds = [v.index.split('-')[0]]
+          } else {
+            data.defaultOpeneds = [v.index]
+          }
+          return false
+        } else if (v.menus) {
+          getActive(v.menus)
+        }
+        return true
+      })
+    }
+
+    getActive(data.menus)
+
+    return data
+  },
+
+  methods: {
+    startsWith: startsWith,
+    breadcrumbRefresh() {
+      this.crumbs = this.$route.meta.crumbs
+    },
+    ...mapActions(['logout'])
   }
 }
 </script>
 
 <style lang="scss">
+@import '../assets/scss/_vars.scss';
+$header-height: 60px;
+$menu-width: 180px;
+$menu-height: 50px;
 .ex-content {
   header {
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
-    height: 60px;
-    line-height: 60px;
+    height: $header-height;
+    line-height: $header-height;
     background: #3e4b5c;
     z-index: 10;
+    .log-out {
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
     .logo {
       height: 25px;
       color: #fff;
@@ -117,59 +272,74 @@ export default {
       }
     }
   }
-  .container {
-    position: relative;
-    padding-left: 180px;
-    top: 60px;
-    aside {
-      position: fixed;
-      z-index: 100;
-      top: 60px;
-      bottom: 0;
-      left: 0;
-      background: #2a313b;
-      width: 180px;
-      overflow-y: auto;
-      .el-menu {
-        background: none;
-        color: #929aa3;
-        list-style: none;
-      }
-      .el-submenu {
-        border-bottom: 1px solid #363f4b;
-        &:last-child {
-          border-bottom: none;
-        }
-      }
-      .el-submenu__title {
-        font-size: 15px;
-        color: #818992;
-        height: 50px;
-        line-height: 50px;
-        padding-left: 15px!important;
-        &:hover {
-          background: none;
-        }
-        .icon-color {
-          padding-right: 10px;
-          color: #4c7ca9;
-        }
-      }
-      .el-menu-item {
-        font-size: 13px;
-        color: #818992;
-        height: 45px;
-        line-height: 45px;
-        padding: 0 10px 0 45px!important;
-        background: #37404c;
-        &:hover {
-          background: #37404c;
-        }
+  .el-breadcrumb__item__inner {
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  .el-breadcrumb {
+    padding: 20px 18px 0;
+  }
+  aside {
+    position: fixed;
+    z-index: 100;
+    top: $header-height;
+    bottom: 0;
+    left: 0;
+    background: #2a313b;
+    width: $menu-width;
+    overflow-y: auto;
+    .el-menu {
+      background: none;
+      color: #929aa3;
+      list-style: none;
+    }
+    .el-submenu {
+      border-bottom: 1px solid #363f4b;
+      &:last-child {
+        border-bottom: none;
       }
     }
+    .el-submenu__title,
+    .el-submenu ~ .el-menu-item {
+      font-size: 15px;
+      color: #818992;
+      height: $menu-height;
+      line-height: $menu-height;
+      padding-left: 15px!important;
+      &:hover {
+        background: none;
+      }
+      &.is-active {
+        color: #538cc0;
+      }
+      .icon-color {
+        padding-right: 10px;
+        color: #4c7ca9;
+      }
+    }
+    .el-submenu .el-menu-item {
+      font-size: 13px;
+      color: #818992;
+      height: $menu-height - 5px;
+      line-height: $menu-height - 5px;
+      padding: 0 10px 0 45px!important;
+      background: #37404c;
+      &.is-active {
+        color: white;
+      }
+      &:hover {
+        color: white;
+        background: #37404c;
+      }
+    }
+  }
+  .container {
+    position: relative;
+    padding-left: $menu-width;
+    top: $header-height;
     .body {
       position: relative;
-
       padding-bottom: 140px;
     }
     .body-container {

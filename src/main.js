@@ -3,8 +3,7 @@
 import Vue from 'vue'
 import router from './router'
 import Filters from './common/filter.js'
-// import ElementUI from 'element-ui'
-// import 'element-ui/lib/theme-default/index.css'
+import VueResource from 'vue-resource'
 
 import {
   Form,
@@ -47,6 +46,8 @@ Vue.component(Dialog.name, Dialog)
 Vue.component(DatePicker.name, DatePicker)
 Vue.component(Collapse.name, Collapse)
 Vue.component(CollapseTransition.name, CollapseTransition)
-  // Vue.use(ElementUI)
+
+Vue.use(VueResource)
 Vue.use(Filters)
+
 router.run()

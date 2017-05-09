@@ -71,6 +71,9 @@ export default {
       }]
     }
     this.echart.setOption(_.merge({}, this.chartOption, option))
+    window.addEventListener('resize', () => {
+      this.echart.resize()
+    })
   },
   watch: {
     chartOption() {
@@ -82,11 +85,11 @@ export default {
 <style lang="scss">
 .pie-echart {
   height: 140px;
-  width:390px;
-  margin:0 auto;
-//   position: absolute;
-//   left: 50%;
-//   top: 50%;
-//   transform: translate(-50%, -50%);
+  width: 390px;
+  margin: 0 auto;
+  //   position: absolute;
+  //   left: 50%;
+  //   top: 50%;
+  //   transform: translate(-50%, -50%);
 }
 </style>
