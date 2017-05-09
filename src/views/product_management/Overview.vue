@@ -462,7 +462,7 @@
           .calendar-bottom-y.fl
             .calendar-bottom-z
               .calendar-bottom-n
-    public-dialog(:visible-show="dialogShow")
+    public-dialog(ref="productDialog")
 </template>
 
 <script>
@@ -515,7 +515,7 @@ export default {
 
   methods: {
     findDialog() {
-      this.dialogShow = true
+      this.$refs.productDialog.showDialog()
     },
     closeRemarks() {
       this.isclose = false
@@ -563,14 +563,25 @@ export default {
               show: false
             }
           },
-          data: [
-            {value: 330, name: '京东金融'},
-            {value: 330, name: '甜橙理财'},
-            {value: 330, name: '网金社'},
-            {value: 330, name: '乐视金融'},
-            {value: 330, name: '恒大金融'},
-            {value: 330, name: '线下认购'}
-          ]
+          data: [{
+            value: 330,
+            name: '京东金融'
+          }, {
+            value: 330,
+            name: '甜橙理财'
+          }, {
+            value: 330,
+            name: '网金社'
+          }, {
+            value: 330,
+            name: '乐视金融'
+          }, {
+            value: 330,
+            name: '恒大金融'
+          }, {
+            value: 330,
+            name: '线下认购'
+          }]
         }]
       },
       items: [{
@@ -590,32 +601,32 @@ export default {
 </script>
 <style lang="scss">
 .overview {
-  .overview-title{
-    font-size:15px;
-    color:#595f67;
-    padding:10px 5px;
+  .overview-title {
+    font-size: 15px;
+    color: #595f67;
+    padding: 10px 5px;
   }
   h3 {
-    font-size:15px;
-    color:#595f67;
-    padding:10px 0;
+    font-size: 15px;
+    color: #595f67;
+    padding: 10px 0;
   }
-  .afp-num{
-     color:#e98da4;
+  .afp-num {
+    color: #e98da4;
   }
-  .redeem-num{
-    color:#82c5aa;
+  .redeem-num {
+    color: #82c5aa;
   }
-  .all-padding{
-    padding:0 5px;
+  .all-padding {
+    padding: 0 5px;
   }
   .ov-today-content {
     overflow: hidden;
     width: 100%;
-    .stock-width{
-      width:33.3%;
-      .stock-width-pad{
-        padding:0 5px;
+    .stock-width {
+      width: 33.3%;
+      .stock-width-pad {
+        padding: 0 5px;
       }
     }
     .stock-product,
@@ -666,172 +677,171 @@ export default {
       }
     }
   }
-  .ov-todo{
-    .some-data{
-      font-size:13px;
-      color:#d1d4d7;
-      em{
+  .ov-todo {
+    .some-data {
+      font-size: 13px;
+      color: #d1d4d7;
+      em {
         font-style: normal;
-        color:#627d9a;
-        margin-right:5px;
+        color: #627d9a;
+        margin-right: 5px;
       }
     }
-    .ov-todo-content{
+    .ov-todo-content {
       border-radius: 5px;
-      border:1px solid #e3e6ea;
+      border: 1px solid #e3e6ea;
       // .el-tabs__header{
       //   border-bottom: none;
       // }
-      .el-tabs--border-card{
+      .el-tabs--border-card {
         box-shadow: none;
-        border:none;
+        border: none;
       }
     }
-    .ov-content-title{
-      .el-tabs__header{
+    .ov-content-title {
+      .el-tabs__header {
         background: #f3f6f8;
       }
-      .el-tabs__content{
-        padding:15px 0;
+      .el-tabs__content {
+        padding: 15px 0;
       }
-      .el-tabs__item{
-        img{
-          width:75px;
-          height:17px;
+      .el-tabs__item {
+        img {
+          width: 75px;
+          height: 17px;
           vertical-align: middle;
         }
-        span{
-          padding:1px 4px;
+        span {
+          padding: 1px 4px;
           border-radius: 3px;
-          color:#fff;
+          color: #fff;
           background: #538cc0;
-          margin-left:5px;
+          margin-left: 5px;
           vertical-align: middle;
         }
       }
-      .ov-content-table{
-         .first_tr{
-              border-bottom:1px solid #f3f6f8;
-            }
-          .first_td{
-            padding-left:20px;
-            font-size:13px;
-            color:#595f67;
-            font-weight:bold;
-          }
-        .ov-table-y{
-            width:100%;
-            border-collapse: collapse;
+      .ov-content-table {
+        .first_tr {
+          border-bottom: 1px solid #f3f6f8;
         }
-        .ov-table-n{
-            width:100%;
-            table-layout:fixed;
-            border-collapse: collapse;
-            td{
-              padding:10px 0;
-            }
-            .ov-table-zj{
-              color:#f55923;
-            }
-            .ov-table-zc{
-              color:#1f98d9;
-            }
-            .afp,.redeem{
-              color:#595f67;
-            }
-            .ov-table-last-td{
-              .n-operation{
-                padding:2px 0;
-                span{
-                  padding:2px 5px;
-                  background:#538cc0;
-                  cursor:pointer;
-                  color:#fff;
-                  border-radius: 3px;
-                }
+        .first_td {
+          padding-left: 20px;
+          font-size: 13px;
+          color: #595f67;
+          font-weight: bold;
+        }
+        .ov-table-y {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        .ov-table-n {
+          width: 100%;
+          table-layout: fixed;
+          border-collapse: collapse;
+          td {
+            padding: 10px 0;
+          }
+          .ov-table-zj {
+            color: #f55923;
+          }
+          .ov-table-zc {
+            color: #1f98d9;
+          }
+          .afp,
+          .redeem {
+            color: #595f67;
+          }
+          .ov-table-last-td {
+            .n-operation {
+              padding: 2px 0;
+              span {
+                padding: 2px 5px;
+                background: #538cc0;
+                cursor: pointer;
+                color: #fff;
+                border-radius: 3px;
               }
-              .y-operation{
-                padding:2px 0;
-                span{
-                  padding:2px 5px;
-                   cursor:pointer;
-                  border-radius: 3px;
-                  background:#f3f6f8;
-                }
+            }
+            .y-operation {
+              padding: 2px 0;
+              span {
+                padding: 2px 5px;
+                cursor: pointer;
+                border-radius: 3px;
+                background: #f3f6f8;
               }
             }
+          }
         }
       }
     }
   }
-  .ov-remind{
-    .ov-remind-table{
-      border:1px solid #e3e6ea;
-      padding:15px 20px;
+  .ov-remind {
+    .ov-remind-table {
+      border: 1px solid #e3e6ea;
+      padding: 15px 20px;
       border-radius: 5px;
-      table{
-        width:100%;
-        table-layout:fixed;
-        .first-td{
-          font-size:13px;
-          color:#595f67;
-          font-weight:bold;
+      table {
+        width: 100%;
+        table-layout: fixed;
+        .first-td {
+          font-size: 13px;
+          color: #595f67;
+          font-weight: bold;
         }
-        td{
-          padding:5px 0;
-          color:#595f67;
+        td {
+          padding: 5px 0;
+          color: #595f67;
         }
-        .remarks{
+        .remarks {
           background: #f3f6f8;
-          padding:0px 5px;
+          padding: 0px 5px;
           display: inline-block;
           border-radius: 3px;
-          margin:5px 0;
-          i{
-            font-size:12px;
-            color:#929aa3;
+          margin: 5px 0;
+          i {
+            font-size: 12px;
+            color: #929aa3;
             margin-left: 20px;
             vertical-align: -1px;
-            cursor:pointer;
+            cursor: pointer;
           }
         }
       }
     }
   }
-  .ov-calendar{
-    .ov-calendar-content{
-      border:1px solid #f3f6f8;
+  .ov-calendar {
+    .ov-calendar-content {
+      border: 1px solid #f3f6f8;
       border-radius: 5px;
-      .calendar-top{
+      .calendar-top {
         background: #f3f6f8;
-        height:40px;
+        height: 40px;
         line-height: 40px;
         text-align: center;
-        span{
-
-        }
-        i{
-          padding:0 20px;
-          font-size:12px;
-          color:#939ba4;
-          cursor:pointer;
+        span {}
+        i {
+          padding: 0 20px;
+          font-size: 12px;
+          color: #939ba4;
+          cursor: pointer;
           &:hover,
-          &:focus{
-            color:#538cc0;
+          &:focus {
+            color: #538cc0;
           }
         }
       }
-      .calendar-middle{
-        width:100%;
+      .calendar-middle {
+        width: 100%;
         overflow: hidden;
-        height:40px;
+        height: 40px;
         line-height: 40px;
       }
-      .calender-cell{
-        width:14.28%;
+      .calender-cell {
+        width: 14.28%;
         text-align: center;
       }
-      .calendar-bottom{
+      .calendar-bottom {
         overflow: hidden;
       }
     }

@@ -2,7 +2,7 @@
   section.asset-list
     .box
       .box-tab-header
-        el-button(type="primary", size="small")
+        el-button(type="primary", size="small", @click="$router.push({name: 'AssetForm', params: {id: 'add'}})")
           i.icon-batonx.icon-plus
           | 新增
       el-tabs(v-model='tab', type='card', @tab-click='tabClick')

@@ -266,9 +266,6 @@ export default {
         name: 'AssetForm',
         params: {
           id: this.demo.name
-        },
-        query: {
-          type: this.demo.type
         }
       })
     },

@@ -169,7 +169,7 @@ import {
 
 export default {
   mounted: function() {
-    if (+this.$route.query.type === 1) {
+    if (this.$route.params.id !== 'add') {
       const name = this.$route.params.id
       this.demo = {
         name: this.$route.params.id,
@@ -205,7 +205,7 @@ export default {
 
   methods: {
     submitForm() {
-      Message.info('demo，只是用来展示！')
+      Message.info('不能保存！Demo，只是用来展示！')
     },
     cancel() {
       MessageBox.confirm('内容将会清楚，确定取消吗？', '提示', {
@@ -277,7 +277,6 @@ export default {
     },
     accountListClose() {
       const ids = map(this.accountListChecked, 'id')
-      console.log(ids, this.demo.accounts)
       each(this.demo.accounts, v => {
         v.checked = includes(ids, v.id)
       })
@@ -289,10 +288,10 @@ export default {
 
   computed: {
     checkedAccounts() {
-      console.log(this.demo.accounts, 'rere')
       return filter(this.demo.accounts, v => v.checked)
     },
     filterAccountList() {
+      if (!this.demo.accounts.length) return this.demo.accounts
       return filter(this.demo.accounts, v => {
         return ~v.name.indexOf(this.filter.name) || ~v.bankNum.indexOf(this.filter.name)
       })

@@ -1,6 +1,6 @@
 <template lang="pug">
   .public_dialog
-    el-dialog(:visible.sync="visibleShow")
+    el-dialog(v-model="visible")
       el-form
         .public_header
           h3 粤股交丰银宝理财计划B
@@ -32,9 +32,22 @@ import {
 } from 'element-ui'
 
 export default {
-  props: ['visibleShow'],
+  // props: ['visibleShow'],
+
   components: {
     ElForm: Form
+  },
+
+  methods: {
+    showDialog() {
+      this.visible = true
+    }
+  },
+
+  data() {
+    return {
+      visible: false
+    }
   }
 }
 </script>
