@@ -61,7 +61,7 @@ export default [{
     name: 'AssetList',
     component: resolve => require(['../views/asset_management/AssetList.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-今日总览',
+      title: '开通金融-交易所产品管理系统-资产列表',
       needLogin: true,
       crumbs: [{
         name: '资产管理',
@@ -76,7 +76,7 @@ export default [{
     name: 'AssetDetail',
     component: resolve => require(['../views/asset_management/AssetDetail.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-今日总览',
+      title: '开通金融-交易所产品管理系统-资产详情',
       needLogin: true,
       crumbs: [{
         name: '资产管理',
@@ -95,7 +95,7 @@ export default [{
     name: 'AssetForm',
     component: resolve => require(['../views/asset_management/AssetForm.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-今日总览',
+      title: '开通金融-交易所产品管理系统-资产编辑',
       needLogin: true,
       crumbs: [{
         name: '资产管理',
@@ -114,13 +114,13 @@ export default [{
     name: 'InstList',
     component: resolve => require(['../views/inst_management/InstList.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-今日总览',
+      title: '开通金融-交易所产品管理系统-机构列表',
       needLogin: true,
       crumbs: [{
-        name: '资产管理',
+        name: '机构管理',
         to: { name: 'InstList' }
       }, {
-        name: '资产列表',
+        name: '机构列表',
         to: { name: 'InstList' }
       }]
     }
@@ -129,17 +129,17 @@ export default [{
     name: 'InstDetail',
     component: resolve => require(['../views/inst_management/InstDetail.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-今日总览',
+      title: '开通金融-交易所产品管理系统-机构详情',
       needLogin: true,
       crumbs: [{
-        name: '资产管理',
+        name: '机构管理',
         to: { name: 'InstList' }
       }, {
-        name: '资产列表',
+        name: '机构列表',
         to: { name: 'InstList' }
       }, {
         id: 'instName',
-        name: '资产详情',
+        name: '机构详情',
         to: { name: 'InstDetail' }
       }]
     }
@@ -148,18 +148,33 @@ export default [{
     name: 'InstForm',
     component: resolve => require(['../views/inst_management/InstForm.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-今日总览',
+      title: '开通金融-交易所产品管理系统-机构编辑',
       needLogin: true,
       crumbs: [{
-        name: '资产管理',
+        name: '机构管理',
         to: { name: 'InstList' }
       }, {
-        name: '资产列表',
+        name: '机构列表',
         to: { name: 'InstList' }
       }, {
         id: 'instName',
-        name: '新增资产',
+        name: '新增机构',
         to: { name: 'InstForm' }
+      }]
+    }
+  }, {
+    path: 'client_list',
+    name: 'ClientList',
+    component: resolve => require(['../views/client_management/ClientList.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-机构列表',
+      needLogin: true,
+      crumbs: [{
+        name: '机构管理',
+        to: { name: 'ClientList' }
+      }, {
+        name: '机构列表',
+        to: { name: 'ClientList' }
       }]
     }
   }]

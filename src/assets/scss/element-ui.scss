@@ -8,6 +8,14 @@ body {
       cursor: pointer;
     }
   }
+  .el-table__body {
+    a {
+      color: $color-blue;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
   .el-dialog__close {
     font-size: 12px;
     &:hover,
@@ -28,6 +36,12 @@ body {
     span {
       font-weight: normal;
     }
+  }
+  .el-tag--primary {
+    color: $primary-color;
+  }
+  .el-select-dropdown.is-multiple .el-select-dropdown__item.selected {
+    color: $primary-color;
   }
   .el-button--text {
     cursor: pointer;
@@ -87,6 +101,19 @@ body {
       color: white;
       background-color: darken($primary-color, 5%);
       border-color: darken($primary-color, 5%);
+    }
+  }
+  .el-checkbox__input {
+    &.is-checked {
+      .el-checkbox__inner {
+        border-color: $primary-color;
+        background-color: $primary-color;
+      }
+    }
+    .el-checkbox__inner {
+      &:hover {
+        border-color: $primary-color;
+      }
     }
   }
   .el-table {

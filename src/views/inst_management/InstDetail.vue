@@ -1,34 +1,48 @@
 <template lang="pug">
-  section.inst-list
-    .box
-      .box-tab-header
-        el-button(type="primary", size="small", @click="$router.push({name: 'AssetForm', params: {id: 'add'}})")
-          i.icon-batonx.icon-plus
-          | 新增
+  section.inst-detail
+    .box.mb20
+      .inst-card
+        .operations
+          el-button(type="primary", size="small", @click="$router.push({name: 'InstForm', params: {id: inst.name}})")
+            i.icon-batonx.icon-edit
+            | 编辑
+        el-row
+          el-col(:span="6")
+           figure
+            figcaption {{inst.shortName}}
+            a(:href="inst.site", target="_blank", rel="nofollow")
+              img(:src="inst.logo")
+          el-col(:span="18")
+            .inst-info
+              table
+                tr
+                  th 机构全称：
+                  td {{inst.name}}
+                tr
+                  th 机构类型：
+                  td {{inst.type}}
+                tr
+                  th 经营范围：
+                  td
+                    span(v-for="item in inst.manageScope") {{item}}
+                tr
+                  th 公司网址：
+                  td
+                    a.color-blue(:href="inst.site", target="_blank", rel="nofollow") {{inst.site}}
+                tr
+                  th 办公地址：
+                  td {{inst.address}}
+                tr
+                  th 联系电话：
+                  td {{inst.tel}}
+
+    .box.box-normal
       el-tabs(v-model='tab', type='card', @tab-click='tabClick')
-        el-tab-pane(label='资金渠道', name='first')
-          .filters
-            el-input(placeholder='机构名称', icon='search', v-model.lazy='filter.name')
-            el-button(size="small", type="primary", @click="clearFilter")  清除
-        el-tab-pane(label='资产渠道', name='second')
-          .filters
-            el-input(placeholder='机构名称', icon='search', v-model.lazy='filter.name')
-            el-button(size="small", type="primary", @click="clearFilter")  清除
-        el-tab-pane(label='托管机构', name='third')
-          .filters
-            el-input(placeholder='机构名称', icon='search', v-model.lazy='filter.name')
-            el-button(size="small", type="primary", @click="clearFilter")  清除
-        el-tab-pane(label='增信机构', name='fourth')
-          .filters
-            el-input(placeholder='机构名称', icon='search', v-model.lazy='filter.name')
-            el-button(size="small", type="primary", @click="clearFilter")  清除
-        el-tab-pane(label='增信机构', name='fifth')
-          .filters
-            el-input(placeholder='机构名称', icon='search', v-model.lazy='filter.name')
-            el-button(size="small", type="primary", @click="clearFilter")  清除
-    .table-container
-      el-table(:data='filterTableData', style='width: 100%', @row-click='goToDetail')
-        el-table-column(prop='name' label='机构名称', width='220')
+        el-tab-pane(label='产品信息', name='first')
+        el-tab-pane(label='账户信息', name='second')
+    .table-container(v-show="tab === 'first'")
+      el-table(:data='filterProducts', style='width: 100%')
+        el-table-column(prop='name' label='产品名称')
           template(scope='scope')
             el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
               p 提示: {{ scope.row.note }}
@@ -36,10 +50,26 @@
                 | {{ scope.row.name }}
                 i.icon-batonx.icon-explain
             span(v-if="!scope.row.note") {{scope.row.name}}
-        el-table-column(prop='count', label='存量产品数量')
-        el-table-column(prop='amount', label='存量产品金额', :sortable='true')
-        el-table-column(prop='amountRate', label='存量产品金额占比', :sortable='true')
-      el-pagination(@size-change='pageSizeChange', @current-change='pageChange', :current-page='page.current', :page-sizes="page.sizes", :page-size="page.size", layout='total, prev, pager, next, jumper', :total='tableData.length')
+        el-table-column(prop='amount', label='存续金额')
+        el-table-column(prop='rate', label='年化收益率')
+        el-table-column(prop='duration', label='期限')
+        el-table-column(prop='endDate', label='到期日')
+        el-table-column(prop='type', label='产品类型')
+      el-pagination(@size-change='pageFirstSizeChange', @current-change='pageChange', :current-page='page.first.current', :page-sizes="page.first.sizes", :page-size="page.first.size", layout='total, prev, pager, next, jumper', :total='products.length')
+    .table-container(v-show="tab === 'second'")
+      el-table(:data='filterAccounts', style='width: 100%')
+        el-table-column(prop='name' label='账户名')
+          template(scope='scope')
+            el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
+              p 提示: {{ scope.row.note }}
+              .name-wrapper(slot='reference')
+                | {{ scope.row.name }}
+                i.icon-batonx.icon-explain
+            span(v-if="!scope.row.note") {{scope.row.name}}
+        el-table-column(prop='bankNum', label='账户')
+        el-table-column(prop='bank', label='开户行')
+        el-table-column(prop='type', label='账户类型')
+      el-pagination(@size-change='pageSecondSizeChange', @current-change='pageChange', :current-page='page.second.current', :page-sizes="page.second.sizes", :page-size="page.second.size", layout='total, prev, pager, next, jumper', :total='accounts.length')
 
 </template>
 
@@ -48,8 +78,18 @@ import {
   filter,
   each
 } from 'lodash'
+import {
+  updateCrumbs
+} from '@/common/crossers.js'
 
 export default {
+  mounted: function() {
+    this.inst.shortName = this.inst.name = this.$route.params.id
+    updateCrumbs.$emit('update-crumbs', [{
+      id: 'instName',
+      name: this.inst.name
+    }])
+  },
   methods: {
     tabClick(tab, event) {
       console.log(tab, event)
@@ -61,30 +101,27 @@ export default {
       })
     },
 
-    goToDetail(row) {
-      this.$router.push({
-        name: 'InstDetail',
-        params: {
-          id: row.id || row.name
-        },
-        query: {
-          type: row.type
-        }
-      })
-    },
-
     pageChange(val) {
       console.log(`分页${val}`)
     },
 
-    pageSizeChange(val) {
-      this.page.size = val
+    pageFirstSizeChange(val) {
+      this.page.first.size = val
+    },
+
+    pageSecondSizeChange(val) {
+      this.page.second.size = val
     }
   },
 
   computed: {
-    filterTableData() {
-      return filter(this.tableData, v => {
+    filterProducts() {
+      return filter(this.products, v => {
+        return ~v.name.indexOf(this.filter.name)
+      })
+    },
+    filterAccounts() {
+      return filter(this.accounts, v => {
         return ~v.name.indexOf(this.filter.name)
       })
     }
@@ -96,26 +133,60 @@ export default {
       filter: {
         name: ''
       },
-      page: {
-        current: 1,
-        size: 10,
-        sizes: [10, 20, 30, 50]
+      inst: {
+        name: '京东金融信息服务有限公司',
+        logo: require('@/assets/images/jd.png'),
+        shortName: '京东金融',
+        type: '资金渠道',
+        manageScope: ['金融信息服务', '计算机网络技术', '技术服务', '电子商务'],
+        site: 'http://jr.jd.com',
+        address: '北京市北京经济技术开发区科创十一街18号C座2层221室',
+        tel: '010-89188467'
       },
-      tableData: [{
-        name: '恒大金服',
-        amount: '￥13,098,781.00',
-        count: 100,
-        amountRate: '25.4%'
+      page: {
+        first: {
+          current: 1,
+          size: 10,
+          sizes: [10, 20, 30, 50]
+        },
+        second: {
+          current: 1,
+          size: 10,
+          sizes: [10, 20, 30, 50]
+        }
+      },
+      products: [{
+        name: '京东丰银宝1号',
+        amount: '￥ 25,550,000.11',
+        rate: '6.40 %',
+        duration: '167天',
+        endDate: '2017-03-14',
+        type: '定期'
       }, {
-        name: '途牛金服',
-        amount: '￥20,231.00',
-        count: 80,
-        amountRate: '26.4%'
+        name: '京东丰银宝2号',
+        amount: '¥ 100,000,203.25',
+        rate: '6.50 %',
+        duration: '170天',
+        endDate: '2017-03-17',
+        type: '定期'
       }, {
-        name: '和聚宝',
-        amount: '￥45,632,98.00',
-        count: 70,
-        amountRate: '15.4%'
+        name: '京东丰银宝3号',
+        amount: '¥ 55,330,000.88',
+        rate: '6.80 %',
+        duration: '182天',
+        endDate: '2017-05-20',
+        type: '活期'
+      }],
+      accounts: [{
+        name: '北京和丰永讯金融信息服务有限公司',
+        bankNum: '1109 2037 8610 0201',
+        bank: '招商银行股份有限公司北京亚运村支行',
+        type: '募集账户'
+      }, {
+        name: '京东金融信息服务有限公司',
+        bankNum: '2401 1109 9210 321',
+        bank: '中国银行股份有限公司三元桥支行',
+        type: '费用账户'
       }]
     }
   }
@@ -123,9 +194,51 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.filters {
-  .el-input {
-    margin-right: 20px;
+.inst-card {
+  position: relative;
+  .operations {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 99;
+  }
+  figure {
+    padding: 25px;
+    a {
+      display: block;
+      background: #f9fafb;
+      border-radius: 4px;
+      padding: 5px;
+      height: 120px;
+      width: 200px;
+      position: relative;
+      img {
+        position: absolute;
+        max-width: 95%;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+    }
+  }
+  figcaption {
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #5c667d;
+  }
+}
+
+.inst-info {
+  padding: 25px;
+  font-size: 13px;
+  color: #595f67;
+  th {
+    color: #929aa3;
+  }
+  th,
+  td {
+    padding: 5px 0;
+    font-weight: normal;
   }
 }
 

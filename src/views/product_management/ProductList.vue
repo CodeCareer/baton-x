@@ -143,7 +143,7 @@ import {
 import {
   Message
 } from 'element-ui'
-import exMixin from '../../common/mixin.js'
+import exMixin from '@/common/mixin.js'
 export default {
   mixins: [exMixin],
   methods: {

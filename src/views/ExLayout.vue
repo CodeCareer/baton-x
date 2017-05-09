@@ -45,7 +45,7 @@ import {
 } from 'lodash'
 import {
   updateCrumbs
-} from '../common/crossers.js'
+} from '@/common/crossers.js'
 import {
   mapGetters,
   mapActions
@@ -154,7 +154,7 @@ export default {
           name: '客户列表',
           index: '4-1',
           route: {
-            name: ''
+            name: 'ClientList'
           }
         }]
       }, {
@@ -278,7 +278,8 @@ $menu-height: 50px;
     }
   }
   .el-breadcrumb {
-    padding: 20px 18px 0;
+    padding: 20px 12px 0;
+    font-size: 12px;
   }
   aside {
     position: fixed;
@@ -340,7 +341,7 @@ $menu-height: 50px;
     top: $header-height;
     .body {
       position: relative;
-      padding-bottom: 140px;
+      padding-bottom: 120px;
     }
     .body-container {
       padding: 12px;

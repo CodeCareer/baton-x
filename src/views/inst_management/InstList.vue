@@ -2,7 +2,7 @@
   section.inst-list
     .box
       .box-tab-header
-        el-button(type="primary", size="small", @click="$router.push({name: 'AssetForm', params: {id: 'add'}})")
+        el-button(type="primary", size="small", @click="$router.push({name: 'InstForm', params: {id: 'add'}})")
           i.icon-batonx.icon-plus
           | 新增
       el-tabs(v-model='tab', type='card', @tab-click='tabClick')
@@ -22,7 +22,7 @@
           .filters
             el-input(placeholder='机构名称', icon='search', v-model.lazy='filter.name')
             el-button(size="small", type="primary", @click="clearFilter")  清除
-        el-tab-pane(label='增信机构', name='fifth')
+        el-tab-pane(label='投资顾问', name='fifth')
           .filters
             el-input(placeholder='机构名称', icon='search', v-model.lazy='filter.name')
             el-button(size="small", type="primary", @click="clearFilter")  清除

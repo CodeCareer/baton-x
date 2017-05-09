@@ -13,7 +13,13 @@ form {
     width: 100%;
     max-width: 300px;
   }
+  .el-form-item {
+    margin-bottom: 10px;
+  }
+
   .el-input__inner {
+    font-size: 13px;
+    color: #595f67;
     // width: 275px;
     height: 30px;
     padding: 0 5px;

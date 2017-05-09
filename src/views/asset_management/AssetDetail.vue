@@ -210,7 +210,7 @@ import {
   Message,
   MessageBox
 } from 'element-ui'
-import KtLineChart from '../../components/LineEchart.vue'
+import KtLineChart from '@/components/LineEchart.vue'
 import {
   concat,
   map,
@@ -220,7 +220,7 @@ import {
 } from 'lodash'
 import {
   updateCrumbs
-} from '../../common/crossers.js'
+} from '@/common/crossers.js'
 import Vue from 'vue'
 
 export default {

@@ -4,91 +4,53 @@
     .box-header
       | 基本信息
     .box-content
-      form
+      el-form(:model="demo", :rules="rules", ref="assetForm", label-width="120px")
         el-row
           el-col(:span="12")
-            table
-              tr
-                th 资产全称：
-                td
-                  el-input(type="text", placeholder="请输入资产全称", v-model="demo.name")
-              tr
-                th 持有总金额：
-                td
-                  el-input(type="text", placeholder="请输入持有总金额", v-model="demo.amount")
-                    template(slot="append") 元
-              tr
-                th 比例：
-                td
-                  el-input(type="text", placeholder="请输入比例", v-model="demo.ratio")
-                    template(slot="append") %
-              tr
-                th 起息日：
-                td
-                  el-date-picker(type="date", :value="demo.startDate", @input="handleStartDate", placeholder="请输入起息日")
-              tr
-                th 发行期限：
-                td
-                  el-input(type="text", placeholder="请输入发行期限", v-model="demo.term")
-                    template(slot="append") 天
-              tr
-                th 付息频率：
-                td
-                  el-input(type="text", placeholder="请输入付息频率", v-model="demo.payFrequency")
-              tr
-                th 资产类型：
-                td
-                  el-input(type="text", placeholder="请输入资产类型", v-model="demo.assetType")
-              tr
-                th 发行方：
-                td
-                  el-input(type="text", placeholder="请输入发行方", v-model="demo.publisher")
-              tr
-                th 托管方：
-                td
-                  el-input(type="text", placeholder="请输入托管方", v-model="demo.trustee")
+            el-form-item(label="资产全称：", prop="type")
+              el-input(type="text", placeholder="请输入资产全称", v-model="demo.name")
+            el-form-item(label="持有总金额：", prop="amount")
+              el-input(type="text", placeholder="请输入持有总金额", v-model="demo.amount")
+                template(slot="append") 元
+            el-form-item(label="比例：", prop="ratio")
+              el-input(type="text", placeholder="请输入比例", v-model="demo.ratio")
+                template(slot="append") %
+            el-form-item(label="起息日：", prop="startDate")
+              el-date-picker(type="date", :value="demo.startDate", @input="handleStartDate", placeholder="请输入起息日")
+            el-form-item(label="发行期限：", prop="term")
+              el-input(type="text", placeholder="请输入发行期限", v-model="demo.term")
+                template(slot="append") 天
+            el-form-item(label="付息频率：", prop="payFrequency")
+              el-input(type="text", placeholder="请输入付息频率", v-model="demo.payFrequency")
+            el-form-item(label="资产类型：", prop="assetType")
+              el-input(type="text", placeholder="请输入资产类型", v-model="demo.assetType")
+            el-form-item(label="发行方：", prop="publisher")
+              el-input(type="text", placeholder="请输入发行方", v-model="demo.publisher")
+            el-form-item(label="托管方：", prop="trustee")
+              el-input(type="text", placeholder="请输入托管方", v-model="demo.trustee")
           el-col(:span="12")
-            table
-              tr
-                th 资产简称：
-                td
-                  el-input(type="text", placeholder="请输入资产简称", v-model="demo.shortName")
-              tr
-                th 总发行金额：
-                td
-                  el-input(type="text", placeholder="请输入总发行金额", v-model="demo.issueAmount")
-                    template(slot="append") 元
-              tr
-                th 收益率：
-                td
-                  el-input(type="text", placeholder="请输入收益率", v-model="demo.rate")
-                    template(slot="append") %
-              tr
-                th 到期日：
-                td
-                  el-date-picker(type="date", :value="demo.endDate", @input="handleEndDate", placeholder="请输入到期日")
-              tr
-                th 风险等级：
-                td
-                  el-select(v-model="demo.riskLevel")
-                    el-option(v-for="o in riskLevels", :label="o.name", :value="o.value")
-              tr
-                th 付息日：
-                td
-                  el-date-picker(type="date",  placeholder="请输入付息日", :value="demo.payDate", @input="handlePayDate",)
-              tr
-                th 增信措施：
-                td
-                  el-input(type="text", placeholder="请输入增信措施", v-model="demo.credit")
-              tr
-                th 担保方：
-                td
-                  el-input(type="text", placeholder="请输入担保方", v-model="demo.gurantee")
-              tr
-                th 流动性：
-                td
-                  el-select(v-model="demo.flow")
-                    el-option(v-for="o in flows", :label="o.name", :value="o.value")
+            el-form-item(label="资产简称：", prop="shortName")
+              el-input(type="text", placeholder="请输入资产简称", v-model="demo.shortName")
+            el-form-item(label="总发行金额：", prop="issueAmount")
+              el-input(type="text", placeholder="请输入总发行金额", v-model="demo.issueAmount")
+                template(slot="append") 元
+            el-form-item(label="收益率：", prop="rate")
+              el-input(type="text", placeholder="请输入收益率", v-model="demo.rate")
+                template(slot="append") %
+            el-form-item(label="到期日：", prop="endDate")
+              el-date-picker(type="date", :value="demo.endDate", @input="handleEndDate", placeholder="请输入到期日")
+            el-form-item(label="风险等级：", prop="riskLevel")
+              el-select(v-model="demo.riskLevel")
+                el-option(v-for="o in riskLevels", :label="o.name", :value="o.value")
+            el-form-item(label="付息日：", prop="payDate")
+              el-date-picker(type="date",  placeholder="请输入付息日", :value="demo.payDate", @input="handlePayDate",)
+            el-form-item(label="增信措施：", prop="credit")
+              el-input(type="text", placeholder="请输入增信措施", v-model="demo.credit")
+            el-form-item(label="担保方：", prop="gurantee")
+              el-input(type="text", placeholder="请输入担保方", v-model="demo.gurantee")
+            el-form-item(label="流动性：", prop="flow")
+              el-select(v-model="demo.flow")
+                el-option(v-for="o in flows", :label="o.name", :value="o.value")
   account-card(:accounts='demo.accounts')
   .bottom-buttons
     el-button(type="primary", size="small", @click="submitForm") 保存
@@ -103,8 +65,8 @@ import {
 } from 'element-ui'
 import {
   updateCrumbs
-} from '../../common/crossers.js'
-import AccountCard from '../../components/AccountCard.vue'
+} from '@/common/crossers.js'
+import AccountCard from '@/components/AccountCard.vue'
 import moment from 'moment'
 import {
   uniqueId
@@ -180,6 +142,7 @@ export default {
 
   data() {
     return {
+      rules: {},
       demo: {
         name: null,
         amount: null,

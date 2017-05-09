@@ -1,5 +1,5 @@
-import { router } from '../router.js'
-// import { sessions, accounts } from '../common/resources.js'
+import { router } from '@/router.js'
+// import { sessions, accounts } from '@/common/resources.js'
 import Vue from 'vue'
 import { Message } from 'element-ui'
 

@@ -99,7 +99,7 @@ export default {
     height: 60px;
     width: 100%;
     color: #ffffff;
-    background: #414453;
+    background: #3e4b5c;
     font-size: 14px;
     overflow: hidden;
     position: fixed;
@@ -117,8 +117,8 @@ export default {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: #79859a;
-    color: #ffffff;
+    background: #f3f6f8;
+    color: #717d8f;
     padding: 30px 0;
     margin-top: 30px;
     p {

@@ -472,8 +472,8 @@ import {
   Tabs,
   TabPane
 } from 'element-ui'
-import PieChart from '../../components/PieEchart'
-import Dialog from '../../components/PublicDialog.vue'
+import PieChart from '@/components/PieEchart'
+import Dialog from '@/components/PublicDialog.vue'
 export default {
   components: {
     ElSelect: Select,

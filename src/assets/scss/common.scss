@@ -24,11 +24,15 @@ body {
 }
 
 .color-green {
-  color: #16a474;
+  color: $color-green;
 }
 
 .color-red {
-  color: #de3569;
+  color: $color-red;
+}
+
+.color-blue {
+  color: $color-blue;
 }
 
 .mr-0_5em {
@@ -141,7 +145,6 @@ body {
 //     margin-right: 3px;
 //   }
 // }
-
 // .update-data {
 //   .update-status {
 //     font-size: 13px;
@@ -164,7 +167,7 @@ body {
 //     }
 //   }
 // }
-.bottom-buttons{
+.bottom-buttons {
   margin-top: 20px;
   text-align: center;
 }
