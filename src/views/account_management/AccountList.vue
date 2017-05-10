@@ -38,7 +38,8 @@
         el-table-column(prop='bank', label='开户行', width='220')
         el-table-column(label='关联产品', width='100')
           template(scope="scope")
-            i.icon-batonx.icon-relation
+            a
+              i.icon-batonx.icon-relation
         el-table-column(prop='updateDate', label='更新时间', width='120')
         el-table-column(label='操作', fixed="right", width='100')
           template(scope="scope")
@@ -223,6 +224,9 @@ export default {
   .el-pagination {
     margin-top: 20px;
     text-align: center;
+  }
+  .icon-relation {
+    font-size: 15px;
   }
 }
 </style>

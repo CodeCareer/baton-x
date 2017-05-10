@@ -77,7 +77,7 @@ import {
 
 export default {
   props: {
-    accounts: {
+    passedAccounts: {
       type: Array,
       default: []
     }
@@ -161,6 +161,7 @@ export default {
       filter: {
         name: ''
       },
+      accounts: merge([], this.passedAccounts),
       formLabelWidth: '120px',
       editAccountVisible: false,
       accountListVisible: false,

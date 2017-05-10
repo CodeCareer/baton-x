@@ -29,6 +29,9 @@ a {
   cursor: pointer;
   color: inherit;
   display: block;
+  &>* {
+    cursor: pointer;
+  }
 }
 
 a:link,

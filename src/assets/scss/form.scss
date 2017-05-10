@@ -2,6 +2,12 @@ form {
   .el-input-group__append {
     border-color: $border-color;
   }
+  .form-inner {
+    max-width: 430px;
+    &.center{
+      margin: 0 auto;
+    }
+  }
   .el-input,
   .el-input-group {
     max-width: 300px;
@@ -16,7 +22,9 @@ form {
   .el-form-item {
     margin-bottom: 10px;
   }
-
+  .el-form-item__error {
+    padding-top: 0;
+  }
   .el-input__inner {
     font-size: 13px;
     color: #595f67;

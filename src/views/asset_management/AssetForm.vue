@@ -51,7 +51,7 @@
             el-form-item(label="流动性：", prop="flow")
               el-select(v-model="demo.flow")
                 el-option(v-for="o in flows", :label="o.name", :value="o.value")
-  account-card(:accounts='demo.accounts')
+  account-card(:passed-accounts='demo.accounts')
   .bottom-buttons
     el-button(type="primary", size="small", @click="submitForm") 保存
     el-button(type="gray", size="small", @click="cancel") 取消

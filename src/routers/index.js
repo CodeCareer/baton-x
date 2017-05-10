@@ -167,13 +167,13 @@ export default [{
     name: 'ClientList',
     component: resolve => require(['../views/client_management/ClientList.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-机构列表',
+      title: '开通金融-交易所产品管理系统-客户列表',
       needLogin: true,
       crumbs: [{
-        name: '机构管理',
+        name: '客户管理',
         to: { name: 'ClientList' }
       }, {
-        name: '机构列表',
+        name: '客户列表',
         to: { name: 'ClientList' }
       }]
     }
