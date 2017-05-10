@@ -116,7 +116,7 @@
                 el-input(icon='search', placeholder="请输入产品代码",:on-icon-click="findproduct")
     .table-container
       el-table(:data='tableData', style='width: 100%', @row-click='goToDetail')
-        el-table-column(prop='name' label='资产名称', width='320')
+        el-table-column(property='name', label='资产名称', width='320')
           template(scope='scope')
            span.asset-name {{scope.row.name}}
            span.current(v-if="scope.row.current") 活期
@@ -125,12 +125,12 @@
         el-table-column
           template(scope='scope')
             span.status_color(v-for="state in scope.row.status", :class="state | filterColor") {{state}}
-        el-table-column(prop='amount' label='实际募集金额', width='150')
-        el-table-column(prop='term' label='发行期限')
-        el-table-column(prop='startDate', label='起息日', :sortable='true')
-        el-table-column(prop='endDate' label='到期日')
-        el-table-column(prop='rates' label='发行利率', width='180')
-        el-table-column(prop='platforms' label='发行平台', width="150")
+        el-table-column(property='amount', label='实际募集金额', width='150')
+        el-table-column(property='term' label='发行期限')
+        el-table-column(property='startDate', label='起息日', :sortable='true')
+        el-table-column(property='endDate' label='到期日')
+        el-table-column(property='rates' label='发行利率', width='180')
+        el-table-column(property='platforms' label='发行平台', width="150")
       el-pagination(@size-change='pageSizeChange', @current-change='pageChange', :current-page='page.current', :page-sizes="page.sizes", :page-size="page.size", layout='total, prev, pager, next, jumper', :total='tableData.length')
 
 </template>

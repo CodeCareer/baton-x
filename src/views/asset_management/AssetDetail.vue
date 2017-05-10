@@ -95,7 +95,7 @@
               el-upload.upload-attachment(action='//jsonplaceholder.typicode.com/posts/', :file-list='demo.attachments')
                 el-button(size='mini', type='primary') 增加
         .box-section
-          kt-note-card(:passed-notes="demo.notes")
+          note-card(:passed-notes="demo.notes")
     .box.box-normal
       .box-header  资产详情
       .box-content
@@ -166,11 +166,11 @@
                   td 招商银行天津滨海新区支行
     el-dialog(title='历史交易记录', v-model='historyDealVisible')
       el-table(:data='demo.historyDeals')
-        el-table-column(label='时间')
+        el-table-column(property='dealAt', label='时间')
           template(scope='scope') {{scope.row.dealAt | moment('YYYY-MM-DD')}}
         el-table-column(property='name', label='产品名称', width='200')
         el-table-column(property='opType', label='操作类型')
-        el-table-column(label='变动金额')
+        el-table-column(property='amount', label='变动金额')
           template(scope='scope')
             span.color-green(v-if="scope.row.opType === '卖出'") -{{scope.row.amount | ktCurrency('')}}
             span.color-red(v-if="scope.row.opType === '买入'") +{{scope.row.amount | ktCurrency('')}}
@@ -190,13 +190,13 @@ import {
 import {
   updateCrumbs
 } from '@/common/crossers.js'
-import KtNoteCard from '@/components/NoteCard.vue'
+import NoteCard from '@/components/NoteCard.vue'
 import Vue from 'vue'
 
 export default {
   components: {
     KtLineChart,
-    KtNoteCard
+    NoteCard
   },
   mounted: function() {
     this.demo.name = this.demo.shortName = this.$route.params.id

@@ -28,7 +28,7 @@
             el-button(size="small", type="primary", @click="clearFilter")  清除
     .table-container
       el-table(:data='filterTableData', style='width: 100%', @row-click='goToDetail')
-        el-table-column(prop='name' label='机构名称', width='220')
+        el-table-column(prop='name', label='机构名称', width='220')
           template(scope='scope')
             el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
               p 提示: {{ scope.row.note }}

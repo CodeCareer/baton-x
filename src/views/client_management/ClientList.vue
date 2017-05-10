@@ -1,12 +1,14 @@
 <template lang="pug">
-  section.inst-list
+  section.client-list
     .box
+      .box-header
+        h3 筛选条件
       .filters
         el-input(placeholder='客户名称或证件号码', icon='search', v-model.lazy='filter.name')
         el-button(size="small", type="primary", @click="clearFilter")  清除
     .table-container
-      el-table(:data='filterClients', style='width: 100%')
-        el-table-column(prop='name' label='客户名称', width='220')
+      el-table(:data='filterClients', style='width: 100%', @sort-change="customSort")
+        el-table-column(prop='name', label='客户名称', width='220')
           template(scope='scope')
             el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
               p 提示: {{ scope.row.note }}
@@ -16,17 +18,17 @@
             span(v-if="!scope.row.note") {{scope.row.name}}
         el-table-column(prop='certificate', label='证件类型')
         el-table-column(prop='IDNumber', label='证件号码')
-        el-table-column(label='持有产品数量', :sortable='true')
+        el-table-column(prop='count', label='持有产品数量', sortable='custom')
           template(scope="scope")
             a(@click="showProducts(scope.row)") {{scope.row.count}}
         el-table-column(prop='amount', label='持有产品金额', :sortable='true')
       el-pagination(@size-change='pageSizeChange', @current-change='pageChange', :current-page='page.current', :page-sizes="page.sizes", :page-size="page.size", layout='total, prev, pager, next, jumper', :total='clients.length')
     el-dialog(title='持有产品', v-model='ownProductDialogVisible')
       el-table(:data='ownProductList')
-        el-table-column(property='name', label='产品名称', width='200')
+        el-table-column(prop='name', label='产品名称', width='200')
         el-table-column(prop="amount", label='持有金额')
-        el-table-column(property='ratio', label='持有金额占比')
-        el-table-column(property="subscribeDate", label='认购时间')
+        el-table-column(prop='ratio', label='持有金额占比')
+        el-table-column(prop="subscribeDate", label='认购时间')
 
 </template>
 
@@ -42,6 +44,10 @@ export default {
       each(this.filter, (v, k) => {
         this.filter[k] = ''
       })
+    },
+
+    customSort(data) {
+      console.log(data)
     },
 
     showProducts(client) {
@@ -141,6 +147,5 @@ export default {
 <style lang="scss" scoped>
 .filters {
   border-radius: 4px;
-
 }
 </style>

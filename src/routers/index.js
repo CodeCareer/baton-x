@@ -182,14 +182,29 @@ export default [{
     name: 'AccountList',
     component: resolve => require(['../views/account_management/AccountList.vue'], resolve),
     meta: {
-      title: '开通金融-交易所产品管理系统-账户列表',
+      title: '开通金融-交易所产品管理系统-资金账户列表',
       needLogin: true,
       crumbs: [{
-        name: '账户管理',
+        name: '资金账户管理',
         to: { name: 'AccountList' }
       }, {
-        name: '账户列表',
+        name: '资金账户列表',
         to: { name: 'AccountList' }
+      }]
+    }
+  }, {
+    path: 'company_account_list',
+    name: 'CompanyAccountList',
+    component: resolve => require(['../views/account_management/CompanyAccountList.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-公司账户列表',
+      needLogin: true,
+      crumbs: [{
+        name: '公司账户管理',
+        to: { name: 'CompanyAccountList' }
+      }, {
+        name: '公司账户列表',
+        to: { name: 'CompanyAccountList' }
       }]
     }
   }]

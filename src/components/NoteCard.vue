@@ -45,7 +45,9 @@ export default {
   props: {
     passedNotes: {
       type: Array,
-      default: []
+      default () {
+        return []
+      }
     }
   },
   methods: {

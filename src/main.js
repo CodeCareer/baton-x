@@ -9,6 +9,7 @@ import {
   Form,
   FormItem,
   Button,
+  Radio,
   Input,
   Select,
   Option,
@@ -30,6 +31,7 @@ import CollapseTransition from 'element-ui/lib/transitions/collapse-transition.j
 Vue.component(Form.name, Form)
 Vue.component(FormItem.name, FormItem)
 Vue.component(Button.name, Button)
+Vue.component(Radio.name, Radio)
 Vue.component(Input.name, Input)
 Vue.component(Select.name, Select)
 Vue.component(Option.name, Option)

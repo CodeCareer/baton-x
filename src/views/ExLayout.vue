@@ -165,10 +165,16 @@ export default {
         index: '5',
         icon: 'icon-capitalman',
         menus: [{
-          name: '账户列表',
+          name: '资金账户列表',
           index: '5-1',
           route: {
             name: 'AccountList'
+          }
+        }, {
+          name: '公司账户列表',
+          index: '5-2',
+          route: {
+            name: 'CompanyAccountList'
           }
         }]
       }, {
@@ -245,7 +251,7 @@ $menu-height: 50px;
     height: $header-height;
     line-height: $header-height;
     background: #3e4b5c;
-    z-index: 10;
+    z-index: 999;
     .log-out {
       cursor: pointer;
       &:hover {
@@ -315,7 +321,7 @@ $menu-height: 50px;
         background: none;
       }
       &.is-active {
-        color: #538cc0;
+        color: white;
       }
       .icon-color {
         padding-right: 10px;

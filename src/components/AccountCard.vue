@@ -23,25 +23,25 @@
               td {{account.bank}}
       el-col(:span="8")
         .account-card.add-new-account(@click="addCheckedAccount")
-  el-dialog(title="编辑账户", v-model='editAccountVisible')
-    el-form(:model='activeAccount', :label-width='formLabelWidth')
-      el-form-item(label='账户类型：')
+  el-dialog(title="编辑账户", v-model='editAccountVisible', @open="onAccountDialogOpen")
+    el-form(:model='activeAccount', ref="accountForm", :rules="rules", :label-width='formLabelWidth')
+      el-form-item(prop="type", label='账户类型：')
         el-select(v-model='activeAccount.type', placeholder='请选择账户类型')
           el-option(label='资产账户', value='资产账户')
           el-option(label='募集账户', value='募集账户')
           el-option(label='产品账户', value='产品账户')
-      el-form-item(label='所属方：')
+      el-form-item(prop="belongto", label='所属方：')
         el-input(v-model='activeAccount.belongto', auto-complete='off', placeholder='请输入所属方')
-      el-form-item(label='账户名：')
+      el-form-item(prop="name", label='账户名：')
         el-input(v-model='activeAccount.name', auto-complete='off', placeholder='请输入账户名')
-      el-form-item(label='账户：')
+      el-form-item(prop="bankNum", label='账户：')
         el-input(v-model='activeAccount.bankNum', auto-complete='off', placeholder='请输入账户')
-      el-form-item(label='开户行：')
+      el-form-item(prop="bank", label='开户行：')
         el-input(v-model='activeAccount.bank', auto-complete='off', placeholder='请输入开户行')
     .dialog-footer(slot="footer")
       el-button(type="primary", size="small", @click='activeAccountSave') 确定
       el-button(type='gray', size="small", @click='editAccountVisible = false') 取消
-  el-dialog.accounts-list(title='账户信息', v-model='accountListVisible', size="large", @open="accountListOpen", @close="accountListClose")
+  el-dialog.accounts-list(title='账户信息', v-model='accountListVisible', size="large", @open="onAccountListOpen", @close="onAccountListClose")
     .box
       .box-tab-header
         el-button(type="primary", size="small", @click="addAccount")
@@ -79,10 +79,19 @@ export default {
   props: {
     passedAccounts: {
       type: Array,
-      default: []
+      default () {
+        return []
+      }
     }
   },
-
+  watch: {
+    passedAccounts: {
+      immediate: true,
+      handler() {
+        this.accounts = merge([], this.passedAccounts)
+      }
+    }
+  },
   methods: {
     deleteAccount(account) {
       MessageBox.confirm('此操作将永久删除改批注, 是否继续?', '提示', {
@@ -104,41 +113,59 @@ export default {
       }
       this.editAccountVisible = true
     },
+
     editAccount(account) {
       this.activeAccount = merge({}, account)
       this.editAccountVisible = true
     },
+
     activeAccountSave() {
       const account = find(this.accounts, v => this.activeAccount.id === v.id)
       if (account) { // 编辑
         merge(account, this.activeAccount)
+        this.editAccountVisible = false
       } else { // 新增
-        this.activeAccount.id = uniqueId()
-          // this.activeAccount.checked = false
-        this.accounts.unshift(this.activeAccount)
-        this._tableCheckedUpdate()
+        this.$refs.accountForm.validate((valid) => {
+          if (valid) {
+            this.activeAccount.id = uniqueId()
+              // this.activeAccount.checked = false
+            this.accounts.unshift(this.activeAccount)
+            this._tableCheckedUpdate()
+            this.editAccountVisible = false
+          }
+        })
       }
-      this.editAccountVisible = false
     },
+
     addCheckedAccount() {
       this.accountListVisible = true
     },
+
     _tableCheckedUpdate() {
-      each(this.accounts, (v) => {
-        this.$nextTick(() => {
+      this.$nextTick(() => {
+        each(this.accounts, (v) => {
           this.$refs.accountsTable.toggleRowSelection(v, v.checked)
         })
       })
     },
-    accountListOpen() {
+
+    onAccountDialogOpen() {
+      this.$nextTick(() => {
+        this.$refs.accountForm.resetFields()
+      })
+    },
+
+    onAccountListOpen() {
       this._tableCheckedUpdate()
     },
-    accountListClose() {
+
+    onAccountListClose() {
       const ids = map(this.accountListChecked, 'id')
       each(this.accounts, v => {
         v.checked = includes(ids, v.id)
       })
     },
+
     checkAccount(val) {
       this.accountListChecked = val
     }
@@ -160,6 +187,38 @@ export default {
     return {
       filter: {
         name: ''
+      },
+      rules: {
+        belongto: [{
+          required: true,
+          message: '请输入账户所属方',
+          trigger: 'blur'
+        }],
+        name: [{
+          required: true,
+          message: '请输入账户名',
+          trigger: 'blur'
+        }],
+        bankNum: [{
+          required: true,
+          message: '请输入账户',
+          trigger: 'blur'
+        }],
+        bank: [{
+          required: true,
+          message: '请输入账户',
+          trigger: 'blur'
+        }],
+        type: [{
+          required: true,
+          message: '请输入账户',
+          trigger: 'blur'
+        }],
+        relationProducts: [{
+          required: true,
+          message: '请输入账户',
+          trigger: 'blur'
+        }]
       },
       accounts: merge([], this.passedAccounts),
       formLabelWidth: '120px',

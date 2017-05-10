@@ -129,7 +129,7 @@ body {
     font-size: 12px;
     color: #626473;
     border: 1px solid #e7eaed;
-    border-bottom: 0;
+    // border-bottom: 0;
     &:after,
     &:before {
       display: none;
@@ -148,6 +148,11 @@ body {
       white-space: nowrap;
       background-color: #f3f6f8;
       font-weight: normal;
+    }
+    tr:last-of-type {
+      td {
+        border-bottom: 0;
+      }
     }
     td {
       border-bottom: 1px solid #e7eaed;

@@ -24,6 +24,13 @@
                 el-input(type="text", placeholder="请输入办公地址", v-model="demo.address")
               el-form-item(label="联系电话：", prop="tel")
                 el-input(type="text", placeholder="请输入联系电话", v-model="demo.tel")
+              el-form-item(label="机构LOGO：", prop="logo")
+                el-upload.logo-uploader(action='//jsonplaceholder.typicode.com/posts/', :show-file-list="false", :on-success="onLogoSuccess", :on-error="onLogoError", :before-upload="beforeUploadLogo")
+                  img.logo(v-if='demo.logo', :src='demo.logo')
+                  i.el-icon-plus.logo-uploader-icon(v-else='')
+                  .mask
+                    el-button(type="primary") 点击重新上传
+                  div.el-upload__tip(slot="tip") 支持JPG、JPEG、PNG格式，大小不超过2M
     .bottom-buttons
       el-button(type="primary", size="small", @click="submitForm") 保存
       el-button(type="gray", size="small", @click="cancel") 取消
@@ -33,7 +40,8 @@
 <script>
 import {
   MessageBox,
-  Message
+  Message,
+  Loading
 } from 'element-ui'
 import {
   updateCrumbs
@@ -65,6 +73,7 @@ export default {
     submitForm() {
       Message.info('不能保存！Demo，只是用来展示！')
     },
+
     cancel() {
       MessageBox.confirm('内容将会清楚，确定取消吗？', '提示', {
         type: 'warning'
@@ -72,26 +81,49 @@ export default {
         this.$router.back()
       })
     },
+
     handleStartDate(value) {
       if (!value) return
       this.demo.startDate = moment(value).format('YYYY-MM-DD')
     },
+
     handleEndDate(value) {
       if (!value) return
       this.demo.endDate = moment(value).format('YYYY-MM-DD')
     },
+
     handlePayDate(value) {
       if (!value) return
       this.demo.payDate = moment(value).format('YYYY-MM-DD')
+    },
+
+    onLogoSuccess(res, file) {
+      this.loadingInstance.close()
+      this.demo.logo = URL.createObjectURL(file.raw)
+    },
+
+    onLogoError(res) {
+      console.error(res)
+      Message.error('上传失败!')
+      this.loadingInstance.close()
+    },
+
+    beforeUploadLogo(file) {
+      this.loadingInstance = Loading.service({
+        target: '.logo-uploader .el-upload'
+      })
     }
   },
 
   data() {
     return {
+      loadingInstance: {
+        close() {}
+      },
       rules: {
         type: [{
           required: true,
-          message: '请输入机构全称',
+          message: '请选择机构类型',
           trigger: 'blur'
         }],
         name: [{
@@ -101,7 +133,7 @@ export default {
         }],
         shortName: [{
           required: true,
-          message: '请输入机构全称',
+          message: '请输入机构简称',
           trigger: 'blur'
         }]
       },
@@ -154,6 +186,46 @@ export default {
 
 <style lang="scss">
 .inst-form {
+  .logo-uploader {
+    .el-upload {
+      border: 1px dashed #d9d9d9;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      &:hover {
+        border-color: #20a0ff;
+        .mask {
+          display: block;
+        }
+      }
+    }
+    .mask {
+      display: none;
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, .3);
+      button {
+        margin-top: 70px;
+      }
+    }
+  }
+  .logo-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 178px;
+    height: 178px;
+    line-height: 178px;
+    text-align: center;
+  }
+  .logo {
+    width: 178px;
+    height: 178px;
+    display: block;
+  }
   .bottom-buttons {
     margin: 0 0 20px;
   }

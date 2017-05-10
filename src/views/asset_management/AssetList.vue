@@ -32,7 +32,7 @@
             el-button(size="small", type="primary", @click="clearFilter")  清除
     .table-container
       el-table(:data='filterTableData', style='width: 100%', @row-click='goToDetail')
-        el-table-column(prop='name' label='资产名称', width='220')
+        el-table-column(property='name', label='资产名称', width='220')
           template(scope='scope')
             el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
               p 提示: {{ scope.row.note }}
@@ -40,12 +40,12 @@
                 | {{ scope.row.name }}
                 i.icon-batonx.icon-explain
             span(v-if="!scope.row.note") {{scope.row.name}}
-        el-table-column(prop='amount' label='持有金额', width='150')
-        el-table-column(prop='start_date' label='起息日')
-        el-table-column(prop='end_date', label='到期日', :sortable='true')
-        el-table-column(prop='term' label='剩余期限')
-        el-table-column(prop='publisher' label='发行方', width='180')
-        el-table-column(prop='credit' label='增信措施', width="150")
+        el-table-column(property='amount' label='持有金额', width='150')
+        el-table-column(property='start_date' label='起息日')
+        el-table-column(property='end_date', label='到期日', :sortable='true')
+        el-table-column(property='term' label='剩余期限')
+        el-table-column(property='publisher' label='发行方', width='180')
+        el-table-column(property='credit' label='增信措施', width="150")
       el-pagination(@size-change='pageSizeChange', @current-change='pageChange', :current-page='page.current', :page-sizes="page.sizes", :page-size="page.size", layout='total, prev, pager, next, jumper', :total='tableData.length')
 
 </template>

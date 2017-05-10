@@ -24,7 +24,7 @@
                 tr
                   th 经营范围：
                   td
-                    span(v-for="item in inst.manageScope") {{item}}
+                    span.simple-tag(v-for="item in inst.manageScope") {{item}}
                 tr
                   th 公司网址：
                   td
@@ -42,7 +42,7 @@
         el-tab-pane(label='账户信息', name='second')
     .table-container(v-show="tab === 'first'")
       el-table(:data='filterProducts', style='width: 100%')
-        el-table-column(prop='name' label='产品名称')
+        el-table-column(property='name', label='产品名称')
           template(scope='scope')
             el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
               p 提示: {{ scope.row.note }}
@@ -50,15 +50,15 @@
                 | {{ scope.row.name }}
                 i.icon-batonx.icon-explain
             span(v-if="!scope.row.note") {{scope.row.name}}
-        el-table-column(prop='amount', label='存续金额')
-        el-table-column(prop='rate', label='年化收益率')
-        el-table-column(prop='duration', label='期限')
-        el-table-column(prop='endDate', label='到期日')
-        el-table-column(prop='type', label='产品类型')
+        el-table-column(property='amount', label='存续金额')
+        el-table-column(property='rate', label='年化收益率')
+        el-table-column(property='duration', label='期限')
+        el-table-column(property='endDate', label='到期日')
+        el-table-column(property='type', label='产品类型')
       el-pagination(@size-change='pageFirstSizeChange', @current-change='pageChange', :current-page='page.first.current', :page-sizes="page.first.sizes", :page-size="page.first.size", layout='total, prev, pager, next, jumper', :total='products.length')
     .table-container(v-show="tab === 'second'")
       el-table(:data='filterAccounts', style='width: 100%')
-        el-table-column(prop='name' label='账户名')
+        el-table-column(property='name', label='账户名')
           template(scope='scope')
             el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
               p 提示: {{ scope.row.note }}
@@ -66,9 +66,9 @@
                 | {{ scope.row.name }}
                 i.icon-batonx.icon-explain
             span(v-if="!scope.row.note") {{scope.row.name}}
-        el-table-column(prop='bankNum', label='账户')
-        el-table-column(prop='bank', label='开户行')
-        el-table-column(prop='type', label='账户类型')
+        el-table-column(property='bankNum', label='账户')
+        el-table-column(property='bank', label='开户行')
+        el-table-column(property='type', label='账户类型')
       el-pagination(@size-change='pageSecondSizeChange', @current-change='pageChange', :current-page='page.second.current', :page-sizes="page.second.sizes", :page-size="page.second.size", layout='total, prev, pager, next, jumper', :total='accounts.length')
 
 </template>
@@ -225,6 +225,9 @@ export default {
     margin-bottom: 10px;
     font-size: 15px;
     color: #5c667d;
+  }
+  .simple-tag {
+    margin-right: 10px;
   }
 }
 
