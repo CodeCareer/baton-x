@@ -23,7 +23,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.icon-log:before {
+  content: "\e91e";
+}
+.icon-relation:before {
+  content: "\e91f";
+}
+.icon-book:before {
+  content: "\e920";
+}
+.icon-brackets:before {
+  content: "\e921";
+}
+.icon-file:before {
+  content: "\e922";
+}
 .icon-approval:before {
   content: "\e907";
 }

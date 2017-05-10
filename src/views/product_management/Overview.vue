@@ -112,9 +112,9 @@
                               td.afp 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span 操作
+                                  span(@click="assetsDialog()") 操作
                                 .y-operation
-                                  span 操作
+                                  span(@click="assetsDialog()") 操作
                     tr
                       td.first_td(width="200") 京东活期理财计划丰银宝b
                       td
@@ -140,9 +140,9 @@
                               td.afp 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span 操作
+                                  span(@click="assetsDialog()") 操作
                                 .y-operation
-                                  span 操作
+                                  span(@click="assetsDialog()") 操作
             el-tab-pane
               a(slot="label")
                 img(src="../../assets/images/ov-tc.png")
@@ -175,9 +175,9 @@
                               td 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
                                 .y-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
                             tr
                               td.ov-table-zc 资产
                               td
@@ -198,9 +198,9 @@
                               td.afp 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
                                 .y-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
                     tr
                       td.first_td(width="200") 甜橙理财理财计划丰银宝b
                       td
@@ -226,9 +226,9 @@
                               td.afp 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
                                 .y-operation
-                                  span 操作
+                                  span(@click="findDialog()") 操作
 
             el-tab-pane
               a(slot="label")
@@ -459,10 +459,19 @@
           .calender-cell.fl  周五
           .calender-cell.fl  周六
         .calendar-bottom
-          .calendar-bottom-y.fl
-            .calendar-bottom-z
-              .calendar-bottom-n
-    public-dialog(ref="productDialog")
+          .calendar-bottom-y.fl(v-for="date in dates")
+            .calendar-bottom-n(@click="findCalendar")
+              .calendar-num {{date.date}}
+              .calendar-table
+                table
+                  tbody
+                    tr(v-for="tableData in date.tableDatas")
+                      td.td-left {{tableData.faxing}}
+                      td.td-right {{tableData.num}}
+
+    product-dialog(ref="productDialog")
+    calendar-dialog(ref="calendarDialog")
+    asset-dialog(ref="assetDialog")
 </template>
 
 <script>
@@ -472,8 +481,10 @@ import {
   Tabs,
   TabPane
 } from 'element-ui'
-import PieChart from '@/components/PieEchart'
-import Dialog from '@/components/PublicDialog.vue'
+import PieChart from '../../components/PieEchart'
+import Dialog from '../../components/ProductDialog.vue'
+import Calendar from '../../components/CalendarDialog.vue'
+import Asset from '../../components/AssetDialog.vue'
 export default {
   components: {
     ElSelect: Select,
@@ -481,7 +492,9 @@ export default {
     KtPieChart: PieChart,
     ElTabs: Tabs,
     ElTabPane: TabPane,
-    PublicDialog: Dialog
+    ProductDialog: Dialog,
+    CalendarDialog: Calendar,
+    AssetDialog: Asset
   },
   // computed: {
   //   weeks() {
@@ -517,6 +530,12 @@ export default {
     findDialog() {
       this.$refs.productDialog.showDialog()
     },
+    findCalendar() {
+      this.$refs.calendarDialog.lookDialog()
+    },
+    assetsDialog() {
+      this.$refs.assetDialog.showDialog()
+    },
     closeRemarks() {
       this.isclose = false
     }
@@ -528,6 +547,49 @@ export default {
       year: 2017,
       moment: 5,
       isclose: true,
+      dates: [{
+        date: '30',
+        tableDatas: [{
+          faxing: '发行',
+          num: '66'
+        }]
+      }, {
+        date: '30',
+        tableDatas: [{
+          faxing: '发行',
+          num: '66'
+        }]
+      }, {
+        date: '30',
+        tableDatas: [{
+          faxing: '发行',
+          num: '66'
+        }]
+      }, {
+        date: '30',
+        tableDatas: [{
+          faxing: '发行',
+          num: '66'
+        }]
+      }, {
+        date: '30',
+        tableDatas: [{
+          faxing: '发行',
+          num: '66'
+        }]
+      }, {
+        date: '30',
+        tableDatas: [{
+          faxing: '发行',
+          num: '66'
+        }]
+      }, {
+        date: '30',
+        tableDatas: [{
+          faxing: '发行',
+          num: '66'
+        }]
+      }],
       pieEchartOption: {
         legend: {
           data: [
@@ -843,6 +905,37 @@ export default {
       }
       .calendar-bottom {
         overflow: hidden;
+        padding-bottom: 20px;
+        .calendar-bottom-y {
+          width: 14.28%;
+          padding: 1px 1px;
+        }
+        .calendar-bottom-n {
+          padding: 10px;
+          border-radius: 3px;
+          background: #f3f6f8;
+          height: 200px;
+          &:hover {
+            cursor: pointer;
+            background: #c5e4f1;
+          }
+          .calendar-num {
+            padding: 5px 0;
+            text-align: right;
+          }
+          .calendar-table {
+            table {
+              width: 100%;
+              table-layout: fixed;
+              .td-left {
+                text-align: left;
+              }
+              .td-right {
+                text-align: right;
+              }
+            }
+          }
+        }
       }
     }
   }

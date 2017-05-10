@@ -23,7 +23,7 @@
                 ul.fl
                   li.fl(v-for="schedule in schedules")
                     a {{schedule.value}}
-              .filter-top-right.fr
+              .filter-top-right.fl
                 label.fl 执行状态：
                 ul.fl
                   li.fl(v-for="statu in status")
@@ -416,14 +416,17 @@ export default {
       color:#54637a;
     }
     li{
-      padding:0 5px;
+      // padding:0 5px;
       a{
         border-radius: 3px;
         padding:0 5px;
       }
     }
-   .filter-top-middle,.filter-top-left,.filter-top-bottom{
-    width:33%;
+   .filter-top-middle,.filter-top-right{
+    margin-left:50px;
+   }
+   .filter-top-middle,.filter-top-left,.filter-top-right{
+    // width:33%;
     .active{
       a{
         background: #538cc0;
@@ -440,7 +443,10 @@ export default {
       color:#54637a;
     }
     li{
-      padding:0 10px;
+      // padding:0 5px;
+      a{
+        padding:0 5px;
+      }
     }
   }
   .filters-search{
