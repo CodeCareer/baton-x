@@ -475,26 +475,17 @@
 </template>
 
 <script>
-import {
-  Select,
-  Option,
-  Tabs,
-  TabPane
-} from 'element-ui'
-import PieChart from '../../components/PieEchart'
-import Dialog from '../../components/ProductDialog.vue'
-import Calendar from '../../components/CalendarDialog.vue'
-import Asset from '../../components/AssetDialog.vue'
+import CalendarDialog from '@/components/CalendarDialog.vue'
+import AssetDialog from '@/components/AssetDialog.vue'
+import KtPieChart from '@/components/PieEchart'
+import ProductDialog from '@/components/ProductDialog.vue'
+
 export default {
   components: {
-    ElSelect: Select,
-    ElOption: Option,
-    KtPieChart: PieChart,
-    ElTabs: Tabs,
-    ElTabPane: TabPane,
-    ProductDialog: Dialog,
-    CalendarDialog: Calendar,
-    AssetDialog: Asset
+    KtPieChart,
+    CalendarDialog,
+    ProductDialog,
+    AssetDialog
   },
   // computed: {
   //   weeks() {

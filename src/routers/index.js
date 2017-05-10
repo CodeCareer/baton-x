@@ -177,5 +177,20 @@ export default [{
         to: { name: 'ClientList' }
       }]
     }
+  }, {
+    path: 'account_list',
+    name: 'AccountList',
+    component: resolve => require(['../views/account_management/AccountList.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-账户列表',
+      needLogin: true,
+      crumbs: [{
+        name: '账户管理',
+        to: { name: 'AccountList' }
+      }, {
+        name: '账户列表',
+        to: { name: 'AccountList' }
+      }]
+    }
   }]
 }]

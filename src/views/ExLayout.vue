@@ -1,5 +1,6 @@
 <template lang="pug">
   .ex-content
+    n-progress(parent=".ex-content")
     header
       img.logo(src="../assets/images/logo.svg")
       .user-info.fr
@@ -43,6 +44,7 @@ import {
   includes,
   find
 } from 'lodash'
+import NProgress from '@/components/NProgress.vue'
 import {
   updateCrumbs
 } from '@/common/crossers.js'
@@ -55,6 +57,7 @@ const headerH = 60 // header高度
 
 export default {
   components: {
+    NProgress,
     ElMenu: Menu,
     ElSubmenu: Submenu,
     ElMenuItem: MenuItem,
@@ -162,10 +165,10 @@ export default {
         index: '5',
         icon: 'icon-capitalman',
         menus: [{
-          name: '资金账户列表',
+          name: '账户列表',
           index: '5-1',
           route: {
-            name: ''
+            name: 'AccountList'
           }
         }]
       }, {
@@ -185,7 +188,7 @@ export default {
       }, {
         name: '行为日志',
         index: '8',
-        icon: 'icon-date',
+        icon: 'icon-log',
         route: {
           name: ''
         }
@@ -317,6 +320,10 @@ $menu-height: 50px;
       .icon-color {
         padding-right: 10px;
         color: #4c7ca9;
+      }
+      .icon-date {
+        display: inline-block;
+        transform: scale(0.9);
       }
     }
     .el-submenu .el-menu-item {

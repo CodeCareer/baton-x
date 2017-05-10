@@ -39,14 +39,10 @@ import {
   each
 } from 'lodash'
 import {
-  Message,
-  Input
+  Message
 } from 'element-ui'
+
 export default {
-  components: {
-    Message,
-    ElInput: Input
-  },
   methods: {
     search(index) {
       each(this.productNames, value => {
@@ -271,11 +267,11 @@ export default {
       padding: 0 5px;
       color: #9b9ca4;
     }
-    .isActive{
-      a{
+    .isActive {
+      a {
         background: #538cc0;
-        color:#fff;
-        padding:0 5px;
+        color: #fff;
+        padding: 0 5px;
         border-radius: 3px;
       }
     }
@@ -284,15 +280,15 @@ export default {
 
 .box-find {
   border-top: 1px solid #e2e5e9;
-  .box-find-input{
-    padding:15px 20px;
-    .el-input{
-      width:250px;
-      .el-input__inner{
-        height:30px;
-        border:none;
+  .box-find-input {
+    padding: 15px 20px;
+    .el-input {
+      width: 250px;
+      .el-input__inner {
+        height: 30px;
+        border: none;
         background: #f3f6f8;
-     }
+      }
     }
   }
 }
@@ -303,8 +299,8 @@ export default {
     margin-top: 20px;
     text-align: center;
   }
-  .last-td{
-  color:#538cc0;
+  .last-td {
+    color: #538cc0;
   }
 }
 </style>

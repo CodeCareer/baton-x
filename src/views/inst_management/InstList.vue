@@ -123,17 +123,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.filters {
-  .el-input {
-    margin-right: 20px;
-  }
-}
 
-.table-container {
-  margin-top: 20px;
-  .el-pagination {
-    margin-top: 20px;
-    text-align: center;
-  }
-}
 </style>

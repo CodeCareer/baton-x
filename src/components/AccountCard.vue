@@ -70,6 +70,7 @@ import {
   remove,
   find,
   each,
+  merge,
   map,
   includes
 } from 'lodash'
@@ -104,13 +105,13 @@ export default {
       this.editAccountVisible = true
     },
     editAccount(account) {
-      this.activeAccount = Object.assign({}, account)
+      this.activeAccount = merge({}, account)
       this.editAccountVisible = true
     },
     activeAccountSave() {
       const account = find(this.accounts, v => this.activeAccount.id === v.id)
       if (account) { // 编辑
-        Object.assign(account, this.activeAccount)
+        merge(account, this.activeAccount)
       } else { // 新增
         this.activeAccount.id = uniqueId()
           // this.activeAccount.checked = false

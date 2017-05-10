@@ -69,7 +69,7 @@
     form {
       padding: 15px;
     }
-    .el-form-item__label{
+    .el-form-item__label {
       font-size: 13px;
       color: #929aa3;
       padding-right: 5px;
@@ -133,7 +133,11 @@
     background: white;
     padding: 15px;
     border-radius: 0 0 4px 4px;
+    .el-select {
+      // margin-right: 20px;
+    }
     .el-input {
+      margin-right: 20px;
       width: 200px;
       height: 30px;
       input {
@@ -152,5 +156,13 @@
       background: white;
       color: #262c38;
     }
+  }
+}
+
+.table-container {
+  margin-top: 20px;
+  .el-pagination {
+    margin-top: 20px;
+    text-align: center;
   }
 }
