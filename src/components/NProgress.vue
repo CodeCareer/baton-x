@@ -1,7 +1,9 @@
 <template></template>
+
 <script>
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
+
 export default {
   props: {
     parent: String
@@ -30,11 +32,11 @@ export default {
   }
 }
 </script>
+
 <style lang="scss">
 .nprogress-custom-parent #nprogress .spinner,
 #nprogress .spinner {
   left: 150px;
   top: 20px;
-  // right: 100px;
 }
 </style>

@@ -36,8 +36,16 @@
     border-radius: 4px 4px 0 0;
     .buttons {
       float: right;
-      button {
+      &>button {
         margin-right: 10px;
+      }
+      &>.icon-batonx {
+        margin-right: 10px;
+        cursor: pointer;
+        color: #c9ccd1;
+        &:hover {
+          color: $primary-color;
+        }
       }
     }
     h3 {

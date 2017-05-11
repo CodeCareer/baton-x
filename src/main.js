@@ -11,8 +11,11 @@ import {
   Button,
   Radio,
   Input,
+  Checkbox,
+  CheckboxGroup,
   Select,
   Option,
+  Tag,
   Tabs,
   TabPane,
   Table,
@@ -33,8 +36,11 @@ Vue.component(FormItem.name, FormItem)
 Vue.component(Button.name, Button)
 Vue.component(Radio.name, Radio)
 Vue.component(Input.name, Input)
+Vue.component(Checkbox.name, Checkbox)
+Vue.component(CheckboxGroup.name, CheckboxGroup)
 Vue.component(Select.name, Select)
 Vue.component(Option.name, Option)
+Vue.component(Tag.name, Tag)
 Vue.component(Tabs.name, Tabs)
 Vue.component(TabPane.name, TabPane)
 Vue.component(Table.name, Table)

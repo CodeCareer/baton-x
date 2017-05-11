@@ -17,7 +17,7 @@
             el-option(label='产品账户', value='产品账户')
             el-option(label='费用账户', value='费用账户')
             el-option(label='其他第三方账户', value='其他第三方账户')
-        el-form-item(prop="relationProducts", label='关联产品：')
+        el-form-item.is-required(prop="relationProducts", label='关联产品：')
           input(type="hidden", v-model="account.relationProducts")
           .relation-products-tag(v-show="account.relationProducts && account.relationProducts.length")
             | 已选择：
@@ -46,11 +46,18 @@ export default {
     ProductList
   },
   methods: {
-    open(title = '新增账户', account = {}) {
+    open(account = {
+      name: '',
+      belongto: '',
+      bankNum: '',
+      bank: '',
+      type: '',
+      relationProducts: []
+    }) {
       this.dialogVisible = true
       this.$nextTick(() => {
-        this.account = merge({}, account)
-        this.title = title
+        this.account = merge({}, this.account, account)
+        this.title = account.id ? '新增账户' : '编辑账户'
       })
     },
 
@@ -81,6 +88,11 @@ export default {
     return {
       title: '新增账户',
       account: {
+        name: '',
+        belongto: '',
+        bankNum: '',
+        bank: '',
+        type: '',
         relationProducts: []
       },
       rules: {

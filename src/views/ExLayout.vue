@@ -12,12 +12,12 @@
       aside
         el-menu(:unique-opened='true', :default-openeds="defaultOpeneds", :default-active="defaultActive", :router='true', ref="menus")
           template(v-for="menu in menus")
-            el-submenu(v-if="menu.menus", :index="menu.index")
+            el-submenu(v-if="menu.menus", :index="menu.index", v-show="!menu.hidden")
               template(slot='title')
                 i.icon-batonx.icon-color(:class="menu.icon")
                 | {{menu.name}}
               el-menu-item( v-for="item in menu.menus", :index='item.index', :route="item.route") {{item.name}}
-            el-menu-item(v-else, :index='menu.index', :route="menu.route")
+            el-menu-item(v-else, :index='menu.index', :route="menu.route", v-show="!menu.hidden")
               i.icon-batonx.icon-color(:class="menu.icon")
               | {{menu.name}}
       .body(:style='containerStyles')
@@ -176,6 +176,18 @@ export default {
           route: {
             name: 'CompanyAccountList'
           }
+        }, {
+          name: '公司账户权限',
+          index: '5-3',
+          route: {
+            name: 'CompanyAccountAuthority'
+          }
+        }, {
+          name: '个人设置',
+          index: '5-4',
+          route: {
+            name: 'Setting'
+          }
         }]
       }, {
         name: '审批管理',
@@ -187,6 +199,7 @@ export default {
       }, {
         name: '权限管理',
         index: '7',
+        hidden: true,
         icon: 'icon-jurisdiction',
         route: {
           name: ''

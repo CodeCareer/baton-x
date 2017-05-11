@@ -200,11 +200,41 @@ export default [{
       title: '开通金融-交易所产品管理系统-公司账户列表',
       needLogin: true,
       crumbs: [{
-        name: '公司账户管理',
-        to: { name: 'CompanyAccountList' }
+        name: '账户管理',
+        to: { name: 'AccountList' }
       }, {
         name: '公司账户列表',
         to: { name: 'CompanyAccountList' }
+      }]
+    }
+  }, {
+    path: 'company_account_authority',
+    name: 'CompanyAccountAuthority',
+    component: resolve => require(['../views/account_management/CompanyAccountAuthority.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-公司账户权限',
+      needLogin: true,
+      crumbs: [{
+        name: '账户管理',
+        to: { name: 'AccountList' }
+      }, {
+        name: '公司账户权限',
+        to: { name: 'CompanyAccountAuthority' }
+      }]
+    }
+  }, {
+    path: 'setting',
+    name: 'Setting',
+    component: resolve => require(['../views/account_management/Setting.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-个人设置',
+      needLogin: true,
+      crumbs: [{
+        name: '账户管理',
+        to: { name: 'AccountList' }
+      }, {
+        name: '个人设置',
+        to: { name: 'Setting' }
       }]
     }
   }]

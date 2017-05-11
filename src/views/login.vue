@@ -84,9 +84,10 @@ export default {
 
 <style lang="scss">
 //登录页面样式
+@import '../assets/scss/_vars.scss';
 .loginPage {
   .login-form {
-    border: 1px solid #e7eaed;
+    border: 1px solid $border-color;
     border-radius: 4px;
   }
   .el-input__inner {
