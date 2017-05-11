@@ -55,7 +55,10 @@
       el-table-column(property='belongto', label='所属方')
       el-table-column(property='name', label='账户名')
       el-table-column(property='bankNum', label='账户')
-      el-table-column(property='bank', label='开户行')
+      el-table-column(property='bank', label='开户行', width="200")
+      el-table-column(label='操作')
+        template(scope="scope")
+          i.icon-batonx.icon-edit(@click="editAccount(scope.row)")
     .dialog-footer(slot="footer")
       el-button(type="primary", size="small", @click='accountListVisible = false') 确定
 </template>
@@ -115,26 +118,28 @@ export default {
     },
 
     editAccount(account) {
-      this.activeAccount = merge({}, account)
       this.editAccountVisible = true
+      this.$nextTick(() => {
+        this.activeAccount = merge({}, account)
+      })
     },
 
     activeAccountSave() {
-      const account = find(this.accounts, v => this.activeAccount.id === v.id)
-      if (account) { // 编辑
-        merge(account, this.activeAccount)
-        this.editAccountVisible = false
-      } else { // 新增
-        this.$refs.accountForm.validate((valid) => {
-          if (valid) {
+      this.$refs.accountForm.validate((valid) => {
+        if (valid) {
+          const account = find(this.accounts, v => this.activeAccount.id === v.id)
+          if (account) { // 编辑
+            merge(account, this.activeAccount)
+            this.editAccountVisible = false
+          } else { // 新增
             this.activeAccount.id = uniqueId()
               // this.activeAccount.checked = false
             this.accounts.unshift(this.activeAccount)
             this._tableCheckedUpdate()
             this.editAccountVisible = false
           }
-        })
-      }
+        }
+      })
     },
 
     addCheckedAccount() {
