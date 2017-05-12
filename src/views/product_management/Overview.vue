@@ -101,7 +101,7 @@
                                 .afp-num {{200184258 | ktCurrency}}
                                 .redeem-num {{16200234 | ktCurrency}}
                               td
-                                i.icon-batonx.icon-brackets
+                                i
                               td
                               td
                                 .in-approval(v-if="false")
@@ -129,7 +129,7 @@
                                 .afp-num {{200184258 | ktCurrency}}
                                 .redeem-num {{16200234 | ktCurrency}}
                               td
-                                i.icon-batonx.icon-brackets
+                                i
                               td
                               td
                                 .in-approval(v-if="false")
@@ -794,6 +794,10 @@ export default {
           td {
             padding: 10px 0;
           }
+          .icon-brackets{
+            font-size:25px;
+            color:#d8dadd;
+          }
           .ov-table-zj {
             color: #f55923;
           }
@@ -872,7 +876,6 @@ export default {
         height: 40px;
         line-height: 40px;
         text-align: center;
-        span {}
         i {
           padding: 0 20px;
           font-size: 12px;

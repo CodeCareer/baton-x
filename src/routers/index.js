@@ -57,6 +57,40 @@ export default [{
       }]
     }
   }, {
+    path: 'product_detail/:id',
+    name: 'ProductDetail',
+    component: reslove => require(['../views/product_management/ProductDetail.vue'], reslove),
+    meta: {
+      title: '开通金融-交易所产品管理系统-产品详情',
+      needLogin: true,
+      crumbs: [{
+        name: '产品管理',
+        to: {name: 'ex'}
+      }, {
+        name: '产品详情',
+        to: {name: 'ex'}
+      }]
+    }
+  }, {
+    path: 'asset_edit/:id',
+    name: 'AssetEdit',
+    component: resolve => require(['../views/product_management/AssetEdit.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-产品详情',
+      needLogin: true,
+      crumbs: [{
+        name: '产品管理',
+        to: {name: 'ex'}
+      }, {
+        name: '产品列表',
+        to: {name: '产品列表'}
+      }, {
+        id: 'AssetName',
+        name: '新增资产',
+        to: {name: 'AssetEdit'}
+      }]
+    }
+  }, {
     path: 'asset_list',
     name: 'AssetList',
     component: resolve => require(['../views/asset_management/AssetList.vue'], resolve),

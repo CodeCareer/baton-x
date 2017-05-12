@@ -17,6 +17,8 @@
           .operations
             i.icon-batonx.icon-edit(@click="editNote(note)", v-show="!note.editActive")
             i.icon-batonx.icon-success(@click="saveNote(note)", v-show="note.editActive")
+            i.icon-batonx.icon-remind(v-show="note.remindActive")
+              el-date-picker(type="datetime")
             i.icon-batonx.icon-close(@click="resetNote(note)", v-show="note.editActive")
             i.icon-batonx.icon-close(@click="deleteNote(note)", v-show="!note.editActive")
           .created-time(v-show='!note.editActive')
@@ -88,6 +90,7 @@ export default {
     },
 
     editNote(note) {
+      debugger
       note.editActive = true
       this.$nextTick(() => {
         const textarea = this.$refs.notes.querySelector(`#note_${note.id} textarea`)
@@ -171,6 +174,29 @@ export default {
           color: #538cc0;
         }
       }
+      .icon-remind{
+          font-size:15px;
+          color:#c9cdd1;
+          position: relative;
+          display: inline-block;
+          font-weight: bold;
+           .el-input{
+                width:100%;
+                height:100%;
+                position: absolute;
+                top:0px;
+                right:0px;
+                opacity:0;
+                cursor: pointer;
+              }
+              .el-input__inner{
+                padding:none;
+                height:0;
+                line-height: 0;
+                border:none;
+                // opacity:0;
+              }
+        }
     }
   }
   label {

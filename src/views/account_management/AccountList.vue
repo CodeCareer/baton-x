@@ -111,6 +111,7 @@ export default {
         type: 'warning'
       }).then(() => {
         this.accounts = remove(this.accounts, (v) => {
+          console.log(v)
           return account.id !== v.id
         })
       })
