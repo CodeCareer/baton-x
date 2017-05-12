@@ -4,7 +4,7 @@
       .box-header
         h3 筛选条件
         .buttons
-          el-button(type="primary", size="small", @click="openAccountDialog")
+          el-button(type="primary", size="small", @click="openAccountDialog()")
             i.icon-batonx.icon-plus
             | 添加
       .filters
@@ -54,6 +54,7 @@ import {
   each
 } from 'lodash'
 import CompanyAccountDialog from '@/components/CompanyAccountDialog.vue'
+import moment from 'moment'
 
 export default {
   components: {
@@ -75,13 +76,22 @@ export default {
     },
 
     onAccountSave(account) {
-      console.log(account)
       const activeAccount = find(this.accounts, v => v.id === account.id)
-      merge(activeAccount, account)
+      merge(account, {
+        updatedDate: moment().format('YYYY-MM-DD'),
+        createdDate: moment().format('YYYY-MM-DD'),
+        creator: '刘建明',
+        updator: '刘建明'
+      })
+      if (activeAccount) {
+        merge(activeAccount, account)
+      } else {
+        this.accounts.unshift(account)
+      }
     },
 
     openAccountDialog(account) {
-      this.$refs.accountDialog.open(account ? '编辑账户' : '新增账户', account)
+      this.$refs.accountDialog.open(account)
     },
 
     deleteAccount(account) {

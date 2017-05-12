@@ -112,8 +112,16 @@ body {
       border-color: darken($primary-color, 5%);
     }
   }
+  .el-checkbox {
+    &.circle {
+      .el-checkbox__inner {
+        border-radius: 50%;
+      }
+    }
+  }
   .el-checkbox__input {
-    &.is-checked {
+    &.is-checked,
+    &.is-indeterminate {
       .el-checkbox__inner {
         border-color: $primary-color;
         background-color: $primary-color;
@@ -128,16 +136,22 @@ body {
   .el-table {
     font-size: 12px;
     color: #626473;
-    border: 1px solid #e7eaed;
+    border: 1px solid $border-color;
     // border-bottom: 0;
     &:after,
     &:before {
       display: none;
     }
+    .icon-edit {
+      cursor: pointer;
+      &:hover {
+        color: $color-blue;
+      }
+    }
     th {
       background-color: #f3f6f8;
       &.is-leaf {
-        border-bottom: 1px solid #e7eaed;
+        border-bottom: 1px solid $border-color;
       }
     }
     .cell {
@@ -155,7 +169,7 @@ body {
       }
     }
     td {
-      border-bottom: 1px solid #e7eaed;
+      border-bottom: 1px solid $border-color;
     }
   }
   .el-pager li.active {

@@ -5,7 +5,7 @@
         el-form-item(prop="name", label='账户名称：')
           el-input(v-model='account.name', auto-complete='off', placeholder='请输入账户名')
         el-form-item(prop="email", label='账户邮箱：')
-          el-input(v-if="!account.email", v-model='account.email', auto-complete='off', placeholder='请输入邮箱')
+          el-input(v-if="title === '新增账户'", v-model='account.email', auto-complete='off', placeholder='请输入邮箱')
           span(v-else="") {{account.email}}
           span.el-form-item-tip.color-red 账户邮箱注册后不可修改
         el-form-item(prop="department", label='所属部门：')
@@ -27,30 +27,28 @@
 <script>
 import {
   merge,
-  uniqueId,
-  remove
+  uniqueId
 } from 'lodash'
 
 export default {
   methods: {
-    open(title = '新增账户', account = {}) {
+    open(account = {
+      name: '',
+      email: '',
+      department: '',
+      job: '',
+      password: '',
+      type: ''
+    }) {
       this.dialogVisible = true
       this.$nextTick(() => {
-        this.account = merge({}, account)
-        this.title = title
+        this.account = merge({}, this.account, account)
+        this.title = !account.id ? '新增账户' : '编辑账户'
       })
     },
 
     onDialogOpen() {
       this.$nextTick(() => this.$refs.accountForm.resetFields())
-    },
-
-    removeRelationProduct(product) {
-      this.account.relationProducts = remove(this.account.relationProducts, v => v.name !== product.name)
-    },
-
-    onProductCheckChange(products) {
-      this.account.relationProducts = merge([], products)
     },
 
     accountSave() {
@@ -67,7 +65,14 @@ export default {
   data() {
     return {
       title: '新增账户',
-      account: {},
+      account: {
+        name: '',
+        email: '',
+        department: '',
+        job: '',
+        password: '',
+        type: ''
+      },
       rules: {
         departments: [{
           required: true,
@@ -88,6 +93,10 @@ export default {
           required: true,
           message: '请输入邮箱',
           trigger: 'blur'
+        }, {
+          type: 'email',
+          message: '请输入正确的邮箱地址',
+          trigger: 'blur,change'
         }],
         job: [{
           required: true,

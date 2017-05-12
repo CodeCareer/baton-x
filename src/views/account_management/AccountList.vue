@@ -32,7 +32,7 @@
                 | {{ scope.row.belongto }}
                 i.icon-batonx.icon-explain
             span(v-if="!scope.row.note") {{scope.row.belongto}}
-        el-table-column(prop='type', label='账户类型', width='100')
+        el-table-column(prop='type', label='账户类型', width='120')
         el-table-column(prop='name', label='账户名', width='220')
         el-table-column(prop='bankNum', label='账户', width='220')
         el-table-column(prop='bank', label='开户行', width='220')
@@ -68,6 +68,7 @@ import AccountDialog from '@/components/AccountDialog.vue'
 import {
   MessageBox
 } from 'element-ui'
+import moment from 'moment'
 
 export default {
   components: {
@@ -93,7 +94,7 @@ export default {
     },
 
     openAccountDialog(account) {
-      this.$refs.accountDialog.open(account ? '编辑账户' : '新增账户', account)
+      this.$refs.accountDialog.open(account)
     },
 
     openRelationProducts(account) {
@@ -103,7 +104,12 @@ export default {
 
     onAccountSave(account) {
       const activeAccount = find(this.accounts, v => v.id === account.id)
-      merge(activeAccount, account)
+      if (activeAccount) {
+        account.updateDate = moment().format('YYYY-MM-DD')
+        merge(activeAccount, account)
+      } else {
+        this.accounts.unshift(account)
+      }
     },
 
     deleteAccount(account) {

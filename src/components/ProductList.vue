@@ -146,17 +146,18 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/scss/_vars.scss';
 .el-form-item.is-error .table-header {
   .el-input__inner,
   .el-textarea__inner {
-    border-color: #e7eaed;
+    border-color: $border-color;
   }
 }
 
 .table-header {
   padding: 8px 5px;
   background: #f3f6f8;
-  border: 1px solid #e7eaed;
+  border: 1px solid $border-color;
   border-bottom: 0;
   .el-input,
   .el-select {
