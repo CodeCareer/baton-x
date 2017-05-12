@@ -63,6 +63,11 @@ export default {
     },
 
     checkProduct(val) {
+      if (this.filterStatus) {
+        this.filterStatus = false
+        return
+      }
+
       this.checkedListClone = val
       this.onChange(this.checkedListClone)
     }
@@ -70,6 +75,8 @@ export default {
 
   computed: {
     filterProducts() {
+      this.filterStatus = true
+      this._tableCheckedUpdate()
       return filter(this.products, v => {
         return ~v.name.indexOf(this.filter.name) && ~v.platform.indexOf(this.filter.platform)
       })
@@ -78,12 +85,16 @@ export default {
 
   data() {
     return {
+      filterStatus: false, //此状态控制checkProduct被反复执行， 筛选状态下，表格会清空筛选，并emit select-change事件，导致选中的平台被清空
       checkedListClone: [],
       filter: {
         name: '',
         platform: ''
       },
       platforms: [{
+        name: '全部平台',
+        value: ''
+      }, {
         name: '京东金融',
         value: '京东金融'
       }, {

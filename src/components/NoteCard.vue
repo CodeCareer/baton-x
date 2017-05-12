@@ -90,7 +90,6 @@ export default {
     },
 
     editNote(note) {
-      debugger
       note.editActive = true
       this.$nextTick(() => {
         const textarea = this.$refs.notes.querySelector(`#note_${note.id} textarea`)

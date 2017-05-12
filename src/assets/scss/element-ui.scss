@@ -8,6 +8,14 @@ body {
       cursor: pointer;
     }
   }
+  .dialog-footer {
+    text-align: center;
+  }
+  .el-date-table td.current:not(.disabled),
+  .el-date-table td.end-date,
+  .el-date-table td.start-date {
+    background-color: $primary-color!important;
+  }
   .el-table__body {
     a {
       color: $color-blue;
@@ -118,6 +126,36 @@ body {
         border-radius: 50%;
       }
     }
+    &.mini {
+      .el-checkbox__label {
+        font-size: 12px;
+      }
+      .el-checkbox__inner {
+        height: 15px;
+        width: 15px;
+        &:after {
+          height: 6px;
+          left: 4px;
+          top: 2px;
+          width: 3px;
+        }
+      }
+    }
+  }
+  .el-radio {
+    &.mini {
+      .el-radio__label {
+        font-size: 12px;
+      }
+      .el-radio__inner {
+        height: 14px;
+        width: 14px;
+        &:after {
+          height: 5px;
+          width: 5px;
+        }
+      }
+    }
   }
   .el-checkbox__input {
     &.is-checked,
@@ -133,11 +171,32 @@ body {
       }
     }
   }
+  .el-radio__input {
+    &.is-checked {
+      .el-radio__inner {
+        border-color: $primary-color;
+        background-color: $primary-color;
+      }
+    }
+    .el-radio__inner {
+      &:hover {
+        border-color: $primary-color;
+      }
+    }
+  }
   .el-table {
     font-size: 12px;
     color: #626473;
     border: 1px solid $border-color;
     // border-bottom: 0;
+    &.no-wrap-cell {
+      .cell {
+        white-space: normal;
+      }
+      th>.cell {
+        white-space: normal;
+      }
+    }
     &:after,
     &:before {
       display: none;
@@ -156,6 +215,10 @@ body {
     }
     .cell {
       white-space: nowrap;
+      em {
+        margin: 0 3px;
+        color: $color-blue;
+      }
     }
     th>.cell {
       color: #657286;

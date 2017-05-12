@@ -10,6 +10,7 @@ import {
   FormItem,
   Button,
   Radio,
+  RadioGroup,
   Input,
   Checkbox,
   CheckboxGroup,
@@ -35,6 +36,7 @@ Vue.component(Form.name, Form)
 Vue.component(FormItem.name, FormItem)
 Vue.component(Button.name, Button)
 Vue.component(Radio.name, Radio)
+Vue.component(RadioGroup.name, RadioGroup)
 Vue.component(Input.name, Input)
 Vue.component(Checkbox.name, Checkbox)
 Vue.component(CheckboxGroup.name, CheckboxGroup)

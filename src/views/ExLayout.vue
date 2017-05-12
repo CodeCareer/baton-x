@@ -194,7 +194,7 @@ export default {
         index: '6',
         icon: 'icon-approval',
         route: {
-          name: ''
+          name: 'Approvement'
         }
       }, {
         name: '权限管理',
@@ -209,7 +209,7 @@ export default {
         index: '8',
         icon: 'icon-log',
         route: {
-          name: ''
+          name: 'LogList'
         }
       }],
 

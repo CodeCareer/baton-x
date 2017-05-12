@@ -219,7 +219,7 @@ export default [{
       title: '开通金融-交易所产品管理系统-资金账户列表',
       needLogin: true,
       crumbs: [{
-        name: '资金账户管理',
+        name: '账户管理',
         to: { name: 'AccountList' }
       }, {
         name: '资金账户列表',
@@ -269,6 +269,36 @@ export default [{
       }, {
         name: '个人设置',
         to: { name: 'Setting' }
+      }]
+    }
+  }, {
+    path: 'log_list',
+    name: 'LogList',
+    component: resolve => require(['../views/log/LogList.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-行为日志',
+      needLogin: true,
+      crumbs: [{
+        name: '行为日志',
+        to: { name: 'LogList' }
+      }, {
+        name: '行为日志',
+        to: { name: 'LogList' }
+      }]
+    }
+  }, {
+    path: 'approvement',
+    name: 'Approvement',
+    component: resolve => require(['../views/approve_management/Approvement.vue'], resolve),
+    meta: {
+      title: '开通金融-交易所产品管理系统-审批管理',
+      needLogin: true,
+      crumbs: [{
+        name: '审批管理',
+        to: { name: 'Approvement' }
+      }, {
+        name: '审批管理',
+        to: { name: 'Approvement' }
       }]
     }
   }]

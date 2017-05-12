@@ -24,20 +24,20 @@
               //- td
             tr(v-for="(module, index) in account.checkModules")
               th.bd-b
-                el-checkbox.circle(:disabled="true", @change="handleCheckAllChange($event, module)", :indeterminate="module.indeterminate" v-model="module.checked") {{module.name}}
+                el-checkbox.circle.mini(:disabled="true", @change="handleCheckAllChange($event, module)", :indeterminate="module.indeterminate" v-model="module.checked") {{module.name}}
               td.bd-b
                 el-checkbox-group(v-model="module.checkedList", @change="handleCheckChange(module)")
-                  el-checkbox.circle(:disabled="true", v-for="o in module.children", :label="o.value") {{o.name}}
+                  el-checkbox.circle.mini(:disabled="true", v-for="o in module.children", :label="o.value") {{o.name}}
             tr.bd-b
               th 可编辑内容
               td.bd-t(:colspan="2")
                 el-checkbox-group(v-model="account.editModules.checkedList", @change="handleCheckChange(account.editModules)")
-                  el-checkbox.circle(:disabled="true", v-for="o in account.editModules.children", :label="o.value") {{o.name}}
+                  el-checkbox.circle.mini(:disabled="true", v-for="o in account.editModules.children", :label="o.value") {{o.name}}
             tr.bd-b
               th 可删除内容
               td(:colspan="2")
                 el-checkbox-group(v-model="account.deleteModules.checkedList", @change="handleCheckChange(account.deleteModules)")
-                  el-checkbox.circle(:disabled="true", v-for="o in account.deleteModules.children", :label="o.value") {{o.name}}
+                  el-checkbox.circle.mini(:disabled="true", v-for="o in account.deleteModules.children", :label="o.value") {{o.name}}
         .more-toggle
           a(v-show="shortView", @click="shortView = false")
             i.icon-batonx.icon-down
@@ -54,7 +54,6 @@ import {
   mergeArrayCover
 } from '@/common/merge-rules.js'
 import {
-  map,
   remove,
   mergeWith,
   find
@@ -71,17 +70,6 @@ export default {
   methods: {
     openAccountAuthorityDialog(account) {
       this.$refs.accountAuthorityDialog.open(account)
-    },
-
-    handleCheckAllChange(event, module) {
-      module.checkedList = event.target.checked ? map(module.children, 'value') : []
-      module.indeterminate = false
-    },
-
-    handleCheckChange(module) {
-      const checkedCount = module.checkedList.length
-      module.checked = checkedCount === module.children.length
-      module.indeterminate = checkedCount > 0 && checkedCount < module.children.length
     },
 
     onAccountSave(account) {
@@ -428,19 +416,6 @@ export default {
       padding-right: 20px;
     }
   }
-  .el-checkbox__label {
-    font-size: 12px;
-  }
-  .el-checkbox__inner {
-    height: 15px;
-    width: 15px;
-    &:after {
-      height: 6px;
-      left: 4px;
-      top: 2px;
-      width: 3px;
-    }
-  }
 }
 
 .authority-table {
@@ -456,6 +431,9 @@ export default {
         border-color: $primary-color;
         cursor: auto;
       }
+    }
+    .el-checkbox{
+      cursor: auto;
     }
   }
   &.bd {

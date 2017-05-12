@@ -148,6 +148,7 @@ export default {
 
     _tableCheckedUpdate() {
       this.$nextTick(() => {
+        if (!this.$refs.accountsTable) return
         each(this.accounts, (v) => {
           this.$refs.accountsTable.toggleRowSelection(v, v.checked)
         })
@@ -182,6 +183,7 @@ export default {
     },
     filterAccountList() {
       if (!this.accounts.length) return this.accounts
+      this._tableCheckedUpdate()
       return filter(this.accounts, v => {
         return ~v.name.indexOf(this.filter.name) || ~v.bankNum.indexOf(this.filter.name)
       })
