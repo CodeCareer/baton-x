@@ -33,6 +33,7 @@ import {
 export default {
   methods: {
     open(account = {
+      id: null,
       name: '',
       email: '',
       department: '',
@@ -66,6 +67,7 @@ export default {
     return {
       title: '新增账户',
       account: {
+        id: null,
         name: '',
         email: '',
         department: '',

@@ -38,5 +38,6 @@ export default {
 #nprogress .spinner {
   left: 150px;
   top: 20px;
+  position: fixed;
 }
 </style>

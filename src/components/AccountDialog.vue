@@ -33,6 +33,7 @@
 <script>
 import ProductList from '@/components/ProductList.vue'
 import {
+  mergeWith,
   merge,
   uniqueId,
   remove
@@ -40,6 +41,9 @@ import {
 import {
   validateArray
 } from '@/common/validator.js'
+import {
+  mergeArrayCover
+} from '@/common/merge-rules.js'
 
 export default {
   components: {
@@ -47,6 +51,7 @@ export default {
   },
   methods: {
     open(account = {
+      id: null,
       name: '',
       belongto: '',
       bankNum: '',
@@ -56,7 +61,7 @@ export default {
     }) {
       this.dialogVisible = true
       this.$nextTick(() => {
-        this.account = merge({}, this.account, account)
+        this.account = mergeWith({}, this.account, account, mergeArrayCover)
         this.title = account.id ? '新增账户' : '编辑账户'
       })
     },
@@ -88,6 +93,7 @@ export default {
     return {
       title: '新增账户',
       account: {
+        id: null,
         name: '',
         belongto: '',
         bankNum: '',

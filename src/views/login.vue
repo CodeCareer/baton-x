@@ -46,7 +46,6 @@ export default {
               })
             })
             .catch(res => {
-              console.log(res)
               Message.error('用户名或密码错误')
               loadingInstance.close()
             })

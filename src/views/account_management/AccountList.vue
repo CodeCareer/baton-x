@@ -41,7 +41,7 @@
             a(@click="openRelationProducts(scope.row)")
               i.icon-batonx.icon-relation
         el-table-column(prop='updateDate', label='更新时间', width='120')
-        el-table-column(label='操作', fixed="right", width='100')
+        el-table-column(label='操作', :fixed="fixed", width='100')
           template(scope="scope")
             .operations
               i.icon-batonx.icon-edit(@click="openAccountDialog(scope.row)")
@@ -59,7 +59,7 @@
 import {
   remove,
   filter,
-  merge,
+  mergeWith,
   each,
   find
   // findIndex
@@ -69,6 +69,9 @@ import {
   MessageBox
 } from 'element-ui'
 import moment from 'moment'
+import {
+  mergeArrayCover
+} from '@/common/merge-rules.js'
 
 export default {
   components: {
@@ -106,7 +109,7 @@ export default {
       const activeAccount = find(this.accounts, v => v.id === account.id)
       if (activeAccount) {
         account.updateDate = moment().format('YYYY-MM-DD')
-        merge(activeAccount, account)
+        mergeWith(activeAccount, account, mergeArrayCover)
       } else {
         this.accounts.unshift(account)
       }
@@ -117,7 +120,6 @@ export default {
         type: 'warning'
       }).then(() => {
         this.accounts = remove(this.accounts, (v) => {
-          console.log(v)
           return account.id !== v.id
         })
       })
@@ -134,6 +136,7 @@ export default {
 
   data() {
     return {
+      fixed: window.innerWidth - 180 - 12 * 2 > 1150 ? false : 'right', // 180 左侧菜单宽度，12 section的padding
       tab: 'first',
       relationProductsVisible: false,
       relationProducts: [],

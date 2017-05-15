@@ -25,6 +25,8 @@
                 i.icon-batonx.icon-explain
             span(v-if="!scope.row.note") {{scope.row.name}}
         el-table-column(prop='detail', label='流程详情')
+          template(scope="scope")
+            span {{getFlowSimple(scope.row.flowList)}}
         el-table-column(label='操作', width='100')
           template(scope="scope")
             .operations
@@ -38,13 +40,18 @@
 import ApproveDialog from '@/components/ApproveDialog.vue'
 import {
   remove,
-  merge,
+  mergeWith,
+  map,
+  find,
   filter,
   each
 } from 'lodash'
 import {
   MessageBox
 } from 'element-ui'
+import {
+  mergeArrayCover
+} from '@/common/merge-rules.js'
 
 export default {
   components: {
@@ -69,6 +76,10 @@ export default {
       this.page.size = val
     },
 
+    getFlowSimple(flowList) {
+      return map(flowList, 'job').join('→')
+    },
+
     openApproveDialog(approve) {
       this.$refs.approveDialog.open(approve)
     },
@@ -76,7 +87,7 @@ export default {
     onApproveSave(approve) {
       const activeApprove = find(this.approves, v => v.id === approve.id)
       if (activeApprove) {
-        merge(activeApprove, approve)
+        mergeWith(activeApprove, approve, mergeArrayCover)
       } else {
         this.approves.unshift(approve)
       }
@@ -116,18 +127,18 @@ export default {
         id: 1,
         name: '资金清算审批流程A1',
         type: '资金清算流程',
-        detail: '项目组长→项目经理→项目总监',
         flowList: [{
           department: '业务发展部',
-          job: '项目组长',
+          hasError: false,
+          job: '业务组长',
           approver: '王一'
         }, {
           department: '业务发展部',
-          job: '项目经理',
+          job: '业务经理',
           approver: '王二'
         }, {
           department: '业务发展部',
-          job: '项目总监',
+          job: '业务总监',
           approver: '王三'
         }],
         relationProducts: [{
@@ -145,14 +156,14 @@ export default {
         id: 2,
         name: '资产交易审批流程A1',
         type: '资产交易流程',
-        detail: '项目经理→项目总监',
         flowList: [{
           department: '业务发展部',
-          job: '项目经理',
+          hasError: false,
+          job: '业务经理',
           approver: '王二'
         }, {
           department: '业务发展部',
-          job: '项目总监',
+          job: '业务总监',
           approver: '王三'
         }],
         relationProducts: [{
@@ -170,10 +181,10 @@ export default {
         id: 3,
         name: '资产交易审批流程A2',
         type: '资产交易流程',
-        detail: '项目经理审批',
         flowList: [{
           department: '业务发展部',
-          job: '项目经理',
+          hasError: false,
+          job: '业务经理',
           approver: '王二'
         }],
         relationProducts: [{
@@ -191,14 +202,14 @@ export default {
         id: 4,
         name: '资金清算审批流程A2',
         type: '资金清算流程',
-        detail: '项目经理→项目总监→合规风控经理',
         flowList: [{
           department: '业务发展部',
-          job: '项目组长',
+          hasError: false,
+          job: '业务组长',
           approver: '王一'
         }, {
           department: '业务发展部',
-          job: '项目经理',
+          job: '业务经理',
           approver: '王二'
         }, {
           department: '合规风控部',
@@ -220,10 +231,10 @@ export default {
         id: 5,
         name: '资金清算审批流程A3',
         type: '资金清算流程',
-        detail: '项目总监→合规风控经理',
         flowList: [{
           department: '业务发展部',
-          job: '项目总监',
+          hasError: false,
+          job: '业务总监',
           approver: '王三'
         }, {
           department: '合规风控部',

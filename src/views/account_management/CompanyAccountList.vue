@@ -32,7 +32,7 @@
         el-table-column(property='updatedDate', label='更新时间',width='150')
         el-table-column(property='creator', label='创建人', width='100')
         el-table-column(property='updator', label='最后更新人', width='100')
-        el-table-column(label='操作', fixed="right", width='100')
+        el-table-column(label='操作', :fixed="fixed", width='100')
           template(scope="scope")
             .operations
               i.icon-batonx.icon-edit(@click="openAccountDialog(scope.row)")
@@ -115,6 +115,7 @@ export default {
 
   data() {
     return {
+      fixed: window.innerWidth - 180 - 12 * 2 > 1150 ? false : 'right', // 180 左侧菜单宽度，12 section的padding
       ownProductList: [],
       ownProductDialogVisible: false,
       filter: {

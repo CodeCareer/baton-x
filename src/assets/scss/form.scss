@@ -2,15 +2,20 @@ form {
   .el-input-group__append {
     border-color: $border-color;
   }
-  .el-form-item__content{
-    .el-radio{
+  .el-form-item__content {
+    .el-radio {
       margin-right: 20px;
       margin-left: 0;
+      line-height: 1;
     }
   }
   .el-form-item-tip {
     font-size: 12px;
     padding-left: 10px;
+  }
+  .el-radio__label {
+    font-size: 13px;
+    color: #626473;
   }
   .el-form-item__label {
     font-size: 13px;
@@ -34,6 +39,18 @@ form {
   }
   .el-form-item {
     margin-bottom: 13px;
+    &.is-error.custom-error {
+      .el-input__inner,
+      .el-textarea__inner {
+        border-color: $border-color;
+      }
+      .has-error {
+        .el-input__inner,
+        .el-textarea__inner {
+          border-color: #ff4949;
+        }
+      }
+    }
   }
   .el-form-item__error {
     padding-top: 0;

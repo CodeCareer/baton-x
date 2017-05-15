@@ -15,16 +15,18 @@
               | {{r.name}}
               i.icon-batonx.icon-close(@click="removeRelationProduct(r)")
           product-list(:on-change="onProductCheckChange", :checked-list="approve.relationProducts")
-        el-form-item(prop="flows", label='审批流程：')
-          .flow(v-for="flow in approve.flowList")
-            el-select(v-model="approve.department", placeholder="请选择审批流程")
+        el-form-item.is-required.flows.custom-error(prop="flowList", label='审批流程：')
+          .flow(v-for="(flow, index) in approve.flowList", :class="{'has-error': flow.hasError}")
+            el-select.mr5(style="width:130px;", v-model="flow.department", placeholder="审批部门")
               el-option(v-for="d in departments", :value="d.value", :label="d.name")
-            el-select(v-model="approve.job", placeholder="请选择审批流程")
+            el-select.mr5(style="width:130px;", v-model="flow.job", placeholder="审批岗位")
               el-option(v-for="j in filterJobs(flow)", :value="j.value", :label="j.name")
-            el-select(v-model="approve.approver", placeholder="请选择审批流程")
+            el-select(style="width:130px;", v-model="flow.approver", placeholder="审批人")
               el-option(v-for="a in filterApprovers(flow)", :value="a.value", :label="a.name")
+            i.icon-batonx.icon-close(@click="removeFlow(index)", v-show="approve.flowList.length > 1")
+          input(type="hidden", v-model="approve.flowList")
         el-form-item(label='')
-          el-button(type="text")
+          el-button(type="text", @click="addFlow")
             i.icon-batonx.icon-plus
             | 添加更多审批
       .dialog-footer(slot="footer")
@@ -36,20 +38,31 @@
 import ProductList from '@/components/ProductList.vue'
 import {
   merge,
+  mergeWith,
   uniqueId,
   filter,
+  find,
+  map,
+  includes,
+  isUndefined,
   remove
 } from 'lodash'
 import {
-  validateArray
+  validateArray,
+  validateArrayDeep
 } from '@/common/validator.js'
+import {
+  mergeArrayCover
+} from '@/common/merge-rules.js'
 
 export default {
   components: {
     ProductList
   },
+
   methods: {
     open(approve = {
+      id: null,
       name: '',
       type: '',
       flowList: [],
@@ -57,17 +70,31 @@ export default {
     }) {
       this.dialogVisible = true
       this.$nextTick(() => {
-        this.approve = merge({}, this.approve, approve)
         this.title = approve.id ? '新增审批流程' : '编辑审批流程'
+        setTimeout(() => {
+          this.approve = mergeWith({}, this.approve, approve, mergeArrayCover)
+        })
       })
     },
 
     onDialogOpen() {
-      this.$nextTick(() => this.$refs.approveForm.resetFields())
+      this.$nextTick(() => {
+        this.$refs.approveForm.resetFields()
+        setTimeout(() => {
+          if (!this.approve.id) {
+            this.approve.flowList.push({
+              department: '',
+              job: '',
+              approver: '',
+              hasError: false
+            })
+          }
+        })
+      })
     },
 
     removeRelationProduct(product) {
-      this.approve.relationProducts = remove(this.approve.relationProducts, v => v.name !== product.name)
+      this.approve.relationProducts = remove(this.approve.g, v => v.name !== product.name)
     },
 
     onProductCheckChange(products) {
@@ -84,16 +111,49 @@ export default {
       })
     },
 
-    filterJobs(flow) {
-      if (!flow.department) return []
+    removeFlow(index) {
+      this.approve.flowList.splice(index, 1)
+    },
+
+    addFlow() {
+      this.approve.flowList.push({
+        hasError: false,
+        department: '',
+        job: '',
+        approver: ''
+      })
+    },
+
+    filterJobs(flow = {}) {
       const department = find(this.departments, d => d.name === flow.department)
-      return filter(this.jobs, j => j.department === department.id)
+      if (!department) {
+        flow.job = ''
+        flow.approver = ''
+        return []
+      }
+
+      const jobs = filter(this.jobs, j => j.department === department.id)
+      if (!includes(map(jobs, 'name'), flow.job)) {
+        flow.job = ''
+        flow.approver = ''
+      }
+      return jobs
     },
 
     filterApprovers(flow) {
-      if (!flow.job) return []
       const job = find(this.jobs, d => d.name === flow.job)
-      return filter(this.approvers, j => j.job === job.id)
+      if (!job) {
+        flow.approver = ''
+        return []
+      }
+
+      const approvers = filter(this.approvers, j => j.job === job.id)
+
+      // isUndefined 目前不清楚为什么选择审批人会重新进入此方法，而且flow.approver还是undefined?，hack一下
+      if (!isUndefined(flow.approver) && !includes(map(approvers, 'name'), flow.approver)) {
+        flow.approver = ''
+      }
+      return approvers
     }
   },
 
@@ -101,8 +161,8 @@ export default {
     return {
       title: '',
       approve: {
+        id: null,
         name: '',
-        job: '',
         type: '',
         flowList: [],
         relationProducts: []
@@ -187,39 +247,51 @@ export default {
       }],
       approvers: [{
         name: '王一',
+        value: '王一',
         job: 1
       }, {
         name: '王二',
+        value: '王二',
         job: 2
       }, {
         name: '王三',
+        value: '王三',
         job: 3
       }, {
         name: '李一',
+        value: '李一',
         job: 4
       }, {
         name: '李二',
+        value: '李二',
         job: 5
       }, {
         name: '李三',
+        value: '李三',
         job: 6
       }, {
         name: '张一',
+        value: '张一',
         job: 7
       }, {
         name: '张二',
+        value: '张二',
         job: 8
       }, {
         name: '张三',
+        value: '张三',
         job: 9
       }, {
         name: '赵一',
+        value: '赵一',
         job: 10
       }, {
         name: '赵二',
+        value: '赵二',
         job: 11
       }, {
         name: '赵三',
+        value: '赵三',
         job: 12
       }],
       rules: {
@@ -237,6 +309,25 @@ export default {
           validator: validateArray,
           fieldName: '关联产品',
           trigger: 'change'
+        }],
+        flowList: [{
+          validator: validateArrayDeep,
+          fieldName: '审批流程',
+          arrayKeys: {
+            department: {
+              required: true,
+              message: '审批部门不能为空'
+            },
+            job: {
+              required: true,
+              message: '审批岗位不能为空'
+            },
+            approver: {
+              required: true,
+              message: '审批人不能为空'
+            }
+          },
+          trigger: 'blur'
         }]
       },
       formLabelWidth: '120px',
@@ -248,23 +339,44 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/_vars.scss';
-.relation-products-tag {
-  font-size: 12px;
-  span {
-    padding: 5px 8px;
-    border-radius: 3px;
-    background: $border-color;
-    margin-right: 10px;
-    display: inline-block;
-    line-height: 1;
-    .icon-close {
-      cursor: pointer;
-      color: #929aa3;
-      margin-left: 10px;
+.approve-dialog {
+  .flows {
+    counter-reset: flows 0;
+    .flow {
+      counter-increment: flows;
+      &:before {
+        content: counter(flows) '. ';
+      }
+      .icon-close {
+        display: inline-block;
+        color: #c9cdd1;
+        cursor: pointer;
+        margin-left: 5px;
+        font-size: 12px;
+        &:hover {
+          color: $color-blue;
+        }
+      }
+    }
+  }
+  .relation-products-tag {
+    font-size: 12px;
+    span {
+      padding: 5px 8px;
+      border-radius: 3px;
+      background: $border-color;
+      margin-right: 10px;
       display: inline-block;
-      transform: scale(.7);
-      &:hover {
-        color: $color-blue;
+      line-height: 1;
+      .icon-close {
+        cursor: pointer;
+        color: #929aa3;
+        margin-left: 10px;
+        display: inline-block;
+        transform: scale(.7);
+        &:hover {
+          color: $color-blue;
+        }
       }
     }
   }

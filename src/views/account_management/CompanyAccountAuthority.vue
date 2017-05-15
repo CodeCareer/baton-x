@@ -22,18 +22,18 @@
             tr.bd-b
               th(:rowspan="account.checkModules.length+1") 可查看模块
               //- td
-            tr(v-for="(module, index) in account.checkModules")
+            tr(v-for="(module, index) in account.checkModules", :class="[isDisabled(account, '查看')]")
               th.bd-b
                 el-checkbox.circle.mini(:disabled="true", @change="handleCheckAllChange($event, module)", :indeterminate="module.indeterminate" v-model="module.checked") {{module.name}}
               td.bd-b
                 el-checkbox-group(v-model="module.checkedList", @change="handleCheckChange(module)")
                   el-checkbox.circle.mini(:disabled="true", v-for="o in module.children", :label="o.value") {{o.name}}
-            tr.bd-b
+            tr.bd-b(:class="[isDisabled(account, '编辑')]")
               th 可编辑内容
               td.bd-t(:colspan="2")
                 el-checkbox-group(v-model="account.editModules.checkedList", @change="handleCheckChange(account.editModules)")
                   el-checkbox.circle.mini(:disabled="true", v-for="o in account.editModules.children", :label="o.value") {{o.name}}
-            tr.bd-b
+            tr.bd-b(:class="[isDisabled(account, '删除')]")
               th 可删除内容
               td(:colspan="2")
                 el-checkbox-group(v-model="account.deleteModules.checkedList", @change="handleCheckChange(account.deleteModules)")
@@ -55,6 +55,7 @@ import {
 } from '@/common/merge-rules.js'
 import {
   remove,
+  includes,
   mergeWith,
   find
 } from 'lodash'
@@ -90,6 +91,10 @@ export default {
           return account.id !== v.id
         })
       })
+    },
+
+    isDisabled(account, type) {
+      return includes(account.permits, type) ? '' : 'disabled'
     }
   },
 
@@ -432,8 +437,23 @@ export default {
         cursor: auto;
       }
     }
-    .el-checkbox{
+    .el-checkbox {
       cursor: auto;
+    }
+    tr.disabled {
+      .el-checkbox__input.is-disabled {
+        &+.el-checkbox__label {
+          color: #bbb;
+        }
+        &.is-checked .el-checkbox__inner {
+          background-color: #d1dbe5;
+          border-color: #d1dbe5;
+          cursor: not-allowed;
+        }
+      }
+      .el-checkbox {
+        cursor: auto;
+      }
     }
   }
   &.bd {
