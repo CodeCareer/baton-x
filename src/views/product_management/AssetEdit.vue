@@ -101,6 +101,7 @@
                   i.icon-batonx.icon-plus
                   span 添加更多费用信息
   account-card(:passed-accounts='demo.accounts')
+
   .bottom-buttons
     el-button(type="primary", size="small", @click="submitForm") 保存
     el-button(type="gray", size="small", @click="cancel") 取消

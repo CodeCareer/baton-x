@@ -407,12 +407,12 @@
       .ov-remind-table
         table
           tbody
-            tr
+            tr(v-if="isclose")
               td.first-td 京东活期理财计划丰银宝a
               td
                 .nature
                  | 开放
-                .remarks(v-if="isclose")
+                .remarks
                   span 备注:预计净赎回五千万左右货币基金
                   i.icon-batonx.icon-close(@click="closeRemarks")
               td
@@ -862,6 +862,8 @@ export default {
             margin-left: 20px;
             vertical-align: -1px;
             cursor: pointer;
+            display: inline-block;
+            transform: scale(0.8);
           }
         }
       }
