@@ -243,7 +243,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .box-title {
   h3 {
     height: 40px;
