@@ -13,110 +13,98 @@
         el-tab-pane(label='全部', name='first')
           .filters
             .filters-top
-              .filter-top-left.fl
-                label.fl 产品类型：
-                ul.fl
-                  li.fl(v-for="(type,$index) in productTypes",:class="{active: type.defaultColor}")
-                    a(@click="searchFilter($index)") {{type.value}}
-              .filter-top-middle.fl
-                label.fl 发行进度：
-                ul.fl
-                  li.fl(v-for="(schedule,$index) in schedules",:class="{active: schedule.defaultColor}")
-                    a(@click="searchFilter($index)") {{schedule.value}}
-              .filter-top-right.fl
-                label.fl 执行状态：
-                ul.fl
-                  li.fl(v-for="statu in status")
-                    a {{statu.value}}
-            .filters-bottom
-                label.fl 发行平台:
-                ul.fl
-                  li.fl(v-for="platform in platforms")
-                    a {{platform.value}}
+              .filter-checkbox
+                .filter-top-left.fl
+                  | 产品类型：
+                  el-radio-group.vertical(v-model="filter.productType")
+                    el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
+                .filter-top-middle.fl
+                  | 发行进度：
+                  el-radio-group.vertical(v-model="filter.schedule")
+                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                .filter-top-right.fl
+                  | 执行状态：
+                  el-radio-group.vertical(v-model="filter.state")
+                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+            .filters-bottom.filter-checkbox
+              | 发行平台：
+              el-radio-group.vertical(v-model="filter.platform")
+                el-radio(v-for="platform in platforms",:label="platform.value") {{platform.name}}
             .filters-search
               .search-input
                 el-input(icon='search', placeholder="请输入产品名称",:on-icon-click="findproduct",v-model.lazy='filter.name')
         el-tab-pane(label='待发产品', name='second')
           .filters
             .filters-top
-              .filter-top-left.fl
-                label.fl 产品类型：
-                ul.fl
-                  li.fl(v-for="type in productTypes")
-                    a {{type.value}}
-              .filter-top-middle.fl
-                label.fl 发行进度：
-                ul.fl
-                  li.fl(v-for="schedule in schedules")
-                    a {{schedule.value}}
-              .filter-top-right.fr
-                label.fl 执行状态：
-                ul.fl
-                  li.fl(v-for="statu in status")
-                    a {{statu.value}}
-            .filters-bottom
-                label.fl 发行平台:
-                ul.fl
-                  li.fl(v-for="platform in platforms")
-                    a {{platform.value}}
+              .filter-checkbox
+                .filter-top-left.fl
+                  | 产品类型：
+                  el-radio-group.vertical(v-model="filter.productType")
+                    el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
+                .filter-top-middle.fl
+                  | 发行进度：
+                  el-radio-group.vertical(v-model="filter.schedule")
+                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                .filter-top-right.fl
+                  | 执行状态：
+                  el-radio-group.vertical(v-model="filter.state")
+                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+            .filters-bottom.filter-checkbox
+              | 发行平台：
+              el-radio-group.vertical(v-model="filter.platform")
+                el-radio(v-for="platform in platforms",:label="platform.value") {{platform.name}}
             .filters-search
               .search-input
-                el-input(icon='search', placeholder="请输入产品代码",:on-icon-click="findproduct")
+                el-input(icon='search', placeholder="请输入产品名称",:on-icon-click="findproduct",v-model.lazy='filter.name')
         el-tab-pane(label='存续产品', name='third')
           .filters
             .filters-top
-              .filter-top-left.fl
-                label.fl 产品类型：
-                ul.fl
-                  li.fl(v-for="type in productTypes")
-                    a {{type.value}}
-              .filter-top-middle.fl
-                label.fl 发行进度：
-                ul.fl
-                  li.fl(v-for="schedule in schedules")
-                    a {{schedule.value}}
-              .filter-top-right.fr
-                label.fl 执行状态：
-                ul.fl
-                  li.fl(v-for="statu in status")
-                    a {{statu.value}}
-            .filters-bottom
-                label.fl 发行平台:
-                ul.fl
-                  li.fl(v-for="platform in platforms")
-                    a {{platform.value}}
+              .filter-checkbox
+                .filter-top-left.fl
+                  | 产品类型：
+                  el-radio-group.vertical(v-model="filter.productType")
+                    el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
+                .filter-top-middle.fl
+                  | 发行进度：
+                  el-radio-group.vertical(v-model="filter.schedule")
+                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                .filter-top-right.fl
+                  | 执行状态：
+                  el-radio-group.vertical(v-model="filter.state")
+                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+            .filters-bottom.filter-checkbox
+              | 发行平台：
+              el-radio-group.vertical(v-model="filter.platform")
+                el-radio(v-for="platform in platforms",:label="platform.value") {{platform.name}}
             .filters-search
               .search-input
-                el-input(icon='search', placeholder="请输入产品代码",:on-icon-click="findproduct")
+                el-input(icon='search', placeholder="请输入产品名称",:on-icon-click="findproduct",v-model.lazy='filter.name')
         el-tab-pane(label='到期产品', name='fourth')
           .filters
             .filters-top
-              .filter-top-left.fl
-                label.fl 产品类型：
-                ul.fl
-                  li.fl(v-for="type in productTypes")
-                    a {{type.value}}
-              .filter-top-middle.fl
-                label.fl 发行进度：
-                ul.fl
-                  li.fl(v-for="schedule in schedules")
-                    a {{schedule.value}}
-              .filter-top-right.fr
-                label.fl 执行状态：
-                ul.fl
-                  li.fl(v-for="statu in status")
-                    a {{statu.value}}
-            .filters-bottom
-                label.fl 发行平台:
-                ul.fl
-                  li.fl(v-for="platform in platforms")
-                    a {{platform.value}}
+              .filter-checkbox
+                .filter-top-left.fl
+                  | 产品类型：
+                  el-radio-group.vertical(v-model="filter.productType")
+                    el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
+                .filter-top-middle.fl
+                  | 发行进度：
+                  el-radio-group.vertical(v-model="filter.schedule")
+                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                .filter-top-right.fl
+                  | 执行状态：
+                  el-radio-group.vertical(v-model="filter.state")
+                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+            .filters-bottom.filter-checkbox
+              | 发行平台：
+              el-radio-group.vertical(v-model="filter.platform")
+                el-radio(v-for="platform in platforms",:label="platform.value") {{platform.name}}
             .filters-search
               .search-input
-                el-input(icon='search', placeholder="请输入产品代码",:on-icon-click="findproduct")
+                el-input(icon='search', placeholder="请输入产品名称",:on-icon-click="findproduct",v-model.lazy='filter.name')
     .table-container
-      el-table(:data='tableData', style='width: 100%', @row-click='goToDetail')
-        el-table-column(property='name', label='资产名称', width='320')
+      el-table(:data='filterTableData', style='width: 100%', @row-click='goToDetail')
+        el-table-column(property='name', label='资产名称',width="260")
           template(scope='scope')
            span.asset-name {{scope.row.name}}
            span.current(v-if="scope.row.current") 活期
@@ -125,19 +113,19 @@
         el-table-column
           template(scope='scope')
             span.status_color(v-for="state in scope.row.status", :class="state | filterColor") {{state}}
-        el-table-column(property='amount', label='实际募集金额', width='150')
-        el-table-column(property='term' label='发行期限')
+        el-table-column(property='amount', label='实际募集金额')
+        el-table-column(property='term' label='发行期限',width="90")
         el-table-column(property='startDate', label='起息日', :sortable='true')
         el-table-column(property='endDate' label='到期日')
-        el-table-column(property='rates' label='发行利率', width='180')
-        el-table-column(property='platforms' label='发行平台', width="150")
+        el-table-column(property='rates' label='发行利率',width="90")
+        el-table-column(property='platforms' label='发行平台')
       el-pagination(@size-change='pageSizeChange', @current-change='pageChange', :current-page='page.current', :page-sizes="page.sizes", :page-size="page.size", layout='total, prev, pager, next, jumper', :total='tableData.length')
 
 </template>
 
 <script>
 import {
-  // filter,
+  filter,
   each
 } from 'lodash'
 import {
@@ -184,20 +172,30 @@ export default {
   },
 
   computed: {
-    // filterTableData() {
-    //   return filter(this.tableData, v => {
-    //     return ~v.name.indexOf(this.filter.name) && ~v.rates.indexOf(this.filter.publisher) && ~v.amount.indexOf(this.filter.amount)
-    //   })
-    // }
+    filterTableData() {
+      const {
+        productType,
+        schedule,
+        state,
+        platform,
+        name
+      } = this.filter
+
+      return filter(this.tableData, v => {
+        return (productType === v.productType || productType === '全部') && (schedule === v.schedule || schedule === '全部') && (state === v.state || state === '全部') && ~v.name.indexOf(name) && (platform === v.platform || platform === '全部')
+      })
+    }
   },
 
   data() {
     return {
       tab: 'first',
       filter: {
-        name: '',
-        rates: '',
-        amount: ''
+        productType: '全部',
+        schedule: '全部',
+        state: '全部',
+        platform: '全部',
+        name: ''
       },
       page: {
         current: 1,
@@ -206,55 +204,64 @@ export default {
       },
       productTypes: [{
         value: '全部',
-        defaultColor: false
+        name: '全部'
       }, {
         value: '定期',
-        defaultColor: false
+        name: '定期'
       }, {
         value: '活期',
-        defaultColor: false
+        name: '活期'
       }],
       schedules: [{
         value: '全部',
-        defaultColor: false
+        name: '全部'
       }, {
         value: '待提交',
-        defaultColor: false
+        name: '待提交'
       }, {
         value: '待确认',
-        defaultColor: false
+        name: '待确认'
       }, {
         value: '待发布',
-        defaultColor: false
+        name: '待发布'
       }, {
         value: '已发布',
-        defaultColor: false
+        name: '已发布'
       }, {
         value: '销售完成',
-        defaultColor: false
+        name: '销售完成'
       }, {
         value: '已确认确认书',
-        defaultColor: false
+        name: '已确认确认书'
       }],
       status: [{
-        value: '全部'
+        value: '全部',
+        name: '全部'
       }, {
-        value: '已执行'
+        value: '已执行',
+        name: '已执行'
       }, {
-        value: '待执行'
+        value: '待执行',
+        name: '待执行'
       }, {
-        value: '不可执行'
+        value: '不可执行',
+        name: '不可执行'
       }, {
-        value: '已过期'
+        value: '已过期',
+        name: '已过期'
       }],
       platforms: [{
-        value: '全部'
+        value: '全部',
+        name: '全部'
       }, {
-        value: '财富宝'
+        value: '财富宝',
+        name: '财富宝'
       }, {
-        value: '360你财富'
+        value: '360你财富',
+        name: '360你财富'
       }, {
-        value: '甜橙理财'
+        value: '甜橙理财',
+        name: '甜橙理财'
       }],
       tableData: [{
         note: '基金总额的30%需在2017年03月06日变现',
@@ -267,7 +274,11 @@ export default {
         platforms: '恒大金服',
         status: ['待提交'],
         current: true,
-        type: 0
+        type: 0,
+        productType: '活期',
+        schedule: '待发布',
+        state: '待执行',
+        platform: '财富宝'
       }, {
         name: '恒耀稳享3006期',
         amount: '￥20,231.00',
@@ -277,7 +288,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['待确认'],
-        type: 1
+        type: 1,
+        productType: '定期',
+        schedule: '已发布',
+        state: '已执行',
+        platform: '360你财富'
       }, {
         name: '恒存金-灵活理财A',
         amount: '￥45,632,98.00',
@@ -287,7 +302,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: [],
-        type: 0
+        type: 0,
+        productType: '定期',
+        schedule: '已发布',
+        state: '已执行',
+        platform: '360你财富'
       }, {
         name: '恒耀稳享85期',
         amount: '￥870,654,256.00',
@@ -298,7 +317,11 @@ export default {
         platforms: '恒大金服',
         status: ['待发布'],
         current: true,
-        type: 1
+        type: 1,
+        productType: '定期',
+        schedule: '已发布',
+        state: '已执行',
+        platform: '甜橙理财'
       }, {
         name: '普惠金交·牛稳赚3号理财计',
         amount: '￥12,098,653.00',
@@ -308,7 +331,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['销售完成', '待执行'],
-        type: 1
+        type: 1,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '恒耀稳享4358期',
         amount: '￥34,892.00',
@@ -318,7 +345,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['已确认确认书'],
-        type: 0
+        type: 0,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '恒耀稳享9746期',
         amount: '￥23,673,88.00',
@@ -328,7 +359,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['待发布'],
-        type: 1
+        type: 1,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '恒存金-灵活理财C',
         amount: '￥12,872.00',
@@ -338,7 +373,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['已发布'],
-        type: 0
+        type: 0,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '恒耀稳享36期',
         amount: '￥76,897,882.00',
@@ -349,7 +388,11 @@ export default {
         platforms: '恒大金服',
         status: ['销售完成', '待执行'],
         current: true,
-        type: 1
+        type: 1,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '普惠金交·牛稳赚4号理财计划',
         amount: '￥27,653,21.00',
@@ -359,7 +402,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['已确认确认书'],
-        type: 1
+        type: 1,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '恒存金-灵活理财B',
         amount: '￥27,653,21.00',
@@ -369,7 +416,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['已确认确认书'],
-        type: 1
+        type: 1,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '恒耀稳享4866期',
         amount: '￥27,653,21.00',
@@ -379,7 +430,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['已确认确认书'],
-        type: 0
+        type: 0,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }, {
         name: '普惠金交·牛稳赚5号理365划',
         amount: '￥27,653,21.00',
@@ -389,7 +444,11 @@ export default {
         rates: '6.5%',
         platforms: '恒大金服',
         status: ['已确认确认书'],
-        type: 1
+        type: 1,
+        productType: '',
+        schedule: '',
+        state: '',
+        platform: ''
       }]
     }
   }
@@ -412,40 +471,14 @@ export default {
     .filters-top {
       padding: 10px 0;
       overflow: hidden;
-      label {
-        width: 65px;
-        color: #54637a;
-      }
-      li {
-        padding: 0 5px;
-        a {
-          border-radius: 3px;
-          padding: 0 5px;
-        }
-      }
       .filter-top-middle,
       .filter-top-right {
         margin-left: 50px;
-      }
-      .filter-top-middle,
-      .filter-top-left,
-      .filter-top-right {
-        // width:33%;
       }
     }
     .filters-bottom {
       overflow: hidden;
       padding: 15px 0;
-      label {
-        width: 65px;
-        color: #54637a;
-      }
-      li {
-        // padding:0 5px;
-        a {
-          padding: 0 5px;
-        }
-      }
     }
     .filters-search {
       margin: 0 -15px;
@@ -460,9 +493,6 @@ export default {
   }
   .table-container {
     margin-top: 20px;
-    table {
-      table-layout: auto;
-    }
     .current {
       padding: 0 3px;
       background: #e55a6c;
@@ -500,5 +530,9 @@ export default {
       color: #fff;
     }
   }
+}
+
+.vertical {
+  vertical-align: 0;
 }
 </style>

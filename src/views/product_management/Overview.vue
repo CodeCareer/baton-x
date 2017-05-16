@@ -859,7 +859,7 @@ export default {
           i {
             font-size: 12px;
             color: #929aa3;
-            margin-left: 20px;
+            margin-left: 10px;
             vertical-align: -1px;
             cursor: pointer;
             display: inline-block;

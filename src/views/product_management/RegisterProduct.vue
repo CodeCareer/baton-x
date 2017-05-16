@@ -4,18 +4,14 @@
       .box-title
         h3 登记产品列表
       .box-screen
-        .product_type
-          .type_name.fl 产品类型：
-          .type_all.fl
-            ul
-              li.fl(v-for="item in productNames",:class="{isActive:'active'}")
-                a(@click="search(item.name)") {{item.name}}
-        .issue_platfor
-          .platform_name.fl 发行平台：
-          .platform_all.fl
-            ul
-              li.fl(v-for="platform in platforms")
-                a {{platform.name}}
+          .product_type.fl
+            | 产品类型：
+            el-radio-group.vercale(v-model="filter.productName")
+              el-radio(v-for="productName in productNames",:label="productName.value") {{productName.name}}
+          .issue_platfor.fl
+            | 发行平台：
+            el-radio-group.vercale(v-model="filter.platform")
+              el-radio(v-for="platform in platforms",:label="platform.value") {{platform.name}}
       .box-find
         .box-find-input
           el-input(icon='search', placeholder="请输入产品代码",:on-icon-click="findproduct",v-model.lazy='filter.code')
@@ -85,8 +81,14 @@ export default {
 
   computed: {
     filterTableData() {
+      const {
+        productName,
+        platform,
+        code
+      } = this.filter
+
       return filter(this.tableData, v => {
-        return ~v.code.indexOf(this.filter.code) && ~v.platform.indexOf(this.filter.platform) && ~v.rate.indexOf(this.filter.rate)
+        return (productName === v.productName || productName === '全部') && (platform === v.platform || platform === '全部') && ~v.code.indexOf(code)
       })
     }
   },
@@ -96,9 +98,9 @@ export default {
       active: null,
       tab: 'first',
       filter: {
-        code: '',
-        platform: '',
-        rate: ''
+        productName: '全部',
+        platform: '全部',
+        code: ''
       },
       page: {
         current: 1,
@@ -107,26 +109,26 @@ export default {
       },
       productNames: [{
         name: '全部',
-        active: '1'
+        value: '全部'
       }, {
         name: '定期',
-        active: '2'
+        value: '定期'
       }, {
         name: '活期',
-        active: '3'
+        value: '活期'
       }],
       platforms: [{
         name: '全部',
-        active: '1'
+        value: '全部'
       }, {
         name: '财富宝',
-        active: '2'
+        value: '财富宝'
       }, {
         name: '360你财富',
-        active: '3'
+        value: '360你财富'
       }, {
         name: '甜橙理财',
-        active: '4'
+        value: '甜橙理财'
       }],
       tableData: [{
         note: '基金总额的30%需在2017年03月06日变现',
@@ -137,7 +139,8 @@ export default {
         term: '96天',
         productType: '活期',
         platform: '京东金融',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }, {
         code: 'F0000CF0000D',
         amount: '¥ 11,000,080.00',
@@ -146,7 +149,8 @@ export default {
         term: '26天',
         productType: '活期',
         platform: '蚂蚁金服',
-        num: '146'
+        num: '146',
+        productName: '活期'
       }, {
         code: 'WJ0101F0000CF00',
         amount: '¥ 12,860,000.00 ',
@@ -155,7 +159,8 @@ export default {
         term: '56天',
         productType: '活期',
         platform: '京东金融',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }, {
         code: 'WJ0101F0000C',
         amount: '¥ 13,090,000.00 ',
@@ -164,7 +169,8 @@ export default {
         term: '87天',
         productType: '活期',
         platform: '蚂蚁金服',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }, {
         code: 'F0000DWJ0101',
         amount: '¥ 20,080,000.00',
@@ -173,7 +179,8 @@ export default {
         term: '4天',
         productType: '活期',
         platform: '京东金融',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }, {
         code: 'F0000CF0000D',
         amount: '¥ 14,030,000.00 ',
@@ -182,7 +189,8 @@ export default {
         term: '26天',
         productType: '活期',
         platform: '蚂蚁金服',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }, {
         code: 'WJ0101F0000C',
         amount: '¥ 16,098,050.00',
@@ -191,7 +199,8 @@ export default {
         term: '31天',
         productType: '活期',
         platform: '京东金融',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }, {
         code: 'F0000DWJ0101',
         amount: '¥ 13,088,060.00',
@@ -200,7 +209,8 @@ export default {
         term: '50天',
         productType: '活期',
         platform: '蚂蚁金服',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }, {
         code: 'F0000CF0000D',
         amount: '¥ 12,090,000.00 ',
@@ -208,8 +218,9 @@ export default {
         endDate: '2017-03-18',
         term: '22天',
         productType: '活期',
-        platform: '京东金融',
-        num: '146'
+        platform: '甜橙理财',
+        num: '146',
+        productName: '定期'
       }, {
         code: 'WJ0101F0000CF00',
         amount: '¥ 13,060,090.00  ',
@@ -217,8 +228,9 @@ export default {
         endDate: '2018-02-24',
         term: '10天',
         productType: '活期',
-        platform: '蚂蚁金服',
-        num: '146'
+        platform: '财富宝',
+        num: '146',
+        productName: '定期'
       }, {
         code: 'ER75551200D',
         amount: '¥ 24,036,090.00  ',
@@ -226,8 +238,9 @@ export default {
         endDate: '2018-02-24',
         term: '10天',
         productType: '活期',
-        platform: '京东金融',
-        num: '146'
+        platform: '360你财富',
+        num: '146',
+        productName: '定期'
       }, {
         code: 'WJ0101F0000C',
         amount: '¥ 26,000,020.00',
@@ -236,7 +249,8 @@ export default {
         term: '10天',
         productType: '活期',
         platform: '蚂蚁金服',
-        num: '146'
+        num: '146',
+        productName: '定期'
       }]
     }
   }
@@ -302,5 +316,32 @@ export default {
   .last-td {
     color: #538cc0;
   }
+}
+.product_type,.issue_platfor{
+  .el-radio__label {
+        font-size: 12px;
+        color: #9b9ca4;
+        cursor: pointer;
+        padding: 3px 5px 2px;
+        &:hover {
+          background: #538cc0;
+          color: white;
+          border-radius: 3px;
+        }
+      }
+      .el-checkbox__input,
+      .el-radio__input {
+        &.is-checked {
+          & + .el-radio__label {
+            background: #538cc0;
+            color: white;
+            border-radius: 3px;
+          }
+        }
+        display: none;
+      }
+      .vercale{
+        vertical-align: 0;
+      }
 }
 </style>

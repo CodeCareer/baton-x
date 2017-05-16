@@ -6,8 +6,8 @@
           el-input(v-model='approve.name', auto-cameomplete='off', placeholder='请输入流程名称')
         el-form-item(prop="type", label='审批流程类型：')
           el-radio.radio(v-model='approve.type', label='资金清算流程') 资金清算流程
-          el-radio.radio(v-model='approve.type', label='资产交易流程') 资产交易流程
-        el-form-item.is-required(prop="relationProducts", label='适用范围：')
+          el-radio.radio(v-model='approve.type', label='资产交易流程',v-if="!eaashow") 资产交易流程
+        el-form-item.is-required(prop="relationProducts", label='适用范围：',v-if="!eaashow")
           input(type="hidden", v-model="approve.relationProducts")
           .relation-products-tag(v-show="approve.relationProducts && approve.relationProducts.length")
             | 已选择：
@@ -15,6 +15,8 @@
               | {{r.name}}
               i.icon-batonx.icon-close(@click="removeRelationProduct(r)")
           product-list(:on-change="onProductCheckChange", :checked-list="approve.relationProducts")
+        el-form-item(prop="relationProducts",label="使用范围：")
+          el-radio.radio(label="粤股交风赢宝理财计划B",v-if="eaashow")
         el-form-item.is-required.flows.custom-error(prop="flowList", label='审批流程：')
           .flow(v-for="(flow, index) in approve.flowList", :class="{'has-error': flow.hasError}")
             el-select.mr5(style="width:130px;", v-model="flow.department", placeholder="审批部门")
@@ -59,7 +61,7 @@ export default {
   components: {
     ProductList
   },
-
+  props: ['eaaShow'],
   methods: {
     open(approve = {
       id: null,
@@ -159,6 +161,7 @@ export default {
 
   data() {
     return {
+      eaashow: this.eaaShow,
       title: '',
       approve: {
         id: null,

@@ -101,7 +101,49 @@
                   i.icon-batonx.icon-plus
                   span 添加更多费用信息
   account-card(:passed-accounts='demo.accounts')
-
+  .box.mt20
+    .box-header 审批流程
+    .box-content
+      .examine
+        table(width="100%")
+          thead
+            tr
+              th 审批流程名称
+              th 详情
+              th 操作
+          tbody
+            tr(v-for="Eaadata in filterEaa",v-if="filterEaa.length")
+              td {{Eaadata.EaaName}}
+              td
+                span {{Eaadata.details}}
+                i.icon-batonx.icon-shenpi
+              td
+                span(@click="EditDialog")
+                  i.icon-batonx.icon-edit
+                  | 编辑
+                span(@click="CloseDialog(Eaadata)")
+                  i.icon-batonx.icon-close
+                  | 删除
+            //- tr(v-if="!Eaadatas.lenght")
+            //-   td(colspan="3") 没有数据！
+  el-dialog(title="审批流程",v-model="Eaavisibel")
+    .box
+      .box-tab-header
+        el-button.fr(type="primary", size="small", @click="addEaa")
+          i.icon-batonx.icon-plus
+          | 新增
+      .filters
+        el-input(placeholder='输入账户名或者账户', icon='search', v-model.lazy='filter.name')
+    el-table(:data='Eaadatas', ref="accountsTable")
+      el-table-column(type="selection", width="45")
+      el-table-column(property="EaaName", label='审批流程名称')
+      el-table-column(property='process', label='审批流程')
+      //- el-table-column(property='belongto', label='操作')
+      //-   template(scope="scope")
+      //-     i.icon-batonx.icon-edit
+    .dialog-footer(slot="footer")
+      el-button(type="primary", size="small", @click='Eaavisibel = false') 确定
+  approve-dialog(ref="approveVisi",:eaa-show="eaaapp")
   .bottom-buttons
     el-button(type="primary", size="small", @click="submitForm") 保存
     el-button(type="gray", size="small", @click="cancel") 取消
@@ -117,14 +159,19 @@ import {
   updateCrumbs
 } from '@/common/crossers.js'
 import AccountCard from '@/components/AccountCard.vue'
+import ApproveDialog from '@/components/ApproveDialog.vue'
 import moment from 'moment'
 import {
-  uniqueId
+  uniqueId,
+  remove,
+  each,
+  filter
 } from 'lodash'
 
 export default {
   components: {
-    AccountCard
+    AccountCard,
+    ApproveDialog
   },
   mounted() {
     if (this.$route.params.id !== 'add') {
@@ -177,6 +224,28 @@ export default {
   },
 
   methods: {
+    addEaa() {
+      this.$refs.approveVisi.open()
+    },
+    EditDialog() {
+      this.Eaavisibel = true
+      this.$nextTick(() => {
+        each(this.Eaadatas, v => {
+          if (v.EaaName === this.EaaDefault.EaaName) {
+            this.$refs.accountsTable.toggleRowSelection(v, true)
+          }
+        })
+      })
+    },
+    CloseDialog(eaa) {
+      MessageBox.confirm('确定要删除此流程吗？是否继续！', '提示', {
+        type: 'warning'
+      }).then(() => {
+        this.Eaadatas = remove(this.Eaadatas, v => {
+          return eaa.EaaName !== v.EaaName
+        })
+      })
+    },
     addMore(data) {
       this.costLists.push(this.emptyObj)
     },
@@ -203,10 +272,26 @@ export default {
       this.demo.payDate = moment(value).format('YYYY-MM-DD')
     }
   },
+  computed: {
+    filterEaa() {
+      return filter(this.Eaadatas, v => {
+        return ~v.EaaName.indexOf(this.EaaDefault.EaaName)
+      })
+    }
+  },
 
   data() {
     return {
+      eaaapp: true,
+      EaaDefault: {
+        EaaName: '资金流程审批A1',
+        process: ''
+      },
+      Eaavisibel: false,
       risksRating: '',
+      filter: {
+        name: ''
+      },
       risks: [{
         value: '1',
         label: '低风险'
@@ -293,7 +378,20 @@ export default {
         payment: '',
         paymentDate: '',
         chargingstart: ''
-      }
+      },
+      Eaadatas: [{
+        EaaName: '资金流程审批A1',
+        details: '审批',
+        process: '项目组长 → 项目经理 → 项目总监'
+      }, {
+        EaaName: '资金流程审批B1',
+        details: '审批',
+        process: '项目经理审批'
+      }, {
+        EaaName: '资金流程审批C1',
+        details: '审批',
+        process: '项目经理 → 项目总监'
+      }]
     }
   }
 }
@@ -317,10 +415,10 @@ export default {
 .cost-table {
   table {
     width: 100%;
-    tr{
+    tr {
       border-bottom: 1px solid #e2e5e9;
-      &:last-child{
-        border-bottom:none;
+      &:last-child {
+        border-bottom: none;
       }
     }
     th {
@@ -330,14 +428,14 @@ export default {
       text-align: left;
     }
     td {
-      &.addMore{
-        padding:10px 0;
+      &.addMore {
+        padding: 10px 0;
         text-align: center;
-        i{
-          color:#538cc0;
+        i {
+          color: #538cc0;
         }
-        span{
-          margin-left:5px;
+        span {
+          margin-left: 5px;
         }
       }
     }
@@ -347,5 +445,39 @@ export default {
       }
     }
   }
+}
+
+.examine {
+  padding: 15px;
+  table {
+    width: 100%;
+    th {
+      font-weight: normal;
+      color: #abb1b8;
+      // text-align: left;
+    }
+    td {
+      padding: 10px 0;
+      text-align: center;
+      i {
+        color: #c9cdd1;
+      }
+      span {
+        cursor: pointer;
+        margin-right: 10px;
+        i {
+          display: inline-block;
+          margin-right: 5px;
+          transform: scale(0.8);
+          vertical-align: 0;
+          color: #c9cdd1;
+        }
+      }
+    }
+  }
+}
+
+.box-tab-header {
+  top: 15px!important;
 }
 </style>
