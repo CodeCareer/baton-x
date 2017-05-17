@@ -2,10 +2,10 @@
   section.product-list
     .box
       .box-tab-header
-        el-button(type="primary", size="small")
+        el-button(type="primary", size="small",@click="$router.push({name: 'AssetForm', params: {id: 'add'}})")
           i.icon-batonx.icon-plus
           | 新增
-        el-button.elButton(type="info",size="small")
+        el-button.elButton(type="info",size="small",@click="importData")
           i.icon-batonx.icon-import
           | 导入
         a.inport-file 历史导入文件
@@ -14,15 +14,15 @@
           .filters
             .filters-top
               .filter-checkbox
-                .filter-top-left.fl
+                .filter-top-left
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-middle.fl
+                .filter-top-left
                   | 发行进度：
                   el-radio-group.vertical(v-model="filter.schedule")
                     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-right.fl
+                .filter-top-left
                   | 执行状态：
                   el-radio-group.vertical(v-model="filter.state")
                     el-radio(v-for="state in status",:label="state.value") {{state.name}}
@@ -37,15 +37,15 @@
           .filters
             .filters-top
               .filter-checkbox
-                .filter-top-left.fl
+                .filter-top-left
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-middle.fl
+                .filter-top-left
                   | 发行进度：
                   el-radio-group.vertical(v-model="filter.schedule")
                     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-right.fl
+                .filter-top-left
                   | 执行状态：
                   el-radio-group.vertical(v-model="filter.state")
                     el-radio(v-for="state in status",:label="state.value") {{state.name}}
@@ -60,15 +60,15 @@
           .filters
             .filters-top
               .filter-checkbox
-                .filter-top-left.fl
+                .filter-top-left
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-middle.fl
+                .filter-top-left
                   | 发行进度：
                   el-radio-group.vertical(v-model="filter.schedule")
                     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-right.fl
+                .filter-top-left
                   | 执行状态：
                   el-radio-group.vertical(v-model="filter.state")
                     el-radio(v-for="state in status",:label="state.value") {{state.name}}
@@ -83,15 +83,15 @@
           .filters
             .filters-top
               .filter-checkbox
-                .filter-top-left.fl
+                .filter-top-left
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-middle.fl
+                .filter-top-left
                   | 发行进度：
                   el-radio-group.vertical(v-model="filter.schedule")
                     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-right.fl
+                .filter-top-left
                   | 执行状态：
                   el-radio-group.vertical(v-model="filter.state")
                     el-radio(v-for="state in status",:label="state.value") {{state.name}}
@@ -135,6 +135,9 @@ import exMixin from '@/common/mixin.js'
 export default {
   mixins: [exMixin],
   methods: {
+    importData() {
+      Message.info('dome暂时不支持导入')
+    },
     findproduct() {
       Message.info('dome暂时不支持查找')
     },
@@ -469,16 +472,15 @@ export default {
   }
   .filters {
     .filters-top {
-      padding: 10px 0;
+      // padding: 10px 0;
       overflow: hidden;
-      .filter-top-middle,
-      .filter-top-right {
-        margin-left: 50px;
+      .filter-top-left {
+       padding:10px 0;
       }
     }
     .filters-bottom {
       overflow: hidden;
-      padding: 15px 0;
+      padding: 10px 0;
     }
     .filters-search {
       margin: 0 -15px;

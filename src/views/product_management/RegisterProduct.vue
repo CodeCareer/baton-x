@@ -63,9 +63,12 @@ export default {
 
     goToDetail(row) {
       this.$router.push({
-        name: 'AssetDetail',
+        name: 'ProductDetail',
         params: {
           id: row.id || row.name
+        },
+        query: {
+          type: row.type
         }
       })
     },

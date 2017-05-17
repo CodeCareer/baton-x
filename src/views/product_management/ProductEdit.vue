@@ -128,7 +128,7 @@
             //-   td(colspan="3") 没有数据！
   el-dialog(title="审批流程",v-model="Eaavisibel")
     .box
-      .box-tab-header
+      .add-more
         el-button.fr(type="primary", size="small", @click="addEaa")
           i.icon-batonx.icon-plus
           | 新增
@@ -176,6 +176,7 @@ export default {
   mounted() {
     if (this.$route.params.id !== 'add') {
       const name = this.$route.params.id
+      console.log(name)
       updateCrumbs.$emit('update-crumbs', [{
         id: 'assetName',
         name: name
@@ -402,10 +403,10 @@ export default {
   .box {
     border: 0;
     padding: 10px 0;
-    .box-tab-header {
-      top: 12px;
-      right: 0;
-    }
+    // .box-tab-header {
+    //   top: 15px;
+    //   right: 0;
+    // }
     .filters {
       padding: 0;
     }
@@ -476,8 +477,9 @@ export default {
     }
   }
 }
-
-.box-tab-header {
-  top: 15px!important;
-}
+ .add-more{
+      position: absolute;
+      top:15px;
+      right:15px;
+    }
 </style>

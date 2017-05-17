@@ -53,7 +53,7 @@ export default [{
         to: { name: 'ex' }
       }, {
         name: '产品列表',
-        to: { name: 'ProductList' }
+        to: {name: 'ProductList'}
       }]
     }
   }, {
@@ -67,14 +67,18 @@ export default [{
         name: '产品管理',
         to: {name: 'ex'}
       }, {
+        name: '产品列表',
+        to: {name: 'ProductList'}
+      }, {
+        id: 'assetName',
         name: '产品详情',
-        to: {name: 'ex'}
+        to: {name: 'ProductDetail'}
       }]
     }
   }, {
-    path: 'asset_edit/:id',
-    name: 'AssetEdit',
-    component: resolve => require(['@/views/product_management/AssetEdit.vue'], resolve),
+    path: 'product_edit/:id',
+    name: 'ProductEdit',
+    component: resolve => require(['@/views/product_management/ProductEdit.vue'], resolve),
     meta: {
       title: '开通金融-交易所产品管理系统-产品详情',
       needLogin: true,
@@ -83,11 +87,11 @@ export default [{
         to: {name: 'ex'}
       }, {
         name: '产品列表',
-        to: {name: '产品列表'}
+        to: {name: 'ProductList'}
       }, {
-        id: 'AssetName',
+        id: 'assetName',
         name: '新增资产',
-        to: {name: 'AssetEdit'}
+        to: {name: 'ProductEdit'}
       }]
     }
   }, {

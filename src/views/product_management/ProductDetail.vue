@@ -596,7 +596,7 @@ export default {
     },
     editAsset() {
       this.$router.push({
-        name: 'AssetEdit',
+        name: 'ProductEdit',
         params: {
           id: this.demo.name
         }
