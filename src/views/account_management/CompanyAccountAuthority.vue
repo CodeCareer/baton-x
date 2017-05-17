@@ -10,7 +10,7 @@
           i.icon-batonx.icon-edit(@click="openAccountAuthorityDialog(account)")
           i.icon-batonx.icon-close(@click="deleteAccount(account)")
       .box-content
-        .authority-table.just-for-show(:class="{'short-view': shortView}")
+        .authority-table.just-for-show(:class="{'short-view': account.collapse}")
           .permits-list
             span.title 权限：
             el-tag.mr10(v-for="p in account.permits", type="gray") {{p}}
@@ -39,10 +39,10 @@
                 el-checkbox-group(v-model="account.deleteModules.checkedList", @change="handleCheckChange(account.deleteModules)")
                   el-checkbox.circle.mini(:disabled="true", v-for="o in account.deleteModules.children", :label="o.value") {{o.name}}
         .more-toggle
-          a(v-show="shortView", @click="shortView = false")
+          a(v-show="account.collapse", @click="account.collapse = false")
             i.icon-batonx.icon-down
             | 显示更多信息
-          a(v-show="!shortView", @click="shortView = true")
+          a(v-show="!account.collapse", @click="account.collapse = true")
             i.icon-batonx.icon-top
             | 收起更多信息
     account-authority-dialog(ref="accountAuthorityDialog", @account-save="onAccountSave")
@@ -100,8 +100,8 @@ export default {
 
   data() {
     return {
-      shortView: true,
       accounts: [{
+        collapse: true,
         id: 1,
         type: '业务专员类账户',
         permits: ['查看'],
@@ -247,6 +247,7 @@ export default {
         }]
       }, {
         id: 2,
+        collapse: true,
         type: '市场经理类账户',
         permits: ['查看', '编辑', '删除'],
         editModules: {

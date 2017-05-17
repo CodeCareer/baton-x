@@ -174,7 +174,6 @@ export default {
 
     checkAccount(val) {
       this.accountListChecked = val
-      debugger
     }
   },
 
