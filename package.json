@@ -1,8 +1,8 @@
 {
   "name": "vue-demo",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "chengzhiyuan <chengzhiyuan@ktjr.com>",
+  "description": "kaitong ex platform",
+  "author": ["chengzhiyuan <chengzhiyuan@ktjr.com>", "luxueyan <luxueyan@ktjr.com>"],
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
