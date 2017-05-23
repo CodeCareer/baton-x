@@ -41,14 +41,14 @@
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-left
-                  | 发行进度：
-                  el-radio-group.vertical(v-model="filter.schedule")
-                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-left
-                  | 执行状态：
-                  el-radio-group.vertical(v-model="filter.state")
-                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+                //- .filter-top-left
+                //-   | 发行进度：
+                //-   el-radio-group.vertical(v-model="filter.schedule")
+                //-     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                //- .filter-top-left
+                //-   | 执行状态：
+                //-   el-radio-group.vertical(v-model="filter.state")
+                //-     el-radio(v-for="state in status",:label="state.value") {{state.name}}
             .filters-bottom.filter-checkbox
               | 发行平台：
               el-radio-group.vertical(v-model="filter.platform")
@@ -64,14 +64,14 @@
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-left
-                  | 发行进度：
-                  el-radio-group.vertical(v-model="filter.schedule")
-                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-left
-                  | 执行状态：
-                  el-radio-group.vertical(v-model="filter.state")
-                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+                //- .filter-top-left
+                //-   | 发行进度：
+                //-   el-radio-group.vertical(v-model="filter.schedule")
+                //-     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                //- .filter-top-left
+                //-   | 执行状态：
+                //-   el-radio-group.vertical(v-model="filter.state")
+                //-     el-radio(v-for="state in status",:label="state.value") {{state.name}}
             .filters-bottom.filter-checkbox
               | 发行平台：
               el-radio-group.vertical(v-model="filter.platform")
@@ -87,14 +87,14 @@
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-left
-                  | 发行进度：
-                  el-radio-group.vertical(v-model="filter.schedule")
-                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-left
-                  | 执行状态：
-                  el-radio-group.vertical(v-model="filter.state")
-                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+                //- .filter-top-left
+                //-   | 发行进度：
+                //-   el-radio-group.vertical(v-model="filter.schedule")
+                //-     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                //- .filter-top-left
+                //-   | 执行状态：
+                //-   el-radio-group.vertical(v-model="filter.state")
+                //-     el-radio(v-for="state in status",:label="state.value") {{state.name}}
             .filters-bottom.filter-checkbox
               | 发行平台：
               el-radio-group.vertical(v-model="filter.platform")
@@ -136,10 +136,10 @@ export default {
   mixins: [exMixin],
   methods: {
     importData() {
-      Message.info('dome暂时不支持导入')
+      Message.info('测试账号不支持此功能！')
     },
     findproduct() {
-      Message.info('dome暂时不支持查找')
+      Message.info('测试账号不支持此功能！')
     },
     tabClick(tab, event) {
       console.log(tab, event)

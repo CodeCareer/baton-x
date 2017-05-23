@@ -59,7 +59,7 @@ import {
 export default {
   methods: {
     tabClick(tab, event) {
-      console.log(tab, event)
+      this.filter.type = tab.name === 'first' ? 0 : 1
     },
 
     clearFilter() {
@@ -92,7 +92,10 @@ export default {
   computed: {
     filterTableData() {
       return filter(this.tableData, v => {
-        return ~v.name.indexOf(this.filter.name) && ~v.publisher.indexOf(this.filter.publisher) && ~v.credit.indexOf(this.filter.credit)
+        return ~v.name.indexOf(this.filter.name) &&
+          ~v.publisher.indexOf(this.filter.publisher) &&
+          ~v.credit.indexOf(this.filter.credit) &&
+          this.filter.type === v.type
       })
     }
   },
@@ -102,6 +105,7 @@ export default {
       tab: 'first',
       filter: {
         name: '',
+        type: 0,
         publisher: '',
         credit: ''
       },
@@ -117,7 +121,7 @@ export default {
         start_date: '2017-01-05',
         end_date: '2017-06-05',
         term: '96天',
-        type: 1,
+        type: 0,
         publisher: '中信集团',
         credit: '责任担保'
       }, {
@@ -144,7 +148,7 @@ export default {
         start_date: '2017-01-22',
         end_date: '2017-05-22',
         term: '87天',
-        type: 0,
+        type: 1,
         publisher: '广西万宁投资集团',
         credit: '全额回购担保'
       }, {
@@ -180,7 +184,7 @@ export default {
         start_date: '2017-02-15',
         end_date: '2017-04-15',
         term: '50天',
-        type: 0,
+        type: 1,
         publisher: '天津旭达有限公司',
         credit: '到期还款'
       }, {
@@ -189,7 +193,7 @@ export default {
         start_date: '2017-02-18',
         end_date: '2017-03-18',
         term: '22天',
-        type: 0,
+        type: 1,
         publisher: '阳光城责任有限公司',
         credit: '无限责任担保'
       }, {
@@ -198,7 +202,7 @@ export default {
         start_date: '2017-02-24',
         end_date: '2018-02-24',
         term: '10天',
-        type: 0,
+        type: 1,
         publisher: '沂山实业责任有限公司',
         credit: '风险保证金'
       }]
@@ -208,5 +212,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

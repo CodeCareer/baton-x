@@ -176,13 +176,13 @@ export default {
         index: '6',
         icon: 'icon-user',
         menus: [{
-          name: '公司账户列表',
+          name: '用户列表',
           index: '6-1',
           route: {
             name: 'CompanyAccountList'
           }
         }, {
-          name: '公司账户权限',
+          name: '权限管理',
           index: '6-2',
           route: {
             name: 'CompanyAccountAuthority'

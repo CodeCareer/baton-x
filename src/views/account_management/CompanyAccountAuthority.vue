@@ -7,10 +7,11 @@
       .box-header
         h3 {{account.type}}
         .buttons
+          i.icon-batonx.icon-down(@click="openContent(account)")
           i.icon-batonx.icon-edit(@click="openAccountAuthorityDialog(account)")
           i.icon-batonx.icon-close(@click="deleteAccount(account)")
-      .box-content
-        .authority-table.just-for-show(:class="{'short-view': account.collapse}")
+      .box-content(v-if="account.type === countName")
+        .authority-table.just-for-show
           .permits-list
             span.title 权限：
             el-tag.mr10(v-for="p in account.permits", type="gray") {{p}}
@@ -38,13 +39,15 @@
               td(:colspan="2")
                 el-checkbox-group(v-model="account.deleteModules.checkedList", @change="handleCheckChange(account.deleteModules)")
                   el-checkbox.circle.mini(:disabled="true", v-for="o in account.deleteModules.children", :label="o.value") {{o.name}}
-        .more-toggle
-          a(v-show="account.collapse", @click="account.collapse = false")
-            i.icon-batonx.icon-down
-            | 显示更多信息
-          a(v-show="!account.collapse", @click="account.collapse = true")
-            i.icon-batonx.icon-top
-            | 收起更多信息
+        //- .more-toggle
+        //-   a(v-show="account.collapse", @click="account.collapse = false")
+        //-     i.icon-batonx.icon-down
+        //-     | 显示更多信息
+        //-   a(v-show="!account.collapse", @click="account.collapse = true")
+        //-     i.icon-batonx.icon-top
+        //-     | 收起更多信息
+            //- (:class="{'short-view': account.collapse}")
+
     account-authority-dialog(ref="accountAuthorityDialog", @account-save="onAccountSave")
 </template>
 
@@ -69,6 +72,14 @@ export default {
     AccountAuthorityDialog
   },
   methods: {
+    openContent(count) {
+      if (count.type === '业务专员类账户') {
+        this.countName = '业务专员类账户'
+      } else {
+        this.countName = '市场经理类账户'
+      }
+    },
+
     openAccountAuthorityDialog(account) {
       this.$refs.accountAuthorityDialog.open(account)
     },
@@ -100,6 +111,7 @@ export default {
 
   data() {
     return {
+      countName: '',
       accounts: [{
         collapse: true,
         id: 1,

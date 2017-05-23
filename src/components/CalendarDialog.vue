@@ -7,7 +7,7 @@
         .unified-table
           table
             tbody
-              tr(v-for="data in calendarData.datas")
+              tr(v-for="data in calendarData.datas",@click="goProductDetail(data)")
                 td {{data.name}}
                 td {{data.amount}}
                 td {{data.platform}}
@@ -105,6 +105,17 @@ export default {
     lookDialog(data) {
       this.visible = true
       this.calendarDatas = data
+    },
+    goProductDetail(data) {
+      this.$router.push({
+        name: 'ProductDetail',
+        params: {
+          id: data.id || data.name
+        },
+        query: {
+          type: data.type
+        }
+      })
     }
   }
 }
@@ -127,6 +138,9 @@ export default {
         table{
           width:100%;
           table-layout: fixed;
+          tr:hover{
+            background: #f3f6f8;
+          }
           td{
             padding:5px 0;
             i{

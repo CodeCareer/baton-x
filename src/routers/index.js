@@ -298,10 +298,10 @@ export default [{
       title: '开通金融-交易所产品管理系统-审批管理',
       needLogin: true,
       crumbs: [{
-        name: '审批管理',
+        name: '流程管理',
         to: { name: 'Approvement' }
       }, {
-        name: '审批管理',
+        name: '流程管理',
         to: { name: 'Approvement' }
       }]
     }

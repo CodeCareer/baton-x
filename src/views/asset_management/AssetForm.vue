@@ -117,7 +117,7 @@ export default {
 
   methods: {
     submitForm() {
-      Message.info('不能保存！Demo，只是用来展示！')
+      Message.info('测试账号不支持此功能！')
     },
     cancel() {
       MessageBox.confirm('内容将会清楚，确定取消吗？', '提示', {

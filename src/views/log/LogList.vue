@@ -78,7 +78,7 @@ export default {
     },
 
     download() {
-      Message.info('Demo，只用来演示！')
+      Message.info('测试账号不支持此功能！')
     },
 
     pageChange(val) {

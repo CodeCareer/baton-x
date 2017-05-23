@@ -610,7 +610,7 @@ export default {
     },
 
     deleteAsset() {
-      Message.info('Demo 资产不能删除哦！')
+      Message.info('测试账号不支持此功能！')
     },
 
     addNote() {

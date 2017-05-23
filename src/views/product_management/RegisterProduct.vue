@@ -16,7 +16,7 @@
         .box-find-input
           el-input(icon='search', placeholder="请输入产品代码",:on-icon-click="findproduct",v-model.lazy='filter.code')
     .table-container
-      el-table(:data='filterTableData', style='width: 100%', @row-click='goToDetail')
+      el-table(:data='filterTableData', style='width: 100%')
         el-table-column(prop='code' label='产品代码')
         el-table-column(prop='amount' label='规模', width='150',:sortable='true')
         el-table-column(prop='rate' label='利率',:sortable='true')
@@ -49,7 +49,7 @@ export default {
       })
     },
     findproduct() {
-      Message.info('dome暂时不支持查找')
+      Message.info('测试账号不支持此功能！')
     },
     tabClick(tab, event) {
       console.log(tab, event)
@@ -61,17 +61,17 @@ export default {
       })
     },
 
-    goToDetail(row) {
-      this.$router.push({
-        name: 'ProductDetail',
-        params: {
-          id: row.id || row.name
-        },
-        query: {
-          type: row.type
-        }
-      })
-    },
+    // goToDetail(row) {
+    //   this.$router.push({
+    //     name: 'ProductDetail',
+    //     params: {
+    //       id: row.id || row.name
+    //     },
+    //     query: {
+    //       type: row.type
+    //     }
+    //   })
+    // },
 
     pageChange(val) {
       console.log(`分页${val}`)
