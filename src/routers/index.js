@@ -238,7 +238,7 @@ export default [{
       title: '开通金融-交易所产品管理系统-公司账户列表',
       needLogin: true,
       crumbs: [{
-        name: '账户管理',
+        name: '用户管理',
         to: { name: 'AccountList' }
       }, {
         name: '公司账户列表',
@@ -253,7 +253,7 @@ export default [{
       title: '开通金融-交易所产品管理系统-公司账户权限',
       needLogin: true,
       crumbs: [{
-        name: '账户管理',
+        name: '用户管理',
         to: { name: 'AccountList' }
       }, {
         name: '公司账户权限',
@@ -268,7 +268,7 @@ export default [{
       title: '开通金融-交易所产品管理系统-个人设置',
       needLogin: true,
       crumbs: [{
-        name: '账户管理',
+        name: '用户管理',
         to: { name: 'AccountList' }
       }, {
         name: '个人设置',

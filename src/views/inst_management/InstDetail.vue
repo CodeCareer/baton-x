@@ -41,7 +41,7 @@
         el-tab-pane(label='产品信息', name='first')
         el-tab-pane(label='账户信息', name='second')
     .table-container(v-show="tab === 'first'")
-      el-table(:data='filterProducts', style='width: 100%')
+      el-table(:data='filterProducts', style='width: 100%',@row-click="goDetail")
         el-table-column(property='name', label='产品名称')
           template(scope='scope')
             el-popover(v-if="scope.row.note", trigger='hover' placement='top', )
@@ -93,6 +93,17 @@ export default {
   methods: {
     tabClick(tab, event) {
       console.log(tab, event)
+    },
+    goDetail(row) {
+      this.$router.push({
+        name: 'ProductDetail',
+        params: {
+          id: row.id || row.name
+        },
+        query: {
+          type: row.type
+        }
+      })
     },
 
     clearFilter() {

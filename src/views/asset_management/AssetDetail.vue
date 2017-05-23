@@ -15,7 +15,7 @@
       .box-content
         .box-section
           el-row(:gutter="20")
-            el-col(:span="8")
+            el-col(:span="12")
               table(v-if="demo.type === 0")
                 tr
                   th 收益率：
@@ -42,7 +42,7 @@
                 tr
                   th 发行方：
                   td {{demo.name}}
-            el-col(:span="8")
+            el-col(:span="12")
               table(v-if="demo.type === 0")
                 tr
                   th 期限：
@@ -69,24 +69,24 @@
                 tr
                   th 托管方：
                   td 中国民生银行
-            el-col(:span="8")
-              .other-list(v-if="demo.type === 0")
-                dl
-                  dt 流动性：
-                  dd 无
-                dl
-                  dt 年化计息天数：
-                  dd 365天
-                dl
-                  dt 托管方：
-                  dd 中国银行
-              .other-list(v-if="demo.type === 1")
-                dl
-                  dt 流动性：
-                  dd 高
-                dl
-                  dt 年化计息天数：
-                  dd 365天
+            //- el-col(:span="8")
+            //-   .other-list(v-if="demo.type === 0")
+            //-     dl
+            //-       dt 流动性：
+            //-       dd 无
+            //-     dl
+            //-       dt 年化计息天数：
+            //-       dd 365天
+            //-     dl
+            //-       dt 托管方：
+            //-       dd 中国银行
+            //-   .other-list(v-if="demo.type === 1")
+            //-     dl
+            //-       dt 流动性：
+            //-       dd 高
+            //-     dl
+            //-       dt 年化计息天数：
+            //-       dd 365天
         .box-section
           .attachments-box
             h3

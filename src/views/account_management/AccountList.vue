@@ -1,20 +1,20 @@
 <template lang="pug">
   section.account-list
     .box
-      .box-tab-header
+      .box-tab-head
         el-button(type="primary", size="small", @click="openAccountDialog()")
           i.icon-batonx.icon-plus
           | 新增
-      el-tabs(v-model='tab', type='card', @tab-click='tabClick')
-        el-tab-pane(label='资金账户', name='first')
-          .filters
-            el-input(placeholder='所属方', icon='search', v-model.lazy='filter.belongto')
-            el-input(placeholder='账户名', icon='search', v-model.lazy='filter.name')
-            el-input(placeholder='账户', icon='search', v-model.lazy='filter.bankNum')
-            el-select(v-model="filter.type", placeholder="账户类型")
-              el-option(v-for="t in accountTypes", :value="t.value", :label="t.name")
-            el-button(size="small", type="primary", @click="clearFilter")  清除
-        el-tab-pane(label='资产账户', name='second')
+      //- el-tabs(v-model='tab', type='card', @tab-click='tabClick')
+      //-   el-tab-pane(label='', name='first')
+      .filters
+        el-input(placeholder='所属方', icon='search', v-model.lazy='filter.belongto')
+        el-input(placeholder='账户名', icon='search', v-model.lazy='filter.name')
+        el-input(placeholder='账户', icon='search', v-model.lazy='filter.bankNum')
+        el-select(v-model="filter.type", placeholder="账户类型")
+          el-option(v-for="t in accountTypes", :value="t.value", :label="t.name")
+        el-button(size="small", type="primary", @click="clearFilter")  清除
+        //- el-tab-pane(label='', name='second')
           .filters
             el-input(placeholder='所属方', icon='search', v-model.lazy='filter.belongto')
             el-input(placeholder='账户名', icon='search', v-model.lazy='filter.name')
@@ -373,5 +373,12 @@ export default {
   .icon-relation {
     font-size: 15px;
   }
+}
+.box-tab-head{
+  text-align: right;
+    background: #f3f6f8;
+    height: 40px;
+    line-height: 40px;
+    padding-right: 15px;
 }
 </style>

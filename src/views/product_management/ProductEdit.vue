@@ -77,73 +77,112 @@
               th 计费开始日期
           tbody
             tr(v-for="costList in costLists")
-              td
-                el-input(v-model="costList.charge")
-              td
-                el-input(v-model="costList.costType")
-              td
-                el-input(v-model="costList.chargingType")
-              td
-                el-input(v-model="costList.rate")
-              td
-                el-input(v-model="costList.chargingDays")
-              td
-                el-input(v-model="costList.costBase")
-              td
-                el-input(v-model="costList.payment")
-              td
-                el-input(v-model="costList.paymentDate")
-              td
-                el-input(v-model="costList.chargingstart")
+              td {{costList.charge}}
+              td {{costList.costType}}
+              td {{costList.chargingType}}
+              td {{costList.rate}}
+              td {{costList.chargingDays}}
+              td {{costList.costBase}}
+              td {{costList.payment}}
+              td {{costList.paymentDate}}
+              td {{costList.chargingstart}}
             tr
               td.addMore(colspan="9")
-                a(@click="addMore(costList)")
+                a(@click="addMore")
                   i.icon-batonx.icon-plus
                   span 添加更多费用信息
-  account-card(:passed-accounts='demo.accounts')
-  .box.mt20
-    .box-header 审批流程
-    .box-content
-      .examine
-        table(width="100%")
-          thead
-            tr
-              th 审批流程名称
-              th 详情
-              th 操作
-          tbody
-            tr(v-for="Eaadata in filterEaa",v-if="filterEaa.length")
-              td {{Eaadata.EaaName}}
-              td
-                span {{Eaadata.details}}
-                i.icon-batonx.icon-shenpi
-              td
-                span(@click="EditDialog")
-                  i.icon-batonx.icon-edit
-                  | 编辑
-                span(@click="CloseDialog(Eaadata)")
-                  i.icon-batonx.icon-close
-                  | 删除
-            //- tr(v-if="!Eaadatas.lenght")
-            //-   td(colspan="3") 没有数据！
-  el-dialog(title="审批流程",v-model="Eaavisibel")
+  el-dialog(title="费用信息",v-model="costDialog",size="large")
     .box
-      .add-more
-        el-button.fr(type="primary", size="small", @click="addEaa")
+      .box-tab-header
+        el-button(type="primary", size="small", @click="addCost")
           i.icon-batonx.icon-plus
           | 新增
       .filters
         el-input(placeholder='输入账户名或者账户', icon='search', v-model.lazy='filter.name')
-    el-table(:data='Eaadatas', ref="accountsTable")
+    el-table(:data='filterCostList', ref="costTable")
       el-table-column(type="selection", width="45")
-      el-table-column(property="EaaName", label='审批流程名称')
-      el-table-column(property='process', label='审批流程')
-      //- el-table-column(property='belongto', label='操作')
-      //-   template(scope="scope")
-      //-     i.icon-batonx.icon-edit
+      el-table-column(property="charge", label='收费主体')
+      el-table-column(property='costType', label='费用类型')
+      el-table-column(property='chargingType', label='计费方式')
+      el-table-column(property='rate', label='费率')
+      el-table-column(property='chargingDays', label='计费天数')
+      el-table-column(property="costBase",label="费用基数")
+      el-table-column(property="payment",label="支付频率")
+      el-table-column(property="paymentDate",label="支付日期")
+      el-table-column(property="chargingstart",label="计费开始日期")
+      el-table-column(label='操作')
+        template(scope="scope")
+          i.icon-batonx.icon-edit(@click="editCost(scope.row)")
+          i.icon-batonx.icon-close(@click="deleteCost(scope.row)")
     .dialog-footer(slot="footer")
-      el-button(type="primary", size="small", @click='Eaavisibel = false') 确定
-  approve-dialog(ref="approveVisi",:eaa-show="eaaapp")
+      el-button(type="primary", size="small", @click='costDialog = false') 确定
+  el-dialog(:title="costTitle",v-model="editDialog")
+    el-form(:model='editCostDatas', ref="costForm", :rules="rules", label-width='120px')
+      el-form-item(prop="charge", label='收费主体：')
+        el-input(v-model="editCostDatas.charge", placeholder="请输入收费主体")
+      el-form-item(prop="costType", label='费用类型：')
+        el-input(v-model="editCostDatas.costType", placeholder="请输入费用类型")
+      el-form-item(prop="chargingType", label='计费方式：')
+        el-input(v-model="editCostDatas.chargingType", placeholder="请输入计费方式")
+      el-form-item(prop="rate", label='费率：')
+        el-input(v-model="editCostDatas.rate", placeholder="请输入费率")
+      el-form-item(prop="chargingDays", label='计费天数：')
+        el-input(v-model="editCostDatas.chargingDays", placeholder="请输入计费天数")
+      el-form-item(prop="costBase", label='费用基数：')
+        el-input(v-model="editCostDatas.costBase", placeholder="请输入费用基数")
+      el-form-item(prop="payment", label='支付频率：')
+        el-input(v-model='editCostDatas.payment', auto-complete='off', placeholder='请输入支付频率')
+      el-form-item(prop="paymentDate", label='支付日期：')
+        el-input(v-model='editCostDatas.paymentDate', auto-complete='off', placeholder='请输入支付日期')
+      el-form-item(prop="chargingstart", label='计费开始日期：')
+        el-input(v-model='editCostDatas.chargingstart', auto-complete='off', placeholder='请输入计费开始日期')
+    .dialog-footer(slot="footer")
+      el-button(type="primary", size="small", @click='activeCostSave') 确定
+      el-button(type='gray', size="small", @click='editDialog = false') 取消
+  account-card(:passed-accounts='demo.accounts')
+  //- .box.mt20
+  //-   .box-header 审批流程
+  //-   .box-content
+  //-     .examine
+  //-       table(width="100%")
+  //-         thead
+  //-           tr
+  //-             th 审批流程名称
+  //-             th 详情
+  //-             th 操作
+  //-         tbody
+  //-           tr(v-for="Eaadata in filterEaa",v-if="filterEaa.length")
+  //-             td {{Eaadata.EaaName}}
+  //-             td
+  //-               span {{Eaadata.details}}
+  //-               i.icon-batonx.icon-shenpi
+  //-             td
+  //-               span(@click="EditDialog")
+  //-                 i.icon-batonx.icon-edit
+  //-                 | 编辑
+  //-               span(@click="CloseDialog(Eaadata)")
+  //-                 i.icon-batonx.icon-close
+  //-                 | 删除
+  //-           //- tr(v-if="!Eaadatas.lenght")
+  //-           //-   td(colspan="3") 没有数据！
+  //- el-dialog(title="审批流程",v-model="Eaavisibel")
+  //-   .box
+  //-     .add-more
+  //-       el-button.fr(type="primary", size="small", @click="addEaa")
+  //-         i.icon-batonx.icon-plus
+  //-         | 新增
+  //-     .filters
+  //-       el-input(placeholder='输入账户名或者账户', icon='search', v-model.lazy='filter.name')
+  //-   el-table(:data='Eaadatas', ref="accountsTable")
+  //-     el-table-column(type="selection", width="45")
+  //-     el-table-column(property="EaaName", label='审批流程名称')
+  //-     el-table-column(property='process', label='审批流程')
+  //-     //- el-table-column(property='belongto', label='操作')
+  //-     //-   template(scope="scope")
+  //-     //-     i.icon-batonx.icon-edit
+  //-   .dialog-footer(slot="footer")
+  //-     el-button(type="primary", size="small", @click='Eaavisibel = false') 确定
+  //- approve-dialog(ref="approveVisi",:eaa-show="eaaapp")
   .bottom-buttons
     el-button(type="primary", size="small", @click="submitForm") 保存
     el-button(type="gray", size="small", @click="cancel") 取消
@@ -164,8 +203,10 @@ import moment from 'moment'
 import {
   uniqueId,
   remove,
-  each,
-  filter
+  find,
+  // each,
+  filter,
+  merge
 } from 'lodash'
 
 export default {
@@ -176,7 +217,6 @@ export default {
   mounted() {
     if (this.$route.params.id !== 'add') {
       const name = this.$route.params.id
-      console.log(name)
       updateCrumbs.$emit('update-crumbs', [{
         id: 'assetName',
         name: name
@@ -228,14 +268,60 @@ export default {
     addEaa() {
       this.$refs.approveVisi.open()
     },
-    EditDialog() {
-      this.Eaavisibel = true
-      this.$nextTick(() => {
-        each(this.Eaadatas, v => {
-          if (v.EaaName === this.EaaDefault.EaaName) {
-            this.$refs.accountsTable.toggleRowSelection(v, true)
-          }
+    editCost(cost) {
+      this.costTitle = '编辑费用信息'
+      this.editDialog = true
+      this.editCostDatas = merge({}, cost)
+    },
+    addCost() {
+      this.costTitle = '新增费用信息'
+      this.editDialog = true
+      this.editCostDatas = {
+        charge: '',
+        costType: '',
+        chargingType: '',
+        rate: '',
+        chargingDays: '',
+        costBase: '',
+        payment: '',
+        paymentDate: '',
+        chargingstart: ''
+      }
+    },
+    deleteCost(row) {
+      MessageBox.confirm('确定要删除这条信息吗？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        this.costLists = remove(this.costLists, v => {
+          return v.id !== row.id
         })
+      })
+    },
+    // EditDialog() {
+    //   this.Eaavisibel = true
+    //   this.$nextTick(() => {
+    //     each(this.Eaadatas, v => {
+    //       if (v.EaaName === this.EaaDefault.EaaName) {
+    //         this.$refs.accountsTable.toggleRowSelection(v, true)
+    //       }
+    //     })
+    //   })
+    // },
+    activeCostSave() {
+      this.$refs.costForm.validate((valid) => {
+        if (valid) {
+          const cost = find(this.costLists, v => {
+            return v.id === this.editCostDatas.id
+          })
+          if (cost) {
+            merge(cost, this.editCostDatas)
+            this.editDialog = false
+          } else {
+            this.editCostDatas.id = uniqueId()
+            this.costLists.unshift(this.editCostDatas)
+            this.editDialog = false
+          }
+        }
       })
     },
     CloseDialog(eaa) {
@@ -248,7 +334,7 @@ export default {
       })
     },
     addMore(data) {
-      this.costLists.push(this.emptyObj)
+      this.costDialog = true
     },
     submitForm() {
       Message.info('不能保存！Demo，只是用来展示！')
@@ -278,16 +364,26 @@ export default {
       return filter(this.Eaadatas, v => {
         return ~v.EaaName.indexOf(this.EaaDefault.EaaName)
       })
+    },
+    filterCostList() {
+      return filter(this.costLists, v => {
+        return ~v.charge.indexOf(this.chargeName)
+      })
     }
   },
 
   data() {
     return {
+      costTitle: '',
+      costDialog: false,
+      editDialog: false,
       eaaapp: true,
+      chargeName: '',
       EaaDefault: {
         EaaName: '资金流程审批A1',
         process: ''
       },
+      editCostDatas: {},
       Eaavisibel: false,
       risksRating: '',
       filter: {
@@ -303,7 +399,6 @@ export default {
         value: '3',
         label: '高风险'
       }],
-      rules: {},
       demo: {
         name: null,
         amount: null,
@@ -348,6 +443,53 @@ export default {
         name: '低',
         value: 'L'
       }],
+      rules: {
+        charge: [{
+          required: true,
+          message: '请输入收费主体',
+          trigger: 'blur'
+        }],
+        costType: [{
+          required: true,
+          message: '请输入费用类型',
+          trigger: 'blur'
+        }],
+        chargingType: [{
+          required: true,
+          message: '请输入计费方式',
+          trigger: 'blur'
+        }],
+        rate: [{
+          required: true,
+          message: '请输入费率',
+          trigger: 'blur'
+        }],
+        chargingDays: [{
+          required: true,
+          message: '请输入计费天数',
+          trigger: 'blur'
+        }],
+        costBase: [{
+          required: true,
+          message: '请输入费用基数',
+          trigger: 'blur'
+        }],
+        payment: [{
+          required: true,
+          message: '请输入支付频率',
+          trigger: 'blur'
+        }],
+        paymentDate: [{
+          required: true,
+          message: '请输入支付日期',
+          trigger: 'blur'
+        }],
+        chargingstart: [{
+          required: true,
+          message: '请输入计费开始日期',
+          trigger: 'blur'
+        }]
+      },
       costLists: [{
         charge: '招商银行',
         costType: '托管费',
@@ -356,8 +498,9 @@ export default {
         chargingDays: '360',
         costBase: '产品规模',
         payment: ' 每月 ',
-        paymentDate: '2016-8-8    12:00:00 AM ',
-        chargingstart: '￥ 23,533,09.00'
+        paymentDate: '2016-8-8',
+        chargingstart: '￥ 23,533,09.00',
+        id: uniqueId()
       }, {
         charge: '京东金融 ',
         costType: '投资顾问费',
@@ -366,20 +509,21 @@ export default {
         chargingDays: '无 ',
         costBase: '无 ',
         payment: ' 每季 ',
-        paymentDate: '2016-8-8    14:00:00 PM',
-        chargingstart: '￥ 123,533,09.00'
+        paymentDate: '2016-8-8',
+        chargingstart: '￥ 123,533,09.00',
+        id: uniqueId()
       }],
-      emptyObj: {
-        charge: '',
-        costType: '',
-        chargingType: '',
-        rate: ' ',
-        chargingDays: '',
-        costBase: '',
-        payment: '',
-        paymentDate: '',
-        chargingstart: ''
-      },
+      // emptyObj: {
+      //   charge: '',
+      //   costType: '',
+      //   chargingType: '',
+      //   rate: ' ',
+      //   chargingDays: '',
+      //   costBase: '',
+      //   payment: '',
+      //   paymentDate: '',
+      //   chargingstart: ''
+      // },
       Eaadatas: [{
         EaaName: '资金流程审批A1',
         details: '审批',
@@ -429,9 +573,13 @@ export default {
       text-align: left;
     }
     td {
+      padding: 10px 8px;
       &.addMore {
         padding: 10px 0;
         text-align: center;
+        a {
+          display: inline-block;
+        }
         i {
           color: #538cc0;
         }
@@ -477,9 +625,17 @@ export default {
     }
   }
 }
- .add-more{
-      position: absolute;
-      top:15px;
-      right:15px;
-    }
+
+.add-more {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.icon-close {
+  margin-left: 8px;
+  color: #656776;
+  font-weight: normal;
+  cursor: pointer;
+}
 </style>

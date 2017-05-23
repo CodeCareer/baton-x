@@ -446,7 +446,7 @@
             el-table-column(property="time",label="时间")
             el-table-column(property="charge",label="收费主体")
             el-table-column(property="extract",label="提取金额")
-            el-table-column(property="wait",label="待计提费用")
+            //- el-table-column(property="wait",label="待计提费用")
     .box.box-normal
       .box-header 账户列表
       .box-content
@@ -582,6 +582,12 @@ export default {
         name: 'ClientList'
       })
     },
+    // closeMessage(file, fileList) {
+    //   MessageBox.confirm('确定要删除文件吗？', '提示', {
+    //     type: 'warning'
+    //   }).then(() => {})
+    //   console.log(file, fileList)
+    // },
     extractDialog() {
       this.extractVisible = true
     },
@@ -1045,6 +1051,9 @@ export default {
     .first-tr {
       border-bottom: 1px solid #f3f6f8;
     }
+    th,td{
+      text-align: center;
+    }
     td {
       padding: 25px 0;
       &.first-td-amount {
@@ -1091,8 +1100,10 @@ export default {
 
 .crux-date {
   padding: 15px;
+  width:950px;
+  margin:0 auto;
   img {
-    width: 100%;
+    width:100%;
     // height: 200px;
   }
 }

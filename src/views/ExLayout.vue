@@ -170,27 +170,32 @@ export default {
           route: {
             name: 'AccountList'
           }
-        }, {
+        }]
+      }, {
+        name: '用户管理',
+        index: '6',
+        icon: 'icon-user',
+        menus: [{
           name: '公司账户列表',
-          index: '5-2',
+          index: '6-1',
           route: {
             name: 'CompanyAccountList'
           }
         }, {
           name: '公司账户权限',
-          index: '5-3',
+          index: '6-2',
           route: {
             name: 'CompanyAccountAuthority'
           }
         }, {
           name: '个人设置',
-          index: '5-4',
+          index: '6-3',
           route: {
             name: 'Setting'
           }
         }]
       }, {
-        name: '审批管理',
+        name: '流程管理',
         index: '6',
         icon: 'icon-approval',
         route: {

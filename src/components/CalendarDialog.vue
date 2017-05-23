@@ -2,106 +2,109 @@
   .calendar-dialog
     el-dialog(title="2月2日星期四 日历详情",v-model="visible")
       .unified-style(v-for="calendarData in calendarDatas")
-        .unified-title {{calendarData.title}}
+        .unified-title {{calendarData.state}}
           .unified-num {{calendarData.num + '条'}}
         .unified-table
           table
             tbody
-              tr(v-for="tableData in calendarData.tableDatas")
-                td {{tableData.name}}
-                td {{tableData.amount}}
-                td {{tableData.platform}}
+              tr(v-for="data in calendarData.datas")
+                td {{data.name}}
+                td {{data.amount}}
+                td {{data.platform}}
                 td
                   i.icon-batonx.icon-remind
                     el-date-picker(type="datetime",v-model="value")
 </template>
 <script>
 export default {
+  // props: ['calendarDatas'],
   data() {
     return {
       value: '',
       visible: false,
-      calendarDatas: [{
-        title: '发行',
-        num: '2',
-        tableDatas: [{
-          name: '智鑫2号”理财计划',
-          amount: '',
-          platform: '京东金融'
-        },
-        {
-          name: '京禾宝”理财计划',
-          amount: '',
-          platform: '途牛金服'
-        }
-        ]
-      }, {
-        title: '开放',
-        num: '1',
-        tableDatas: [{
-          name: '美信宝-粤盈6期3号',
-          amount: '',
-          platform: '美易理财'
-        }]
-      }, {
-        title: '提费',
-        num: '3',
-        tableDatas: [{
-          name: '美信宝-粤盈6期4号',
-          amount: '￥78,840.00',
-          platform: '美易理财'
-        },
-        {
-          name: '牛稳赚GZEEC719001',
-          amount: '￥78,840.00',
-          platform: '苏宁金服'
-        },
-        {
-          name: '融通宝系列产品第061期',
-          amount: '￥56,098.21',
-          platform: '绿地金服'
-        }
-        ]
-      },
-      {
-        title: '付息',
-        num: '4',
-        tableDatas: [{
-          name: '凤溢盈-PHZL-6个月',
-          amount: '￥78,840.00',
-          platform: '美易理财'
-        },
-        {
-          name: '凤溢盈-PHZL-12个月',
-          amount: '￥48,287.21',
-          platform: '苏宁金服'
-        },
-        {
-          name: '财富赢-普惠235A期 ',
-          amount: '￥56,098.21',
-          platform: '绿地金服'
-        },
-        {
-          name: '海信宝587期21-270 ',
-          amount: '￥981,562.21',
-          platform: '聚宝汇'
-        }
-        ]
-      },
-      {
-        title: '试算',
-        num: '1',
-        tableDatas: [{
-          name: '万惠金-月月尊-11552',
-          amount: '￥70,094,192.00',
-          platform: '万达财富'
-        }]
-      }]
+      calendarDatas: null
+      // calendarDatas: [{
+      //   title: '发行',
+      //   num: '2',
+      //   tableDatas: [{
+      //     name: '智鑫2号”理财计划',
+      //     amount: '',
+      //     platform: '京东金融'
+      //   },
+      //   {
+      //     name: '京禾宝”理财计划',
+      //     amount: '',
+      //     platform: '途牛金服'
+      //   }
+      //   ]
+      // }, {
+      //   title: '开放',
+      //   num: '1',
+      //   tableDatas: [{
+      //     name: '美信宝-粤盈6期3号',
+      //     amount: '',
+      //     platform: '美易理财'
+      //   }]
+      // }, {
+      //   title: '提费',
+      //   num: '3',
+      //   tableDatas: [{
+      //     name: '美信宝-粤盈6期4号',
+      //     amount: '￥78,840.00',
+      //     platform: '美易理财'
+      //   },
+      //   {
+      //     name: '牛稳赚GZEEC719001',
+      //     amount: '￥78,840.00',
+      //     platform: '苏宁金服'
+      //   },
+      //   {
+      //     name: '融通宝系列产品第061期',
+      //     amount: '￥56,098.21',
+      //     platform: '绿地金服'
+      //   }
+      //   ]
+      // },
+      // {
+      //   title: '付息',
+      //   num: '4',
+      //   tableDatas: [{
+      //     name: '凤溢盈-PHZL-6个月',
+      //     amount: '￥78,840.00',
+      //     platform: '美易理财'
+      //   },
+      //   {
+      //     name: '凤溢盈-PHZL-12个月',
+      //     amount: '￥48,287.21',
+      //     platform: '苏宁金服'
+      //   },
+      //   {
+      //     name: '财富赢-普惠235A期 ',
+      //     amount: '￥56,098.21',
+      //     platform: '绿地金服'
+      //   },
+      //   {
+      //     name: '海信宝587期21-270 ',
+      //     amount: '￥981,562.21',
+      //     platform: '聚宝汇'
+      //   }
+      //   ]
+      // },
+      // {
+      //   title: '试算',
+      //   num: '1',
+      //   tableDatas: [{
+      //     name: '万惠金-月月尊-11552',
+      //     amount: '￥70,094,192.00',
+      //     platform: '万达财富'
+      //   }]
+      // }]
     }
   },
   methods: {
-    lookDialog() {
+    lookDialog(data) {
       this.visible = true
+      this.calendarDatas = data
     }
   }
 }

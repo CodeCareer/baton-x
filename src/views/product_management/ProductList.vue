@@ -2,7 +2,7 @@
   section.product-list
     .box
       .box-tab-header
-        el-button(type="primary", size="small",@click="$router.push({name: 'AssetForm', params: {id: 'add'}})")
+        el-button(type="primary", size="small",@click="$router.push({name: 'ProductEdit', params: {id: 'add'}})")
           i.icon-batonx.icon-plus
           | 新增
         el-button.elButton(type="info",size="small",@click="importData")
@@ -18,14 +18,14 @@
                   | 产品类型：
                   el-radio-group.vertical(v-model="filter.productType")
                     el-radio(v-for="productType in productTypes",:label="productType.value") {{productType.name}}
-                .filter-top-left
-                  | 发行进度：
-                  el-radio-group.vertical(v-model="filter.schedule")
-                    el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
-                .filter-top-left
-                  | 执行状态：
-                  el-radio-group.vertical(v-model="filter.state")
-                    el-radio(v-for="state in status",:label="state.value") {{state.name}}
+                //- .filter-top-left
+                //-   | 发行进度：
+                //-   el-radio-group.vertical(v-model="filter.schedule")
+                //-     el-radio(v-for="schedule in schedules",:label="schedule.value") {{schedule.name}}
+                //- .filter-top-left
+                //-   | 执行状态：
+                //-   el-radio-group.vertical(v-model="filter.state")
+                //-     el-radio(v-for="state in status",:label="state.value") {{state.name}}
             .filters-bottom.filter-checkbox
               | 发行平台：
               el-radio-group.vertical(v-model="filter.platform")
@@ -110,10 +110,10 @@
            span.current(v-if="scope.row.current") 活期
            span.regular(v-if="!scope.row.current") 定期
            i.icon-batonx.icon-date
-        el-table-column
+        el-table-column(width="150")
           template(scope='scope')
             span.status_color(v-for="state in scope.row.status", :class="state | filterColor") {{state}}
-        el-table-column(property='amount', label='实际募集金额')
+        el-table-column(property='amount', label='实际募集金额',width="150")
         el-table-column(property='term' label='发行期限',width="90")
         el-table-column(property='startDate', label='起息日', :sortable='true')
         el-table-column(property='endDate' label='到期日')
@@ -495,6 +495,7 @@ export default {
   }
   .table-container {
     margin-top: 20px;
+    overflow-x:auto;
     .current {
       padding: 0 3px;
       background: #e55a6c;
