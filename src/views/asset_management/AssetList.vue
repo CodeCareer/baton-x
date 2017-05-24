@@ -69,13 +69,15 @@ export default {
     },
 
     goToDetail(row) {
+      console.log(row)
       this.$router.push({
         name: 'AssetDetail',
         params: {
           id: row.id || row.name
         },
         query: {
-          type: row.type
+          type: row.type,
+          publisher: row.publisher
         }
       })
     },
@@ -143,14 +145,14 @@ export default {
         publisher: '武汉新港城建设投资企业',
         credit: '到期回购'
       }, {
-        name: '广西万宁投资集团融资项目',
+        name: '易方达货币基金A',
         amount: '￥870,654,256.00',
-        start_date: '2017-01-22',
-        end_date: '2017-05-22',
-        term: '87天',
+        start_date: '-',
+        end_date: '-',
+        term: '-',
         type: 1,
-        publisher: '广西万宁投资集团',
-        credit: '全额回购担保'
+        publisher: '易方达基金',
+        credit: '-'
       }, {
         name: '创元开发建设投资企业融资项目',
         amount: '￥12,098,653.00',
@@ -179,32 +181,32 @@ export default {
         publisher: '福州郑和发展有限公司',
         credit: '承诺回购'
       }, {
-        name: '天津旭达过桥资金项目',
+        name: '广发货币基金C',
         amount: '￥12,872.00',
-        start_date: '2017-02-15',
-        end_date: '2017-04-15',
-        term: '50天',
+        start_date: '-',
+        end_date: '-',
+        term: '-',
         type: 1,
-        publisher: '天津旭达有限公司',
-        credit: '到期还款'
+        publisher: '广发基金',
+        credit: '-'
       }, {
-        name: '阳光城保证金基金项目',
+        name: '华夏基金零活宝',
         amount: '￥76,897,882.00',
-        start_date: '2017-02-18',
-        end_date: '2017-03-18',
-        term: '22天',
+        start_date: '-',
+        end_date: '-',
+        term: '-',
         type: 1,
-        publisher: '阳光城责任有限公司',
-        credit: '无限责任担保'
+        publisher: '华夏基金',
+        credit: '-'
       }, {
-        name: '沂山实业企业融资项目',
+        name: '天宏余额宝',
         amount: '￥27,653,21.00',
-        start_date: '2017-02-24',
-        end_date: '2018-02-24',
-        term: '10天',
+        start_date: '-',
+        end_date: '-',
+        term: '-',
         type: 1,
-        publisher: '沂山实业责任有限公司',
-        credit: '风险保证金'
+        publisher: '天宏基金',
+        credit: '-'
       }]
     }
   }

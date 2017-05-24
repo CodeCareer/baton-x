@@ -265,7 +265,7 @@ export default {
       }, {
         id: 6,
         belongto: '天津旭达有限公司',
-        type: '募集账户',
+        type: '资产账户',
         name: '天津旭达有限公司',
         bankNum: '2310 8372 6532 098',
         bank: '招商银行天津滨海新区支行',
@@ -284,7 +284,7 @@ export default {
       }, {
         id: 7,
         belongto: '江苏开汇资产管理有限公司',
-        type: '募集账户',
+        type: '资产账户',
         name: '江苏开汇资产管理有限公司',
         bankNum: '4367 8022 6182 200',
         bank: '杭州银行股份有限公司南京河支行',

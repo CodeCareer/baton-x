@@ -31,7 +31,7 @@
                   td 每周一次
                 tr
                   th 发行方：
-                  td {{demo.name}}
+                  td {{demo.publisher}}
               table(v-if="demo.type === 1")
                 tr
                   th 七日年化收益率：
@@ -41,7 +41,7 @@
                   td 货币基金
                 tr
                   th 发行方：
-                  td {{demo.name}}
+                  td {{demo.publisher}}
             el-col(:span="12")
               table(v-if="demo.type === 0")
                 tr
@@ -201,6 +201,7 @@ export default {
   mounted: function() {
     this.demo.name = this.demo.shortName = this.$route.params.id
     this.demo.type = +this.$route.query.type || this.demo.type
+    this.demo.publisher += this.$route.query.publisher || this.demo.publisher
     updateCrumbs.$emit('update-crumbs', [{
       id: 'assetName',
       name: this.demo.name
@@ -263,7 +264,7 @@ export default {
         name: '天津旭达资产管理项目',
         shortName: '旭达资管',
         type: 0, // 0 非标 1 货币基金
-        // newNote: '',
+        publisher: '',
         rateChartOpt: {},
         notes: [{
           id: 1,

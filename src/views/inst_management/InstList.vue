@@ -112,10 +112,26 @@ export default {
         count: 80,
         amountRate: '26.4%'
       }, {
-        name: '和聚宝',
+        name: '京东金融',
         amount: '￥45,632,98.00',
         count: 70,
         amountRate: '15.4%'
+      }],
+      tableData1: [{
+        name: '广西万宁投资集团',
+        amount: '￥398,781.00',
+        count: 50,
+        amountRate: '20.4%'
+      }, {
+        name: '天津旭达有限公司',
+        amount: '￥13,781.00',
+        count: 80,
+        amountRate: '15.8%'
+      }, {
+        name: '阳光城责任有限公司',
+        amount: '￥13,098,781.00',
+        count: 90,
+        amountRate: '26.3%'
       }]
     }
   }

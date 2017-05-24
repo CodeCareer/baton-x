@@ -6,29 +6,29 @@
         .stock-width.fl
           .stock-width-pad
             .stock-product
-              .stock-product-title 存量产品（元）
+              .stock-product-title 存量金额（元）
               .stock-product-num
-                span {{58838848.62 | ktCurrency}}
+                span {{23258838848.62 | ktCurrency}}
               .principal-interest
                 label.interest.fl
                   span.interest-name 本金
-                  span {{58760178 | ktCurrency}}
+                  span {{22358760178 | ktCurrency}}
                 label.interest.fr
                   span.interest-name 利息
-                  span {{78670.62 | ktCurrency}}
+                  span {{12578670.62 | ktCurrency}}
         .stock-width.fl
           .stock-width-pad
             .acc-amount
-              .stock-product-title 存量产品（元）
+              .stock-product-title 累计金额（元）
               .stock-product-num
-                span {{132838848.62 | ktCurrency}}
+                span {{435132838848.62 | ktCurrency}}
               .principal-interest
                 label.interest.fl
                   span.interest-name 本金
-                  span {{58760178.00 | ktCurrency}}
+                  span {{432258760178.00 | ktCurrency}}
                 label.interest.fr
                   span.interest-name 利息
-                  span {{78670.62| ktCurrency}}
+                  span {{42278670.62| ktCurrency}}
         .stock-width.fl
           .stock-width-pad
             .today-stock
@@ -36,24 +36,24 @@
                 .stock-title-name.fl 今日存量产品占比分析
                 .stock-title-select.fr
                   el-select(v-model="name")
-                    el-option(v-for="item in items", :key="item.value", :value="item.name")
+                    el-option(v-for="item in items", :key="item.value", :value="item.name",:disabled="item.disabled")
               .stock-echart
                 kt-pie-chart(:chart-option="pieEchartOption")
     .ov-todo
       h3 待办事项
-        .some-data.fr
-          span
-            em 1
-          | 条待审批，
-          span
-            em 12
-          | 条待执行，
-          span
-            em 2
-          | 条已执行，
-          span
-            em 3
-          | 条已过期
+        //- .some-data.fr
+        //-   span
+        //-     em 1
+        //-   | 条待审批，
+        //-   span
+        //-     em 12
+        //-   | 条待执行，
+        //-   span
+        //-     em 2
+        //-   | 条已执行，
+        //-   span
+        //-     em 3
+        //-   | 条已过期
       .ov-todo-content
         .ov-content-title
           el-tabs(type="border-card")
@@ -407,8 +407,8 @@
       .ov-remind-table
         table
           tbody
-            tr(v-if="isclose",@click="toDetail('京东活期理财计划丰银宝A')")
-              td.first-td 京东活期理财计划丰银宝A
+            tr(v-if="isclose",@click="toDetail('恒耀稳享5016期')")
+              td.first-td 恒耀稳享5016期
               td
                 .nature
                  | 开放
@@ -416,8 +416,8 @@
                   span 备注:预计净赎回五千万左右货币基金
               td
               td  3月01日12：00--3月02日11：00
-            tr(@click="toDetail('京东活期理财计划丰银宝B1')")
-              td.first-td 京东活期理财计划丰银宝B1
+            tr(@click="toDetail('恒耀稳享3006期')")
+              td.first-td 恒耀稳享3006期
               td
                 .nature
                  | 募集期
@@ -429,8 +429,8 @@
                 .trial-amount(v-if="false") 试算金额：
                   span  {{ 200184258 | ktCurrency}}
               td 3月01日12：00--3月02日11：00
-            tr(@click="toDetail('京东活期理财计划丰银宝C1')")
-              td.first-td 京东活期理财计划丰银宝C1
+            tr(@click="toDetail('恒存金-灵活理财A')")
+              td.first-td 恒存金-灵活理财A
               td
                 .nature
                  | 到期
@@ -684,7 +684,7 @@ export default {
                 amount: '￥123，891',
                 platform: '美易理财'
               }, {
-                name: '凤溢盈-PHZL-6个月',
+                name: '凤溢盈-PHZL-12个月',
                 amount: '￥850，01.91',
                 platform: '苏宁金融'
               }]
@@ -742,9 +742,9 @@ export default {
                 amount: '￥123.91',
                 platform: '美易理财'
               }, {
-                name: '凤溢盈-PHZL-6个月',
+                name: '凤溢盈-PHZL-12个月',
                 amount: '￥850，01.91',
-                platform: '苏宁金融'
+                platform: '美易理财'
               }]
             },
             {
@@ -960,10 +960,12 @@ export default {
         value: '选项1'
       }, {
         name: '产品类型分布',
-        value: '选项2'
+        value: '选项2',
+        disabled: true
       }, {
         name: '期限分布',
-        value: '选项3'
+        value: '选项3',
+        disabled: true
       }],
       name: '平台分布'
     }

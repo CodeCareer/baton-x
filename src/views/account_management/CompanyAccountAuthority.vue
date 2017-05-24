@@ -81,6 +81,7 @@ export default {
     },
 
     openAccountAuthorityDialog(account) {
+      console.log(account)
       this.$refs.accountAuthorityDialog.open(account)
     },
 

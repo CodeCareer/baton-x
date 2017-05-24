@@ -42,7 +42,7 @@
                     th 已更新
                     td
                   tr
-                    th 申购数据：
+                    th 净申购：
                     td
                       span ￥
                       span.product-rate 183,184,258.00

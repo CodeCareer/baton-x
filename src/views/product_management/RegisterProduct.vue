@@ -124,11 +124,11 @@ export default {
         name: '全部',
         value: '全部'
       }, {
-        name: '财富宝',
-        value: '财富宝'
+        name: '京东金融',
+        value: '京东金融'
       }, {
-        name: '360你财富',
-        value: '360你财富'
+        name: '蚂蚁金服',
+        value: '蚂蚁金服'
       }, {
         name: '甜橙理财',
         value: '甜橙理财'

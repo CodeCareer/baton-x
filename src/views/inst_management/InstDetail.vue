@@ -146,7 +146,7 @@ export default {
       },
       inst: {
         name: '京东金融信息服务有限公司',
-        logo: require('@/assets/images/jd.png'),
+        logo: '', //require('@/assets/images/jd.png'),
         shortName: '京东金融',
         type: '资金渠道',
         manageScope: ['金融信息服务', '计算机网络技术', '技术服务', '电子商务'],

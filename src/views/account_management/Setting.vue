@@ -94,7 +94,7 @@ export default {
   data() {
     return {
       dome: {
-        url: require('@/assets/images/jd.png'),
+        url: '', //require('@/assets/images/jd.png'),
         shortName: name,
         type: '资金渠道',
         manageScope: ['金融信息服务', '计算机网络技术', '技术服务', '电子商务'],

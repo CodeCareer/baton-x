@@ -143,13 +143,15 @@ export default {
       }, {
         name: '总监类',
         value: '总监类'
-      }, {
-        name: '费用账户',
-        value: '费用账户'
-      }, {
-        name: '其他第三方账户',
-        value: '其他第三方账户'
-      }],
+      }
+      // , {
+      //   name: '费用账户',
+      //   value: '费用账户'
+      // }, {
+      //   name: '其他第三方账户',
+      //   value: '其他第三方账户'
+      // }
+      ],
       formLabelWidth: '120px',
       dialogVisible: false
     }

@@ -25,10 +25,10 @@
                   td ￥1000
                 tr
                   th 发行平台：
-                  td 京东金融
+                  td 恒大金服
                 tr
                   th 增信机构：
-                  td 北京易尚投资管理有限公司
+                  td -
               table(v-if="demo.type === 1")
                 tr
                   th 利率：
@@ -38,10 +38,10 @@
                   td ￥1000
                 tr
                   th 发行平台：
-                  td 京东金融
+                  td 恒大金服
                 tr
                   th 增信机构：
-                  td 北京易尚投资管理有限公司
+                  td -
             el-col(:span="8")
               table(v-if="demo.type === 0")
                 tr

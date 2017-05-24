@@ -86,7 +86,7 @@ export default {
       },
       clients: [{
         id: 1,
-        name: '王一',
+        name: '张梦来',
         certificate: '身份证',
         IDNumber: '220112198809012345',
         amount: '￥15,000.00',
@@ -109,7 +109,7 @@ export default {
         }]
       }, {
         id: 2,
-        name: '王二',
+        name: '张东雨',
         certificate: '身份证',
         IDNumber: '220112198809012346',
         amount: '￥12,000.00',
@@ -122,9 +122,9 @@ export default {
         }]
       }, {
         id: 3,
-        name: '王三',
+        name: '王琦',
         certificate: '身份证',
-        IDNumber: '220112198809012347',
+        IDNumber: '327422198809012900',
         amount: '￥12,000.00',
         count: 2,
         products: [{
@@ -137,6 +137,45 @@ export default {
           amount: '￥9,000.00',
           ratio: '75%',
           subscribeDate: '2017-03-02'
+        }]
+      }, {
+        id: 4,
+        name: '刘旭',
+        certificate: '身份证',
+        IDNumber: '763112198809000983',
+        amount: '￥3,000,000.00',
+        count: 1,
+        products: [{
+          name: '恒耀稳享5029期',
+          amount: '￥3,000,000.00',
+          ratio: '100%',
+          subscribeDate: '2017-02-02'
+        }]
+      }, {
+        id: 5,
+        name: '周瑾',
+        certificate: '身份证',
+        IDNumber: '839522198809012901',
+        amount: '￥5,000.00',
+        count: 1,
+        products: [{
+          name: '恒耀稳享5029期',
+          amount: '￥5,000.00',
+          ratio: '100%',
+          subscribeDate: '2017-02-02'
+        }]
+      }, {
+        id: 6,
+        name: '夏欢',
+        certificate: '身份证',
+        IDNumber: '494112198809019405',
+        amount: '￥190,000.00',
+        count: 1,
+        products: [{
+          name: '恒耀稳享5029期',
+          amount: '￥190,000.00',
+          ratio: '100%',
+          subscribeDate: '2017-02-02'
         }]
       }]
     }
