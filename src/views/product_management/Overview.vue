@@ -56,352 +56,207 @@
         //-   | 条已过期
       .ov-todo-content
         .ov-content-title
-          el-tabs(type="border-card")
-            el-tab-pane.jd-bg
+          el-tabs(v-model='tab',type="border-card",@tab-click="tabClick")
+            el-tab-pane.jd-bg(name="first")
               a(slot="label")
                 img(src="../../assets/images/ov-jd.png")
                 span 2
               .ov-content-table
                 table.ov-table-y
                   tbody
-                    tr.first_tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝a
+                    tr.first_tr(v-for="filterProduct of filterProducts")
+                      td.first_td(width="200") {{filterProduct.name}}
                       td
                         table.ov-table-n
                           tbody
-                            tr.first_tr
-                              td.ov-table-zj 资金
+                            tr.first_tr(v-for="type in filterProduct.type")
+                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
                               td
-                                .afp 申购数据已更新
-                                .redeem 赎回数据已更新
+                                .afp(v-for="state of type.state") {{state}}
+                                //- .redeem 赎回数据已更新
                               td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
+                                .gs(v-for="company in type.company") {{company}}
                               td
-                                i.icon-batonx.icon-brackets
-                              td.afp-num  {{183984024 | ktCurrency}}
+                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                //- .redeem-num {{16200234 | ktCurrency}}
+                              td(style="text-align:center",width="50")
+                                i.icon-batonx.icon-brackets(v-if="type.boole")
+                              td.afp-num  {{type.Surplus | ktCurrency}}
                               td
-                                .in-approval
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="false") 已执行
-                                .unexecuted.redeem-num(v-if="false") 待执行
+                                .in-approval(v-for="stated in type.stated")
+                                  span(:class="stated | filterColor") {{stated}}
+                                  i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
+                                //- .executed.afp-num(v-if="false") 已执行
+                                //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span(@click="findDialog()") 操作
+                                  span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog()") 操作
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
-                    tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝b
-                      td
-                        table.ov-table-n
-                          tbody
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
-            el-tab-pane
+                                  span(@click="findDialog(type,be=false)") 操作
+                            //- tr
+                            //-   td.ov-table-zc 资产
+                            //-   td
+                            //-     .afp 申购广发货币基金
+                            //-     .redeem 卖出15北京城投债
+                            //-   td
+                            //-     .afp-num {{200184258 | ktCurrency}}
+                            //-     .redeem-num {{16200234 | ktCurrency}}
+                            //-   td
+                            //-     i
+                            //-   td
+                            //-   td
+                            //-     .in-approval(v-if="false")
+                            //-       span 交款审批中
+                            //-       i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
+                            //-     .executed.afp-num(v-if="true") 已执行
+                            //-     .unexecuted.redeem-num(v-if="true") 待执行
+                            //-   td.afp 最晚明日12：00执行
+                            //-   td.ov-table-last-td
+                            //-     .n-operation
+                            //-       span(@click="assetsDialog()") 操作
+                            //-     .y-operation
+                            //-       span(@click="assetsDialog()") 操作
+                    //- tr
+                    //-   td.first_td(width="200") 京东活期理财计划丰银宝b
+                    //-   td
+                    //-     table.ov-table-n
+                    //-       tbody
+                    //-         tr
+                    //-           td.ov-table-zc 资产
+                    //-           td
+                    //-             .afp 申购广发货币基金
+                    //-             .redeem 卖出15北京城投债
+                    //-           td
+                    //-             .afp-num {{200184258 | ktCurrency}}
+                    //-             .redeem-num {{16200234 | ktCurrency}}
+                    //-           td
+                    //-             i
+                    //-           td
+                    //-           td
+                    //-             .in-approval(v-if="false")
+                    //-               span 交款审批中
+                    //-               i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
+                    //-             .executed.afp-num(v-if="true") 已执行
+                    //-             .unexecuted.redeem-num(v-if="true") 待执行
+                    //-           td.afp 最晚明日12：00执行
+                    //-           td.ov-table-last-td
+                    //-             .n-operation
+                    //-               span(@click="assetsDialog()") 操作
+                    //-             .y-operation
+                    //-               span(@click="assetsDialog()") 操作
+            el-tab-pane(name="second")
               a(slot="label")
                 img(src="../../assets/images/ov-tc.png")
                 span 2
               .ov-content-table
                 table.ov-table-y
                   tbody
-                    tr.first_tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝a
+                    tr.first_tr(v-for="filterProduct of filterProducts")
+                      td.first_td(width="200") {{filterProduct.name}}
                       td
                         table.ov-table-n
                           tbody
-                            tr.first_tr
-                              td.ov-table-zj 资金
+                            tr.first_tr(v-for="type in filterProduct.type")
+                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
                               td
-                                .afp 申购数据已更新
-                                .redeem 赎回数据已更新
+                                .afp(v-for="state of type.state") {{state}}
+                                //- .redeem 赎回数据已更新
                               td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
+                                .gs(v-for="company in type.company") {{company}}
                               td
-                                i.icon-batonx.icon-brackets
-                              td.afp-num  {{183984024 | ktCurrency}}
+                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                //- .redeem-num {{16200234 | ktCurrency}}
+                              td(style="text-align:center",width="50")
+                                i.icon-batonx.icon-brackets(v-if="type.boole")
+                              td.afp-num  {{type.Surplus | ktCurrency}}
                               td
-                                .in-approval
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="false") 已执行
-                                .unexecuted.redeem-num(v-if="false") 待执行
+                                .in-approval(v-for="stated in type.stated")
+                                  span(:class="stated | filterColor") {{stated}}
+                                  i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
+                                //- .executed.afp-num(v-if="false") 已执行
+                                //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span(@click="findDialog()") 操作
+                                  span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog()") 操作
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
-                    tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝b
-                      td
-                        table.ov-table-n
-                          tbody
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
+                                  span(@click="findDialog(type,be=false)") 操作
 
-            el-tab-pane
+            el-tab-pane(name="third")
               a(slot="label")
                 img(src="../../assets/images/ov-tn.png")
                 span 2
               .ov-content-table
                 table.ov-table-y
                   tbody
-                    tr.first_tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝a
+                    tr.first_tr(v-for="filterProduct of filterProducts")
+                      td.first_td(width="200") {{filterProduct.name}}
                       td
                         table.ov-table-n
                           tbody
-                            tr.first_tr
-                              td.ov-table-zj 资金
+                            tr.first_tr(v-for="type in filterProduct.type")
+                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
                               td
-                                .afp 申购数据已更新
-                                .redeem 赎回数据已更新
+                                .afp(v-for="state of type.state") {{state}}
+                                //- .redeem 赎回数据已更新
                               td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
+                                .gs(v-for="company in type.company") {{company}}
                               td
-                                i.icon-batonx.icon-brackets
-                              td.afp-num  {{183984024 | ktCurrency}}
+                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                //- .redeem-num {{16200234 | ktCurrency}}
+                              td(style="text-align:center",width="50")
+                                i.icon-batonx.icon-brackets(v-if="type.boole")
+                              td.afp-num  {{type.Surplus | ktCurrency}}
                               td
-                                .in-approval
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="false") 已执行
-                                .unexecuted.redeem-num(v-if="false") 待执行
+                                .in-approval(v-for="stated in type.stated")
+                                  span(:class="stated | filterColor") {{stated}}
+                                  i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
+                                //- .executed.afp-num(v-if="false") 已执行
+                                //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span(@click="findDialog()") 操作
+                                  span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog()") 操作
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
-                    tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝b
-                      td
-                        table.ov-table-n
-                          tbody
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
-            el-tab-pane
+                                  span(@click="findDialog(type,be=false)") 操作
+            el-tab-pane(name="fourth")
               a(slot="label")
                 img(src="../../assets/images/ov-ncf.png")
                 span 2
               .ov-content-table
                 table.ov-table-y
                   tbody
-                    tr.first_tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝a
+                    tr.first_tr(v-for="filterProduct of filterProducts")
+                      td.first_td(width="200") {{filterProduct.name}}
                       td
                         table.ov-table-n
                           tbody
-                            tr.first_tr
-                              td.ov-table-zj 资金
+                            tr.first_tr(v-for="type in filterProduct.type")
+                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
                               td
-                                .afp 申购数据已更新
-                                .redeem 赎回数据已更新
+                                .afp(v-for="state of type.state") {{state}}
+                                //- .redeem 赎回数据已更新
                               td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
+                                .gs(v-for="company in type.company") {{company}}
                               td
-                                i.icon-batonx.icon-brackets
-                              td.afp-num  {{183984024 | ktCurrency}}
+                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                //- .redeem-num {{16200234 | ktCurrency}}
+                              td(style="text-align:center",width="50")
+                                i.icon-batonx.icon-brackets(v-if="type.boole")
+                              td.afp-num  {{type.Surplus | ktCurrency}}
                               td
-                                .in-approval
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="false") 已执行
-                                .unexecuted.redeem-num(v-if="false") 待执行
+                                .in-approval(v-for="stated in type.stated")
+                                  span(:class="stated | filterColor") {{stated}}
+                                  i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
+                                //- .executed.afp-num(v-if="false") 已执行
+                                //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 最晚明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span(@click="findDialog()") 操作
+                                  span(@click="findDialog(type,boole=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog()") 操作
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
-                    tr
-                      td.first_td(width="200") 京东活期理财计划丰银宝b
-                      td
-                        table.ov-table-n
-                          tbody
-                            tr
-                              td.ov-table-zc 资产
-                              td
-                                .afp 申购广发货币基金
-                                .redeem 卖出15北京城投债
-                              td
-                                .afp-num {{200184258 | ktCurrency}}
-                                .redeem-num {{16200234 | ktCurrency}}
-                              td
-                                i
-                              td
-                              td
-                                .in-approval(v-if="false")
-                                  span 交款审批中
-                                  i.icon-batonx.icon-shenpi
-                                .executed.afp-num(v-if="true") 已执行
-                                .unexecuted.redeem-num(v-if="true") 待执行
-                              td.afp 最晚明日12：00执行
-                              td.ov-table-last-td
-                                .n-operation
-                                  span(@click="assetsDialog()") 操作
-                                .y-operation
-                                  span(@click="assetsDialog()") 操作
+                                  span(@click="findDialog(type,boole=false)") 操作
     .ov-remind
       h3 提醒
       .ov-remind-table
@@ -459,7 +314,7 @@
           .calender-cell.fl  周六
         .calendar-bottom
           .calendar-bottom-y.fl(v-for="date in dates")
-            .calendar-bottom-n(@click="findCalendar(date.tableDatas)")
+            .calendar-bottom-n(@click="findCalendar(date)")
               .calendar-num {{date.date}}
               .calendar-table
                 table
@@ -478,8 +333,13 @@ import CalendarDialog from '@/components/CalendarDialog.vue'
 import AssetDialog from '@/components/AssetDialog.vue'
 import KtPieChart from '@/components/PieEchart'
 import ProductDialog from '@/components/ProductDialog.vue'
-
+import exMixin from '@/common/mixin.js'
+// import moment from 'moment'
+import {
+  filter
+} from 'lodash'
 export default {
+  mixins: [exMixin],
   components: {
     KtPieChart,
     CalendarDialog,
@@ -515,7 +375,13 @@ export default {
   //     return weeks
   //   }
   //   },
-
+  computed: {
+    filterProducts() {
+      return filter(this.needDatas, v => {
+        return this.filter.id === v.id
+      })
+    }
+  },
   methods: {
     toDetail(str) {
       this.$router.push({
@@ -528,31 +394,177 @@ export default {
         }
       })
     },
-    findDialog() {
-      this.$refs.productDialog.showDialog()
+    findDialog(data, boole) {
+      this.$refs.productDialog.showDialog(data, boole)
     },
     findCalendar(data) {
       // this.calendardatas = data
       this.$refs.calendarDialog.lookDialog(data)
     },
-    assetsDialog() {
-      this.$refs.assetDialog.showDialog()
-    },
+    // assetsDialog(data, boole) {
+    //   this.$refs.assetDialog.showDialog(data, boole)
+    // },
     closeRemarks() {
       this.isclose = false
+    },
+    tabClick(tab) {
+      if (tab.name === 'first') {
+        this.filter.id = 0
+      } else if (tab.name === 'second') {
+        this.filter.id = 1
+      } else if (tab.name === 'third') {
+        this.filter.id = 2
+      } else {
+        this.filter.id = 3
+      }
     }
   },
 
   data() {
     return {
+      tab: 'first',
+      filter: {
+        id: 0
+      },
       // calendardatas: null,
       dialogShow: false,
       year: 2017,
       moment: 5,
       isclose: true,
-      dates: [
-        {
-          date: '31'
+      needDatas: [{
+        name: '丰银宝A',
+        id: 0,
+        type: [{
+          productName: '丰银宝A',
+          assetType: '资金',
+          state: ['已更新', '已更新'],
+          company: [],
+          accounts: [1235325236, 435346632],
+          Surplus: 799978640,
+          boole: true,
+          stated: ['审批中']
+        }, {
+          productName: '丰银宝A',
+          assetType: '资产',
+          state: ['申购', '赎回'],
+          company: ['广发货币基金', '天弘余额宝'],
+          accounts: [34573477, 484456825],
+          Surplus: '',
+          stated: ['待执行', '已执行']
+        }]
+      }, {
+        name: '丰银宝B',
+        id: 0,
+        type: [{
+          productName: '丰银宝B',
+          assetType: '资产',
+          state: ['买入', '赎回'],
+          company: ['宝信国际ABS集合信托', '广发货币基金'],
+          accounts: [2343526536, 35434546],
+          Surplus: '',
+          stated: ['已执行', '待执行']
+        }]
+      }, {
+        name: '甜橙宝',
+        id: 1,
+        type: [{
+          productName: '甜橙宝',
+          assetType: '资金',
+          state: ['已更新', '未更新'],
+          company: [],
+          accounts: [124535236, '-'],
+          Surplus: '-',
+          stated: ['待执行']
+        }, {
+          productName: '甜橙宝',
+          assetType: '资产',
+          state: ['申购', '赎回'],
+          company: ['天弘余额宝', '易方达货币基金'],
+          accounts: [3467573477, 2484456825],
+          Surplus: '',
+          stated: ['待执行', '已执行']
+        }]
+      }, {
+        name: '甜橙定期尊享3001',
+        id: 1,
+        type: [{
+          productName: '甜橙定期尊享3001',
+          assetType: '资产',
+          state: ['买入'],
+          company: ['天津旭达过桥资管计划1号'],
+          accounts: [8565858768],
+          Surplus: '',
+          stated: ['审批中']
+        }]
+      }, {
+        name: '途牛灵活宝',
+        id: 2,
+        type: [{
+          productName: '途牛灵活宝',
+          assetType: '资金',
+          state: ['已更新', '已更新'],
+          company: [],
+          boole: true,
+          accounts: [7454352636, 9674573456],
+          Surplus: 2220220820,
+          stated: ['已执行']
+        }, {
+          productName: '途牛灵活宝',
+          assetType: '资产',
+          state: ['申购', '赎回'],
+          company: ['盛京银行协议存款', '华夏货币基金'],
+          accounts: [34573477, 484456825],
+          Surplus: '',
+          stated: ['审批中', '审批中']
+        }]
+      }, {
+        name: '牛稳赚3号理财计划',
+        id: 2,
+        type: [{
+          productName: '牛稳赚3号理财计划',
+          assetType: '资产',
+          state: ['赎回'],
+          company: ['广发货币基金'],
+          accounts: [35434546],
+          Surplus: '',
+          stated: ['待执行']
+        }]
+      }, {
+        name: '财富变现通',
+        id: 3,
+        type: [{
+          productName: '财富变现通',
+          assetType: '资金',
+          state: ['未更新', '已更新'],
+          company: [],
+          accounts: ['-', 3743536632],
+          Surplus: '-',
+          stated: ['待执行']
+        }, {
+          productName: '财富变现通',
+          assetType: '资产',
+          state: ['申购', '赎回'],
+          company: ['天弘余额宝', '广发货币基金'],
+          accounts: [34567347, 5844576825],
+          Surplus: '',
+          stated: ['待执行', '已执行']
+        }]
+      }, {
+        name: '360聚财88期',
+        id: 3,
+        type: [{
+          productName: '360聚财88期',
+          assetType: '资产',
+          state: ['到期', '买入'],
+          company: ['广西中小担-象翌融资信托计划3号', '易方达货币基金'],
+          accounts: [243526536, 65434546],
+          Surplus: '',
+          stated: ['审批中', '审批中']
+        }]
+      }],
+      dates: [{
+        date: '31',
+        time: '5月22日' + '星期日'
           // tableDatas: [
           //   {
           //     state: '发行',
@@ -609,238 +621,213 @@ export default {
           //     }]
           //   }
           // ]
-        },
-        {
-          date: '1',
-          tableDatas: [
-            {
-              state: '发行',
-              num: '1',
-              datas: [{
-                name: '智鑫2号”理财计划',
-                amount: '￥123，850，01.91',
-                platform: '京东金服'
-              }]
-            },
-            {
-              state: '到期',
-              num: '1',
-              datas: [{
-                name: '凤溢盈-PHZL-6个月',
-                amount: '￥123，850.1',
-                platform: '美易理财'
-              }]
-            },
-            {
-              state: '开放',
-              num: '1',
-              datas: [{
-                name: '万惠金-月月尊-11552',
-                amount: '',
-                platform: '万达财富'
-              }]
-            },
-            {
-              state: '提费',
-              num: '1',
-              datas: [{
-                name: '美信宝-粤盈6期4号',
-                amount: '￥910，90',
-                platform: '美易理财'
-              }]
-            },
-            {
-              state: '付息',
-              num: '2',
-              datas: [{
-                name: '财富赢-普惠235A期',
-                amount: '￥1231',
-                platform: ' 绿地金服'
-              }, {
-                name: '海信宝587期21-270',
-                amount: '￥123，850，01.91',
-                platform: '聚宝汇'
-              }]
-            }
-          ]
-        },
-        {
-          date: '2',
-          tableDatas: [
-            {
-              state: '发行',
-              num: '1',
-              datas: [{
-                name: '智鑫2号”理财计划',
-                amount: '￥123，850',
-                platform: '京东金服'
-              }]
-            },
-            {
-              state: '到期',
-              num: '2',
-              datas: [{
-                name: '凤溢盈-PHZL-6个月',
-                amount: '￥123，891',
-                platform: '美易理财'
-              }, {
-                name: '凤溢盈-PHZL-12个月',
-                amount: '￥850，01.91',
-                platform: '苏宁金融'
-              }]
-            },
-            {
-              state: '提费',
-              num: '1',
-              datas: [{
-                name: '美信宝-粤盈6期4号',
-                amount: '￥123，8501',
-                platform: '美易理财'
-              }]
-            },
-            {
-              state: '付息',
-              num: '2',
-              datas: [{
-                name: '财富赢-普惠235A期',
-                amount: '￥1',
-                platform: ' 绿地金服'
-              }, {
-                name: '海信宝587期21-270',
-                amount: '￥123，85',
-                platform: '聚宝汇'
-              }]
-            },
-            {
-              state: '试算',
-              num: '1',
-              datas: [{
-                name: '京禾宝”理财计划',
-                amount: '￥1201.91',
-                platform: ' 途牛金服'
-              }]
-            }
-          ]
-        },
-        {
-          date: '3',
-          tableDatas: [
-            {
-              state: '发行',
-              num: '1',
-              datas: [{
-                name: '智鑫2号”理财计划',
-                amount: '￥1230，01.91',
-                platform: '京东金服'
-              }]
-            },
-            {
-              state: '到期',
-              num: '2',
-              datas: [{
-                name: '凤溢盈-PHZL-6个月',
-                amount: '￥123.91',
-                platform: '美易理财'
-              }, {
-                name: '凤溢盈-PHZL-12个月',
-                amount: '￥850，01.91',
-                platform: '美易理财'
-              }]
-            },
-            {
-              state: '开放',
-              num: '1',
-              datas: [{
-                name: '万惠金-月月尊-11552',
-                amount: '￥123，81',
-                platform: '万达财富'
-              }]
-            }
-          ]
-        },
-        {
-          date: '4',
-          tableDatas: [
-            {
-              state: '开放',
-              num: '1',
-              datas: [{
-                name: '万惠金-月月尊-11552',
-                amount: '￥1201.91',
-                platform: '万达财富'
-              }]
-            },
-            {
-              state: '提费',
-              num: '1',
-              datas: [{
-                name: '美信宝-粤盈6期4号',
-                amount: '￥12391',
-                platform: '美易理财'
-              }]
-            },
-            {
-              state: '付息',
-              num: '2',
-              datas: [{
-                name: '财富赢-普惠235A期',
-                amount: '￥12391',
-                platform: ' 绿地金服'
-              }, {
-                name: '海信宝587期21-270',
-                amount: '￥121',
-                platform: '聚宝汇'
-              }]
-            },
-            {
-              state: '试算',
-              num: '1',
-              datas: [{
-                name: '京禾宝”理财计划',
-                amount: '￥1291',
-                platform: ' 途牛金服'
-              }]
-            }
-          ]
-        },
-        {
-          date: '5',
-          tableDatas: [
-            {
-              state: '发行',
-              num: '1',
-              datas: [{
-                name: '智鑫2号”理财计划',
-                amount: '￥1232321',
-                platform: '京东金服'
-              }]
-            },
-            {
-              state: '付息',
-              num: '2',
-              datas: [{
-                name: '财富赢-普惠235A期',
-                amount: '￥482834',
-                platform: ' 绿地金服'
-              }, {
-                name: '海信宝587期21-270',
-                amount: '￥9495030',
-                platform: '聚宝汇'
-              }]
-            },
-            {
-              state: '试算',
-              num: '1',
-              datas: [{
-                name: '京禾宝”理财计划',
-                amount: '￥2343434',
-                platform: ' 途牛金服'
-              }]
-            }
-          ]
-        },
-        {
-          date: '6'
+      }, {
+        date: '1',
+        time: '5月23日' + '星期一',
+        tableDatas: [{
+          state: '发行',
+          num: '1',
+          datas: [{
+            name: '智鑫2号”理财计划',
+            amount: '￥123，850，01.91',
+            platform: '京东金服'
+          }]
+        }, {
+          state: '到期',
+          num: '1',
+          datas: [{
+            name: '凤溢盈-PHZL-6个月',
+            amount: '￥123，850.1',
+            platform: '美易理财'
+          }]
+        }, {
+          state: '开放',
+          num: '1',
+          datas: [{
+            name: '万惠金-月月尊-11552',
+            amount: '',
+            platform: '万达财富'
+          }]
+        }, {
+          state: '提费',
+          num: '1',
+          datas: [{
+            name: '美信宝-粤盈6期4号',
+            amount: '￥910，90',
+            platform: '美易理财'
+          }]
+        }, {
+          state: '付息',
+          num: '2',
+          datas: [{
+            name: '财富赢-普惠235A期',
+            amount: '￥1231',
+            platform: ' 绿地金服'
+          }, {
+            name: '海信宝587期21-270',
+            amount: '￥123，850，01.91',
+            platform: '聚宝汇'
+          }]
+        }]
+      }, {
+        date: '2',
+        time: '5月24日' + '星期二',
+        tableDatas: [{
+          state: '发行',
+          num: '1',
+          datas: [{
+            name: '智鑫2号”理财计划',
+            amount: '￥123，850',
+            platform: '京东金服'
+          }]
+        }, {
+          state: '到期',
+          num: '2',
+          datas: [{
+            name: '凤溢盈-PHZL-6个月',
+            amount: '￥123，891',
+            platform: '美易理财'
+          }, {
+            name: '凤溢盈-PHZL-12个月',
+            amount: '￥850，01.91',
+            platform: '苏宁金融'
+          }]
+        }, {
+          state: '提费',
+          num: '1',
+          datas: [{
+            name: '美信宝-粤盈6期4号',
+            amount: '￥123，8501',
+            platform: '美易理财'
+          }]
+        }, {
+          state: '付息',
+          num: '2',
+          datas: [{
+            name: '财富赢-普惠235A期',
+            amount: '￥1',
+            platform: ' 绿地金服'
+          }, {
+            name: '海信宝587期21-270',
+            amount: '￥123，85',
+            platform: '聚宝汇'
+          }]
+        }, {
+          state: '试算',
+          num: '1',
+          datas: [{
+            name: '京禾宝”理财计划',
+            amount: '￥1201.91',
+            platform: ' 途牛金服'
+          }]
+        }]
+      }, {
+        date: '3',
+        time: '5月25日' + '星期三',
+        tableDatas: [{
+          state: '发行',
+          num: '1',
+          datas: [{
+            name: '智鑫2号”理财计划',
+            amount: '￥1230，01.91',
+            platform: '京东金服'
+          }]
+        }, {
+          state: '到期',
+          num: '2',
+          datas: [{
+            name: '凤溢盈-PHZL-6个月',
+            amount: '￥123.91',
+            platform: '美易理财'
+          }, {
+            name: '凤溢盈-PHZL-12个月',
+            amount: '￥850，01.91',
+            platform: '美易理财'
+          }]
+        }, {
+          state: '开放',
+          num: '1',
+          datas: [{
+            name: '万惠金-月月尊-11552',
+            amount: '￥123，81',
+            platform: '万达财富'
+          }]
+        }]
+      }, {
+        date: '4',
+        time: '5月26日' + '星期四',
+        tableDatas: [{
+          state: '开放',
+          num: '1',
+          datas: [{
+            name: '万惠金-月月尊-11552',
+            amount: '￥1201.91',
+            platform: '万达财富'
+          }]
+        }, {
+          state: '提费',
+          num: '1',
+          datas: [{
+            name: '美信宝-粤盈6期4号',
+            amount: '￥12391',
+            platform: '美易理财'
+          }]
+        }, {
+          state: '付息',
+          num: '2',
+          datas: [{
+            name: '财富赢-普惠235A期',
+            amount: '￥12391',
+            platform: ' 绿地金服'
+          }, {
+            name: '海信宝587期21-270',
+            amount: '￥121',
+            platform: '聚宝汇'
+          }]
+        }, {
+          state: '试算',
+          num: '1',
+          datas: [{
+            name: '京禾宝”理财计划',
+            amount: '￥1291',
+            platform: ' 途牛金服'
+          }]
+        }]
+      }, {
+        date: '5',
+        time: '5月27日' + '星期五',
+        tableDatas: [{
+          state: '发行',
+          num: '1',
+          datas: [{
+            name: '智鑫2号”理财计划',
+            amount: '￥1232321',
+            platform: '京东金服'
+          }]
+        }, {
+          state: '付息',
+          num: '2',
+          datas: [{
+            name: '财富赢-普惠235A期',
+            amount: '￥482834',
+            platform: ' 绿地金服'
+          }, {
+            name: '海信宝587期21-270',
+            amount: '￥9495030',
+            platform: '聚宝汇'
+          }]
+        }, {
+          state: '试算',
+          num: '1',
+          datas: [{
+            name: '京禾宝”理财计划',
+            amount: '￥2343434',
+            platform: ' 途牛金服'
+          }]
+        }]
+      }, {
+        date: '6',
+        time: '5月28日' + '星期六'
           // tableDatas: [
           //   {
           //     state: '发行',
@@ -897,8 +884,7 @@ export default {
           //     }]
           //   }
           // ]
-        }
-      ],
+      }],
       pieEchartOption: {
         legend: {
           data: [
@@ -986,6 +972,9 @@ export default {
   }
   .afp-num {
     color: #e98da4;
+    &:last-child{
+      color:#82c5aa;
+    }
   }
   .redeem-num {
     color: #82c5aa;
@@ -1098,6 +1087,9 @@ export default {
       .ov-content-table {
         .first_tr {
           border-bottom: 1px solid #f3f6f8;
+          &:last-child{
+            border:none;
+          }
         }
         .first_td {
           padding-left: 20px;
@@ -1120,10 +1112,10 @@ export default {
             font-size: 25px;
             color: #d8dadd;
           }
-          .ov-table-zj {
+          .capitalColor {
             color: #f55923;
           }
-          .ov-table-zc {
+          .assetColor {
             color: #1f98d9;
           }
           .afp,
@@ -1167,7 +1159,7 @@ export default {
           font-size: 13px;
           color: #595f67;
           font-weight: bold;
-          padding-left:15px;
+          padding-left: 15px;
         }
         tr:hover {
           background: #f3f6f8;
@@ -1255,7 +1247,7 @@ export default {
               }
               .td-right {
                 text-align: right;
-                color:#e85b51;
+                color: #e85b51;
               }
             }
           }
@@ -1264,9 +1256,16 @@ export default {
     }
   }
 }
-
 .jd-bg {
   border-radius: 5px 0 0 0;
 }
-
+.waitC {
+      color: #eb7c72;
+    }
+.ok1C {
+  color: #18b8ba;
+}
+.ok2C {
+  color: #538cc0;
+}
 </style>

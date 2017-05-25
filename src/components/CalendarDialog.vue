@@ -1,6 +1,6 @@
 <template lang="pug">
   .calendar-dialog
-    el-dialog(title="2月2日星期四 日历详情",v-model="visible")
+    el-dialog(:title="time + '日历详情' ",v-model="visible")
       .unified-style(v-for="calendarData in calendarDatas")
         .unified-title {{calendarData.state}}
           .unified-num {{calendarData.num + '条'}}
@@ -22,7 +22,8 @@ export default {
     return {
       value: '',
       visible: false,
-      calendarDatas: null
+      calendarDatas: null,
+      time: ''
       // calendarDatas: [{
       //   title: '发行',
       //   num: '2',
@@ -104,7 +105,9 @@ export default {
   methods: {
     lookDialog(data) {
       this.visible = true
-      this.calendarDatas = data
+      this.time = data.time
+      console.log(data.time)
+      this.calendarDatas = data.tableDatas
     },
     goProductDetail(data) {
       this.$router.push({

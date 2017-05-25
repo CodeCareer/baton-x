@@ -1,6 +1,6 @@
 <template lang="pug">
   .product-asset-dialog
-    el-dialog(title="天津旭达资产管理项目",v-model="visible")
+    el-dialog(:title="dialogData.productName",v-model="visible")
       el-form
         .public-asset-dialog-body
           .product-mes
@@ -92,7 +92,9 @@
 import {
   Form
 } from 'element-ui'
-
+import {
+  merge
+} from 'lodash'
 export default {
   props: {
     static: false // 是否只用来展示当前状态
@@ -103,7 +105,9 @@ export default {
   },
 
   methods: {
-    showDialog() {
+    showDialog(data, boole) {
+      console.log('1111')
+      this.dialogData = merge({}, data)
       this.visible = true
     },
     goEaa() {
@@ -116,7 +120,8 @@ export default {
 
   data() {
     return {
-      visible: false
+      visible: false,
+      dialogData: {}
     }
   }
 }

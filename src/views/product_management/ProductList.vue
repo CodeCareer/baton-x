@@ -142,7 +142,19 @@ export default {
       Message.info('测试账号不支持此功能！')
     },
     tabClick(tab, event) {
-      console.log(tab, event)
+      if (tab.name === 'first') {
+        this.filter.id = null
+        console.log(tab.name + this.filter.id)
+      } else if (tab.name === 'second') {
+        this.filter.id = 1
+        console.log(tab.name)
+      } else if (tab.name === 'third') {
+        this.filter.id = 2
+        console.log(tab.name)
+      } else {
+        this.filter.id = 3
+        console.log(tab.name)
+      }
     },
     searchFilter(index) {
       this.productTypes[index].defaultColor = true
@@ -181,11 +193,12 @@ export default {
         schedule,
         state,
         platform,
-        name
+        name,
+        id
       } = this.filter
 
       return filter(this.tableData, v => {
-        return (productType === v.productType || productType === '全部') && (schedule === v.schedule || schedule === '全部') && (state === v.state || state === '全部') && ~v.name.indexOf(name) && (platform === v.platform || platform === '全部')
+        return (productType === v.productType || productType === '全部') && (schedule === v.schedule || schedule === '全部') && (state === v.state || state === '全部') && ~v.name.indexOf(name) && (platform === v.platforms || platform === '全部') && (!id || id === v.id)
       })
     }
   },
@@ -198,7 +211,8 @@ export default {
         schedule: '全部',
         state: '全部',
         platform: '全部',
-        name: ''
+        name: '',
+        id: null
       },
       page: {
         current: 1,
@@ -278,6 +292,7 @@ export default {
         status: ['待提交'],
         current: false,
         type: 0,
+        id: 2,
         productType: '活期',
         schedule: '待发布',
         state: '待执行',
@@ -292,6 +307,7 @@ export default {
         platforms: '恒大金服',
         status: ['待确认'],
         type: 0,
+        id: 2,
         productType: '定期',
         schedule: '已发布',
         state: '已执行',
@@ -306,6 +322,7 @@ export default {
         platforms: '恒大金服',
         status: [],
         type: 1,
+        id: 1,
         current: true,
         productType: '定期',
         schedule: '已发布',
@@ -322,6 +339,7 @@ export default {
         status: ['待发布'],
         current: false,
         type: 0,
+        id: 2,
         productType: '定期',
         schedule: '已发布',
         state: '已执行',
@@ -336,6 +354,7 @@ export default {
         platforms: '途牛金服',
         status: ['销售完成', '待执行'],
         type: 0,
+        id: 1,
         productType: '',
         schedule: '',
         state: '',
@@ -350,6 +369,7 @@ export default {
         platforms: '恒大金服',
         status: ['已确认确认书'],
         type: 0,
+        id: 2,
         productType: '',
         schedule: '',
         state: '',
@@ -364,6 +384,7 @@ export default {
         platforms: '恒大金服',
         status: ['待发布'],
         type: 0,
+        id: 2,
         productType: '',
         schedule: '',
         state: '',
@@ -378,6 +399,7 @@ export default {
         platforms: '恒大金服',
         status: ['已发布'],
         type: 0,
+        id: 2,
         productType: '',
         schedule: '',
         state: '',
@@ -393,6 +415,7 @@ export default {
         status: ['销售完成', '待执行'],
         current: false,
         type: 0,
+        id: 1,
         productType: '',
         schedule: '',
         state: '',
@@ -407,6 +430,7 @@ export default {
         platforms: '途牛金服',
         status: ['已确认确认书'],
         type: 0,
+        id: 2,
         productType: '',
         schedule: '',
         state: '',
@@ -421,6 +445,7 @@ export default {
         platforms: '恒大金服',
         status: ['已确认确认书'],
         type: 0,
+        id: 2,
         productType: '',
         schedule: '',
         state: '',
@@ -435,6 +460,7 @@ export default {
         platforms: '京东金融',
         status: ['已执行'],
         type: 1,
+        id: 1,
         current: true,
         productType: '',
         schedule: '',
@@ -450,6 +476,7 @@ export default {
         platforms: '京东金融',
         status: ['已执行'],
         type: 1,
+        id: 1,
         current: true,
         productType: '',
         schedule: '',
@@ -478,7 +505,7 @@ export default {
       // padding: 10px 0;
       overflow: hidden;
       .filter-top-left {
-       padding:10px 0;
+        padding: 10px 0;
       }
     }
     .filters-bottom {
@@ -498,7 +525,7 @@ export default {
   }
   .table-container {
     margin-top: 20px;
-    overflow-x:auto;
+    overflow-x: auto;
     .current {
       padding: 0 3px;
       background: #e55a6c;

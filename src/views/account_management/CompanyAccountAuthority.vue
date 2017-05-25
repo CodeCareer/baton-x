@@ -10,7 +10,7 @@
           i.icon-batonx.icon-down(@click="openContent(account)")
           i.icon-batonx.icon-edit(@click="openAccountAuthorityDialog(account)")
           i.icon-batonx.icon-close(@click="deleteAccount(account)")
-      .box-content(v-if="account.type === countName")
+      .box-content(v-if="account.id === countId")
         .authority-table.just-for-show
           .permits-list
             span.title 权限：
@@ -73,10 +73,12 @@ export default {
   },
   methods: {
     openContent(count) {
-      if (count.type === '业务专员类账户') {
-        this.countName = '业务专员类账户'
+      if (count.id === 1) {
+        this.countId = 1
+      } else if (count.id === 2) {
+        this.countId = 2
       } else {
-        this.countName = '市场经理类账户'
+        this.countId = 3
       }
     },
 
@@ -112,7 +114,7 @@ export default {
 
   data() {
     return {
-      countName: '',
+      countId: 1,
       accounts: [{
         collapse: true,
         id: 1,
@@ -262,6 +264,151 @@ export default {
         id: 2,
         collapse: true,
         type: '市场经理类账户',
+        permits: ['查看', '编辑', '删除'],
+        editModules: {
+          checkedList: ['产品信息', '资产信息'],
+          children: [{
+            name: '产品信息',
+            value: '产品信息'
+          }, {
+            name: '资产信息',
+            value: '资产信息'
+          }, {
+            name: '资金账户信息',
+            value: '资金账户信息'
+          }, {
+            name: '审批流程信息',
+            value: '审批流程信息'
+          }, {
+            name: '公司账户信息',
+            value: '公司账户信息'
+          }]
+        },
+        deleteModules: {
+          checkedList: ['产品信息'],
+          children: [{
+            name: '产品信息',
+            value: '产品信息'
+          }, {
+            name: '资产信息',
+            value: '资产信息'
+          }, {
+            name: '资金账户信息',
+            value: '资金账户信息'
+          }, {
+            name: '审批流程信息',
+            value: '审批流程信息'
+          }, {
+            name: '公司账户信息',
+            value: '公司账户信息'
+          }]
+        },
+        checkModules: [{
+          name: '总览页',
+          value: '总览页',
+          checkedList: ['存续金额模块', '占比分析模块', '当前状态模块', '日历模块'],
+          checked: false,
+          indeterminate: true,
+          children: [{
+            name: '存续金额模块',
+            value: '存续金额模块'
+          }, {
+            name: '占比分析模块',
+            value: '占比分析模块'
+          }, {
+            name: '当前状态模块',
+            value: '当前状态模块'
+          }, {
+            name: '日历模块',
+            value: '日历模块'
+          }, {
+            name: '趋势图模块',
+            value: '趋势图模块'
+          }]
+        }, {
+          name: '产品总列表页',
+          value: '产品总列表页',
+          checkedList: [],
+          checked: true,
+          indeterminate: false,
+          children: []
+        }, {
+          name: '登记产品总列表页',
+          value: '登记产品总列表页',
+          checkedList: [],
+          checked: true,
+          indeterminate: false,
+          children: []
+        }, {
+          name: '产品详情页',
+          value: '产品详情页',
+          checkedList: ['附件', '待办事项-资金'],
+          checked: false,
+          indeterminate: true,
+          children: [{
+            name: '附件',
+            value: '附件'
+          }, {
+            name: '待办事项-资金',
+            value: '待办事项-资金'
+          }, {
+            name: ' 待办事项-资产',
+            value: ' 待办事项-资产'
+          }, {
+            name: '持仓详情',
+            value: '持仓详情'
+          }, {
+            name: '客户列表',
+            value: '客户列表'
+          }, {
+            name: '登记产品列表',
+            value: '登记产品列表'
+          }, {
+            name: '费用详情',
+            value: '费用详情'
+          }]
+        }, {
+          name: '资产总列表',
+          value: '资产总列表',
+          checkedList: [],
+          checked: false,
+          indeterminate: false,
+          children: []
+        }, {
+          name: '资产详情页',
+          value: '资产详情页',
+          checkedList: ['持有产品列表', '待办事项'],
+          checked: false,
+          indeterminate: true,
+          children: [{
+            name: '附件',
+            value: '附件'
+          }, {
+            name: '基础信息与备注',
+            value: '基础信息与备注'
+          }, {
+            name: '持有产品列表',
+            value: '持有产品列表'
+          }, {
+            name: '待办事项',
+            value: '待办事项'
+          }, {
+            name: '行情信息',
+            value: '行情信息'
+          }, {
+            name: '平台列表页',
+            value: '平台列表页',
+            children: []
+          }, {
+            name: '客户列表',
+            value: '客户列表',
+            children: []
+          }]
+        }]
+      }, {
+        id: 3,
+        collapse: true,
+        type: '总监类账户',
         permits: ['查看', '编辑', '删除'],
         editModules: {
           checkedList: ['产品信息', '资产信息'],

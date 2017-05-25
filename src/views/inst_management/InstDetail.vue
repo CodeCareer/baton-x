@@ -55,7 +55,7 @@
         el-table-column(property='duration', label='期限')
         el-table-column(property='endDate', label='到期日')
         el-table-column(property='type', label='产品类型')
-      el-pagination(@size-change='pageFirstSizeChange', @current-change='pageChange', :current-page='page.first.current', :page-sizes="page.first.sizes", :page-size="page.first.size", layout='total, prev, pager, next, jumper', :total='products.length')
+      el-pagination(@size-change='pageFirstSizeChange', @current-change='pageChange', :current-page='page.first.current', :page-sizes="page.first.sizes", :page-size="page.first.size", layout='total, prev, pager, next, jumper', :total='productDatas.length')
     .table-container(v-show="tab === 'second'")
       el-table(:data='filterAccounts', style='width: 100%')
         el-table-column(property='name', label='账户名')
@@ -81,10 +81,10 @@ import {
 import {
   updateCrumbs
 } from '@/common/crossers.js'
-
+// import instList from '@/inst_management/instList.vue'
 export default {
   mounted: function() {
-    this.inst.shortName = this.inst.name = this.$route.params.id
+    this.inst.shortName = this.inst.name = this.filter.name = this.$route.params.id
     updateCrumbs.$emit('update-crumbs', [{
       id: 'instName',
       name: this.inst.name
@@ -93,6 +93,7 @@ export default {
   methods: {
     tabClick(tab, event) {
       console.log(tab, event)
+      // console.log(instList.productDatas)
     },
     goDetail(row) {
       this.$router.push({
@@ -127,13 +128,13 @@ export default {
 
   computed: {
     filterProducts() {
-      return filter(this.products, v => {
-        return ~v.name.indexOf(this.filter.name)
+      return filter(this.productDatas, v => {
+        return ~v.platform.indexOf(this.filter.name)
       })
     },
     filterAccounts() {
       return filter(this.accounts, v => {
-        return ~v.name.indexOf(this.filter.name)
+        return ~v.platform.indexOf(this.filter.name)
       })
     }
   },
@@ -166,38 +167,97 @@ export default {
           sizes: [10, 20, 30, 50]
         }
       },
-      products: [{
-        name: '京东丰银宝1号',
+      productDatas: [{
+        name: '恒耀稳享5016期',
         amount: '￥ 25,550,000.11',
         rate: '6.40 %',
         duration: '167天',
         endDate: '2017-03-14',
-        type: '定期'
+        type: '定期',
+        platform: '恒大金服'
       }, {
-        name: '京东丰银宝2号',
+        name: '恒耀稳享1231期',
         amount: '¥ 100,000,203.25',
         rate: '6.50 %',
         duration: '170天',
         endDate: '2017-03-17',
-        type: '定期'
+        type: '定期',
+        platform: '恒大金服'
       }, {
-        name: '京东丰银宝3号',
+        name: '恒耀稳享1023期',
         amount: '¥ 55,330,000.88',
         rate: '6.80 %',
         duration: '182天',
         endDate: '2017-05-20',
-        type: '活期'
+        type: '活期',
+        platform: '恒大金服'
+      }, {
+        name: '普惠金交·牛稳赚4号理财计',
+        amount: '￥ 25,550,000.11',
+        rate: '6.40 %',
+        duration: '167天',
+        endDate: '2017-03-14',
+        type: '定期',
+        platform: '途牛金服'
+      }, {
+        name: '普惠金交·牛稳赚1号理财计',
+        amount: '¥ 100,000,203.25',
+        rate: '6.50 %',
+        duration: '170天',
+        endDate: '2017-03-17',
+        type: '定期',
+        platform: '途牛金服'
+      }, {
+        name: '普惠金交·牛稳赚6号理财计',
+        amount: '¥ 55,330,000.88',
+        rate: '6.80 %',
+        duration: '182天',
+        endDate: '2017-05-20',
+        type: '活期',
+        platform: '途牛金服'
+      }, {
+        name: '丰银宝A',
+        amount: '￥ 25,550,000.11',
+        rate: '6.40 %',
+        duration: '167天',
+        endDate: '2017-03-14',
+        type: '定期',
+        platform: '京东金融'
+      }, {
+        name: '丰银宝B',
+        amount: '¥ 100,000,203.25',
+        rate: '6.50 %',
+        duration: '170天',
+        endDate: '2017-03-17',
+        type: '定期',
+        platform: '京东金融'
+      }, {
+        name: '丰银宝C',
+        amount: '¥ 55,330,000.88',
+        rate: '6.80 %',
+        duration: '182天',
+        endDate: '2017-05-20',
+        type: '活期',
+        platform: '京东金融'
       }],
       accounts: [{
         name: '北京和丰永讯金融信息服务有限公司',
         bankNum: '1109 2037 8610 0201',
         bank: '招商银行股份有限公司北京亚运村支行',
-        type: '募集账户'
+        type: '募集账户',
+        platform: '恒大金服'
       }, {
         name: '京东金融信息服务有限公司',
         bankNum: '2401 1109 9210 321',
         bank: '中国银行股份有限公司三元桥支行',
-        type: '费用账户'
+        type: '费用账户',
+        platform: '京东金服'
+      }, {
+        name: '途牛金融信息有限公司',
+        bankNum: '2401 1109 9210 321',
+        bank: '中国银行股份有限公司三元桥支行',
+        type: '费用账户',
+        platform: '途牛金服'
       }]
     }
   }

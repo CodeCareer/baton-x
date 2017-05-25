@@ -1,6 +1,6 @@
 <template lang="pug">
   .product-asset-dialog
-    el-dialog(title="粤股交丰银宝理财计划B",v-model="visible")
+    el-dialog(:title="dialogData.productName",v-model="visible")
       el-form
         .product-asset-dialog-body
           .product-mes
@@ -22,7 +22,7 @@
           .now-state
             .mes-title
               h4 当前状态
-                span 交款审批中
+                span {{dialogData.stated[0]}}
                 i.icon-batonx.icon-shenpi
             .mes-body
               table
@@ -30,22 +30,22 @@
                   tr
                     th 申购数据：
                     td
-                      span ￥
-                      span.product-rate 200,184,258.00
+                      //- span ￥
+                      span.product-rate {{dialogData.accounts[0] | ktCurrency}}
                     th 已更新
                     td
                   tr
                     th 赎回数据：
                     td
-                      span ￥
-                      span.redeem 245,742.00
+                      //- span ￥
+                      span.redeem {{dialogData.accounts[1] | ktCurrency}}
                     th 已更新
                     td
                   tr
                     th 净申购：
                     td
-                      span ￥
-                      span.product-rate 183,184,258.00
+                      //- span ￥
+                      span.product-rate {{dialogData.Surplus | ktCurrency}}
                     th 已更新
                     td
           .account-info
@@ -83,7 +83,8 @@
                         th 开户行：
                         td 招商银行股份有限公司广州番禹区支行
       .dialog-footer(slot="footer")
-        el-button(type="primary", size="small", @click="goEaa", v-if="!static") 确认审批
+        el-button(type="primary", size="small", @click="goEaa", v-if="!static && disabled") 确认审批
+        el-button(type="primary", size="small", @click="goEaa", v-if="!static && !disabled",disabled="disabled") 确认审批
         el-button(type="gray", size="small", @click="closeDialog", v-if="!static") 驳回
         el-button(type="gray", size="small", @click="closeDialog", v-if="static") 关闭
 </template>
@@ -92,7 +93,9 @@
 import {
   Form
 } from 'element-ui'
-
+import {
+  merge
+} from 'lodash'
 export default {
   props: {
     static: false // 是否只用来展示当前状态
@@ -103,8 +106,10 @@ export default {
   },
 
   methods: {
-    showDialog() {
+    showDialog(data, boole) {
       this.visible = true
+      this.dialogData = merge({}, data)
+      this.disabled = boole
     },
     goEaa() {
       this.visible = false
@@ -116,7 +121,18 @@ export default {
 
   data() {
     return {
-      visible: false
+      visible: false,
+      disabled: '',
+      dialogData: {
+        productName: '丰银宝A',
+        assetType: '资金',
+        state: ['已更新', '已更新'],
+        company: [],
+        accounts: [1235325236, 435346632],
+        Surplus: 799978640,
+        boole: true,
+        stated: ['审批中']
+      }
     }
   }
 }
