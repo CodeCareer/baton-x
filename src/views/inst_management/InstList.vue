@@ -155,37 +155,37 @@ export default {
         type: 1,
         amountRate: '26.3%'
       }, {
-        name: '中信集团',
+        name: '浦发银行',
         amount: '￥13,098,781.00',
         count: 100,
         type: 2,
         amountRate: '18.4%'
       }, {
-        name: '广西中小担保有限公司',
+        name: '光大银行',
         amount: '￥20,231.00',
         count: 80,
         type: 2,
         amountRate: '9.5%'
       }, {
-        name: '武汉新港城建设投资企业',
+        name: '建设银行',
         amount: '￥45,632,98.00',
         count: 70,
         type: 2,
         amountRate: '10.1%'
       }, {
-        name: '创元开发建设投资企业',
+        name: '中国人寿',
         amount: '￥1,381.00',
         count: 100,
         type: 3,
         amountRate: '5.4%'
       }, {
-        name: '宝信国际有限公司',
+        name: '新华保险',
         amount: '￥20,231.00',
         count: 80,
         type: 3,
         amountRate: '26.4%'
       }, {
-        name: '戴森尔金融有限公司',
+        name: '中合担保',
         amount: '￥45,698.00',
         count: 70,
         type: 3,

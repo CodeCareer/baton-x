@@ -8,10 +8,18 @@ let statuColors = {
   '销售完成': 'ok2C',
   '已确认确认书': 'ok2C'
 }
+let amountColors = {
+  '已执行': 'yzx',
+  '未执行': 'wzx',
+  '审批中': 'spz'
+}
 export default {
   filters: {
     filterColor(value) {
       return statuColors[value]
+    },
+    filterAmountColor(value) {
+      return amountColors[value]
     }
   }
 }

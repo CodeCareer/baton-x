@@ -275,20 +275,20 @@ export default {
         }, {
           id: 2,
           editActive: false,
-          textEdit: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
-          text: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
+          textEdit: '今日申购款已到账。',
+          text: '今日申购款已到账。',
           createdAt: new Date()
         }, {
           id: 3,
           editActive: false,
-          textEdit: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
-          text: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
+          textEdit: '今日申购款未到账，预计款项明日到账。',
+          text: '今日申购款未到账，预计款项明日到账。',
           createdAt: new Date()
         }, {
           id: 4,
           editActive: false,
-          textEdit: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
-          text: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
+          textEdit: '今日申购款未到账，预计款项两日后到账。',
+          text: '今日申购款未到账，预计款项两日后到账。',
           createdAt: new Date()
         }],
         attachments: [{

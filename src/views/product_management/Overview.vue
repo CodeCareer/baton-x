@@ -77,7 +77,8 @@
                               td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
                               td(width="150")
-                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                div(v-if="type.assetType !== '资金'", v-for="(account,index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
+                                div(v-if="type.assetType === '资金'", v-for="(account,index) in type.accounts", :class="index === 0 ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
@@ -89,11 +90,16 @@
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 明日12：00执行
-                              td.ov-table-last-td
+                              td(v-if="type.assetType === '资金'").ov-table-last-td
                                 .n-operation
                                   span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="assetsDialog(type,be=false)") 操作
+                                  span(@click="findDialog(type,be=false)") 操作
+                              td(v-else).ov-table-last-td
+                                .n-operation
+                                  span(@click="assetsDialog(type,be=true,id=0)") 操作
+                                .y-operation
+                                  span(@click="assetsDialog(type,be=false,id=1)") 操作
                             //- tr
                             //-   td.ov-table-zc 资产
                             //-   td
@@ -165,7 +171,8 @@
                               td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
                               td(width="150")
-                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                div(v-if="type.assetType !== '资金'", v-for="(account,index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
+                                div(v-if="type.assetType === '资金'", v-for="(account,index) in type.accounts", :class="index === 0 ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
@@ -177,11 +184,16 @@
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 明日12：00执行
-                              td.ov-table-last-td
+                              td(v-if="type.assetType === '资金'").ov-table-last-td
                                 .n-operation
                                   span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="assetsDialog(type,be=false)") 操作
+                                  span(@click="findDialog(type,be=false)") 操作
+                              td(v-else).ov-table-last-td
+                                .n-operation
+                                  span(@click="assetsDialog(type,be=true,id=0)") 操作
+                                .y-operation
+                                  span(@click="assetsDialog(type,be=false,id=1)") 操作
 
             el-tab-pane(name="third")
               a(slot="label")
@@ -203,7 +215,8 @@
                               td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
                               td(width="150")
-                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                div(v-if="type.assetType !== '资金'", v-for="(account,index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
+                                div(v-if="type.assetType === '资金'", v-for="(account,index) in type.accounts", :class="index === 0 ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
@@ -215,11 +228,16 @@
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 明日12：00执行
-                              td.ov-table-last-td
+                              td(v-if="type.assetType === '资金'").ov-table-last-td
                                 .n-operation
                                   span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="assetsDialog(type,be=false)") 操作
+                                  span(@click="findDialog(type,be=false)") 操作
+                              td(v-else).ov-table-last-td
+                                .n-operation
+                                  span(@click="assetsDialog(type,be=true,id=0)") 操作
+                                .y-operation
+                                  span(@click="assetsDialog(type,be=false,id=1)") 操作
             el-tab-pane(name="fourth")
               a(slot="label")
                 img(src="../../assets/images/ov-ncf.png")
@@ -240,7 +258,8 @@
                               td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
                               td(width="150")
-                                .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
+                                div(v-if="type.assetType !== '资金'", v-for="(account,index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
+                                div(v-if="type.assetType === '资金'", v-for="(account,index) in type.accounts", :class="index === 0 ? 'afp-num' : 'gColor'") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
@@ -252,11 +271,16 @@
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
                               td 明日12：00执行
-                              td.ov-table-last-td
+                              td(v-if="type.assetType === '资金'").ov-table-last-td
                                 .n-operation
                                   span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="assetsDialog(type,be=false)") 操作
+                                  span(@click="findDialog(type,be=false)") 操作
+                              td(v-else).ov-table-last-td
+                                .n-operation
+                                  span(@click="assetsDialog(type,be=true,id=0)") 操作
+                                .y-operation
+                                  span(@click="assetsDialog(type,be=false,id=1)") 操作
     .ov-remind
       h3 提醒
       .ov-remind-table
@@ -401,8 +425,8 @@ export default {
       // this.calendardatas = data
       this.$refs.calendarDialog.lookDialog(data)
     },
-    assetsDialog(data, boole) {
-      this.$refs.assetDialog.showDialog(data, boole)
+    assetsDialog(data, boole, id) {
+      this.$refs.assetDialog.showDialog(data, boole, id)
     },
     closeRemarks() {
       this.isclose = false
@@ -972,10 +996,10 @@ export default {
   }
   .afp-num {
     color: #e98da4;
-    &:last-child{
-      color:#82c5aa;
-    }
   }
+  .gColor{
+    color:#82c5aa;
+    }
   .redeem-num {
     color: #82c5aa;
   }

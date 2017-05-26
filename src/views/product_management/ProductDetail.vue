@@ -105,93 +105,78 @@
         .todo(v-if="demo.type === 0")
           table
             tbody
-              tr.first-tr
-                td.first-td-amount 资金
-                td 发行数据已更新
+              tr.first-tr(v-for="type in producttype1")
+                td(:class="[type.assetType === '资金'? 'first-td-amount' : 'first-td-asset ']") {{type.assetType}}
                 td
-                  span ￥
-                  span.amount-color 200,184,258.00
-                td 缴款审批中
-                  i.icon-batonx.icon-shenpi
+                  div(v-for="state in type.state") {{state}}
+                td
+                  div(v-for="company in type.company") {{company}}
+                td
+                  div(v-for="(account, index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'amount-color ' : 'gColor'") {{account | ktCurrency}}
+                  //- span.amount-color 200,184,258.00
+                td
+                  div(v-for="stated in type.stated", :class="stated | filterAmountColor") {{stated}}
+                    i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                 td 最晚明日12：00执行
-                td
+                td(v-if="type.assetType === '资金'")
                   .y-operation
-                    a(@click="productDetail") 操作
-                  .n-operation(v-if="false")
-                    a 操作
-              tr
-                td.first-td-asset 资产
-                td
-                  .asset-buy 申购广发货币基金
-                  .asset-sell 卖出15北京城投债
-                td
-                  .asset-amount
-                    span ￥
-                    span.amount-color 245,742.00
-                  .asset-amount
-                    span ￥
-                    span.amount-color 81,084,134.00
-                td
-                  .already 已执行
-                  .not 未执行
-                td
-                  .state 最晚明日12：00执行
-                  .state 最晚明日12：00执行
-                td
+                    a(@click="productDialog(type,be=true,id=0)") 操作
+                  //- .n-operation
+                  //-   a(@click="productDatail") 操作
+                td(v-else)
                   .y-operation
-                    a(@click="assetDatail") 操作
+                    a(@click="assetDialog(type,be=true,id=1)") 操作
                   .n-operation
-                    a(@click="assetDatail") 操作
+                    a(@click="assetDialog(type,be=false,id=1)") 操作
+              //- tr
+              //-   td.first-td-asset 资产
+              //-   td
+              //-     .asset-buy 申购广发货币基金
+              //-     .asset-sell 卖出15北京城投债
+              //-   td
+              //-     .asset-amount
+              //-       span ￥
+              //-       span.amount-color 245,742.00
+              //-     .asset-amount
+              //-       span ￥
+              //-       span.already 81,084,134.00
+              //-   td
+              //-     .already 已执行
+              //-     .not 未执行
+              //-   td
+              //-     .state 最晚明日12：00执行
+              //-     .state 最晚明日12：00执行
+              //-   td
+              //-     .y-operation
+              //-       a(@click="assetDatail") 操作
+              //-     .n-operation
+              //-       a(@click="assetDatail") 操作
         .todo(v-if="demo.type === 1")
           table
             tbody
-              tr.first-tr
-                td.first-td-amount 资金
+              tr.first-tr(v-for="type in producttype2")
+                td(:class="[type.assetType === '资金'? 'first-td-amount' : 'first-td-asset ']") {{type.assetType}}
                 td
-                  .apply-buy 申购数据已更新
-                  .redeem 赎回数据已更新
+                  div(v-for="state in type.state") {{state}}
                 td
-                  .apply-amount
-                    span ￥
-                    span.amount-color  200,184,258.00
-                  .redeem-amount
-                    span ￥
-                    span.already  16,200,234.00
+                  div(v-for="company in type.company") {{company}}
                 td
-                  span ￥
-                  span.amount-color 183,984,024.00
-                td 缴款审批中
-                  i.icon-batonx.icon-shenpi
+                  div(v-for="(account, index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'amount-color ' : 'gColor'") {{account | ktCurrency}}
+                  //- span.amount-color 200,184,258.00
+                td
+                  div(v-for="stated in type.stated", :class="stated | filterAmountColor") {{stated}}
+                    i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                 td 最晚明日12：00执行
-                td
+                td(v-if="type.assetType === '资金'")
                   .y-operation
-                    a(@click="productDetail") 操作
-                  .n-operation(v-if="false")
-                    a 操作
-              tr
-                td.first-td-asset 资产
-                td
-                  .asset-buy 申购广发货币基金
-                  .asset-sell 卖出15北京城投债
-                td
-                  .asset-amount
-                    span ￥
-                    span.amount-color 245,742.00
-                  .asset-amount
-                    span ￥
-                    span.already 81,084,134.00
-                td
-                td
-                  .already 已执行
-                  .not 未执行
-                td
-                  .state 最晚明日12：00执行
-                  .state 最晚明日12：00执行
-                td
+                    a(@click="productDialog(type,be=true,id=0)") 操作
                   .n-operation
-                    a(@click="assetDatail") 操作
+                    a(@click="productDialog(type,be=false,id=0)") 操作
+                td(v-else)
                   .y-operation
-                    a(@click="assetDatail") 操作
+                    a(@click="assetDialog(type,be=true,id=1)") 操作
+                  .n-operation
+                    a(@click="assetDialog(type,be=false,id=1)") 操作
     .box.box-normal
       .box-header 关键日期
       .box-content
@@ -499,8 +484,8 @@
                 dl
                   dd 流程详情
                   dt  项目组长  →  项目经理  →  项目总监
-    kt-product-dialog(ref="prdialog")
-    kt-asset-dialog(ref="assdialog")
+    kt-product-dialog(ref="productDialog")
+    kt-asset-dialog(ref="assetDialog")
 </template>
 
 <script>
@@ -512,10 +497,11 @@ import KtLineChart from '@/components/LineEchart.vue'
 import KtNoteCard from '@/components/NoteCard.vue'
 import KtProductDialog from '@/components/ProductDialog.vue'
 import KtAssetDialog from '@/components/AssetDialog.vue'
+import exMixin from '@/common/mixin.js'
 import {
   // concat,
   // map,
-  // merge,
+  merge,
   remove,
   uniqueId
 } from 'lodash'
@@ -525,6 +511,7 @@ import {
 // import Vue from 'vue'
 
 export default {
+  mixins: [exMixin],
   components: {
     KtLineChart,
     KtNoteCard,
@@ -532,7 +519,7 @@ export default {
     KtAssetDialog
   },
   mounted: function() {
-    this.demo.name = this.demo.shortName = this.$route.params.id
+    this.demo.name = this.filter.productName = this.demo.shortName = this.$route.params.id
     this.demo.type = +this.$route.query.type || this.demo.type
     updateCrumbs.$emit('update-crumbs', [{
       id: 'assetName',
@@ -594,11 +581,14 @@ export default {
     historyDialog() {
       this.historyVisible = true
     },
-    productDetail() {
-      this.$refs.prdialog.showDialog()
+    productDialog(data, boole, index) {
+      let newData = merge(this.filter, data)
+      console.log(newData)
+      this.$refs.productDialog.showDialog(newData, boole, index)
     },
-    assetDatail() {
-      this.$refs.assdialog.showDialog()
+    assetDialog(data, boole, index) {
+      let newData = merge(this.filter, data)
+      this.$refs.assetDialog.showDialog(newData, boole, index)
     },
     editAsset() {
       this.$router.push({
@@ -680,6 +670,9 @@ export default {
 
   data() {
     return {
+      filter: {
+        productName: ''
+      },
       extractVisible: false,
       historyVisible: false,
       addNoteFocus: false,
@@ -702,22 +695,22 @@ export default {
           id: 2,
           editActive: false,
           remindActive: true,
-          textEdit: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
-          text: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
+          textEdit: '今日申购款已到账。',
+          text: '今日申购款已到账。',
           createdAt: new Date()
         }, {
           id: 3,
           editActive: false,
           remindActive: true,
-          textEdit: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
-          text: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
+          textEdit: '今日申购款未到账，预计款项明日到账。',
+          text: '今日申购款未到账，预计款项明日到账。',
           createdAt: new Date()
         }, {
           id: 4,
           editActive: false,
           remindActive: true,
-          textEdit: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
-          text: '今日申购款未到账，今日利息最终由法务部门决定由京东金融贴息，预计款项两日后到账。',
+          textEdit: '今日申购款未到账，预计款项两日后到账。',
+          text: '今日申购款未到账，预计款项两日后到账。',
           createdAt: new Date()
         }],
         attachments: [{
@@ -830,6 +823,38 @@ export default {
         charge: '京东金融',
         extract: '￥ 117,346.66 ',
         wait: '￥ 185,974.45'
+      }],
+      producttype1: [{
+        assetType: '资金',
+        state: ['已更新'],
+        company: [],
+        accounts: [200184258],
+        Surplus: '',
+        boole: true,
+        stated: ['审批中']
+      }, {
+        assetType: '资产',
+        state: ['申购', '卖出'],
+        company: ['广发货币基金', '15北京城投债'],
+        accounts: [245742, 81084134],
+        Surplus: '',
+        stated: ['已执行', '未执行']
+      }],
+      producttype2: [{
+        assetType: '资金',
+        state: ['申购', '赎回'],
+        company: [],
+        accounts: [200184258, 16200234],
+        Surplus: 183984024,
+        boole: true,
+        stated: ['审批中']
+      }, {
+        assetType: '资产',
+        state: ['申购', '卖出'],
+        company: ['鹏华添利宝货币基金', '小定宝-财富-海航商业控股项目'],
+        accounts: [245742, 81084134],
+        Surplus: '',
+        stated: ['已执行', '未执行']
       }]
     }
   }
@@ -1046,7 +1071,7 @@ export default {
 .todo {
   // padding:15px 0;
   table {
-    table-layout: fixed;
+    // table-layout: fixed;
     width: 100%;
     .first-tr {
       border-bottom: 1px solid #f3f6f8;
@@ -1069,6 +1094,9 @@ export default {
       .amount-color {
         color: #de3569;
       }
+      .gColor{
+        color:#82c5aa;
+      }
       .y-operation {
         padding: 2px 0;
         a {
@@ -1088,10 +1116,10 @@ export default {
           border-radius: 3px;
         }
       }
-      .already {
+      .yzx {
         color: #60b896;
       }
-      .not {
+      .wzx {
         color: #de3569;
       }
     }

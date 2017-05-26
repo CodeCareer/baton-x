@@ -22,18 +22,18 @@
           .now-state
             .mes-title
               h4 当前状态
-                span {{dialogData.stated[0]}}
+                span {{dialogData.stated[id]}}
                 i.icon-batonx.icon-shenpi
             .mes-body
               table
                 tbody
                   tr
-                    th 买入金额：
-                    td
+                    th {{dialogData.state[id]}}
+                    td {{dialogData.company[id]}}
                       //- span ￥
-                      span.product-rate {{dialogData.accounts[0] | ktCurrency}}
-                    th 已更新
+                    th
                     td
+                      span.product-rate {{dialogData.accounts[id] | ktCurrency}}
                   //- tr
                   //-   th 赎回数据：
                   //-   td
@@ -106,9 +106,9 @@ export default {
   },
 
   methods: {
-    showDialog(data, boole) {
-      console.log('1111')
+    showDialog(data, boole, id) {
       this.disabled = boole
+      this.id = id
       this.dialogData = merge({}, data)
       this.visible = true
     },
@@ -123,15 +123,15 @@ export default {
   data() {
     return {
       visible: false,
+      id: '',
       dialogData: {
-        productName: '丰银宝A',
-        assetType: '资金',
-        state: ['已更新', '已更新'],
-        company: [],
-        accounts: [1235325236, 435346632],
-        Surplus: 799978640,
-        boole: true,
-        stated: ['审批中']
+        productName: '丰银宝B',
+        assetType: '资产',
+        state: ['买入', '赎回'],
+        company: ['宝信国际ABS集合信托', '广发货币基金'],
+        accounts: [2343526536, 35434546],
+        Surplus: '',
+        stated: ['已执行', '待执行']
       },
       disabled: false
     }

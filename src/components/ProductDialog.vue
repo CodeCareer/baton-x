@@ -109,6 +109,7 @@ export default {
     showDialog(data, boole) {
       this.visible = true
       this.dialogData = merge({}, data)
+      console.log(this.dialogData)
       this.disabled = boole
     },
     goEaa() {
