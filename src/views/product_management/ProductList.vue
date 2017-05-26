@@ -146,10 +146,10 @@ export default {
         this.filter.id = null
         console.log(tab.name + this.filter.id)
       } else if (tab.name === 'second') {
-        this.filter.id = 1
+        this.filter.id = 2
         console.log(tab.name)
       } else if (tab.name === 'third') {
-        this.filter.id = 2
+        this.filter.id = 1
         console.log(tab.name)
       } else {
         this.filter.id = 3
@@ -169,7 +169,7 @@ export default {
       this.$router.push({
         name: 'ProductDetail',
         params: {
-          id: row.id || row.name
+          id: row.name
         },
         query: {
           type: row.type
@@ -293,7 +293,7 @@ export default {
         current: false,
         type: 0,
         id: 2,
-        productType: '活期',
+        productType: '定期',
         schedule: '待发布',
         state: '待执行',
         platform: '财富宝'
@@ -324,7 +324,7 @@ export default {
         type: 1,
         id: 1,
         current: true,
-        productType: '定期',
+        productType: '活期',
         schedule: '已发布',
         state: '已执行',
         platform: '360你财富'
@@ -355,7 +355,7 @@ export default {
         status: ['销售完成', '待执行'],
         type: 0,
         id: 1,
-        productType: '',
+        productType: '定期',
         schedule: '',
         state: '',
         platform: ''
@@ -370,7 +370,7 @@ export default {
         status: ['已确认确认书'],
         type: 0,
         id: 2,
-        productType: '',
+        productType: '定期',
         schedule: '',
         state: '',
         platform: ''
@@ -385,7 +385,7 @@ export default {
         status: ['待发布'],
         type: 0,
         id: 2,
-        productType: '',
+        productType: '定期',
         schedule: '',
         state: '',
         platform: ''
@@ -400,7 +400,7 @@ export default {
         status: ['已发布'],
         type: 0,
         id: 2,
-        productType: '',
+        productType: '定期',
         schedule: '',
         state: '',
         platform: ''
@@ -416,7 +416,7 @@ export default {
         current: false,
         type: 0,
         id: 1,
-        productType: '',
+        productType: '定期',
         schedule: '',
         state: '',
         platform: ''
@@ -431,7 +431,7 @@ export default {
         status: ['已确认确认书'],
         type: 0,
         id: 2,
-        productType: '',
+        productType: '定期',
         schedule: '',
         state: '',
         platform: ''
@@ -446,7 +446,7 @@ export default {
         status: ['已确认确认书'],
         type: 0,
         id: 2,
-        productType: '',
+        productType: '定期',
         schedule: '',
         state: '',
         platform: ''
@@ -462,7 +462,7 @@ export default {
         type: 1,
         id: 1,
         current: true,
-        productType: '',
+        productType: '活期',
         schedule: '',
         state: '',
         platform: ''
@@ -478,7 +478,7 @@ export default {
         type: 1,
         id: 1,
         current: true,
-        productType: '',
+        productType: '活期',
         schedule: '',
         state: '',
         platform: ''

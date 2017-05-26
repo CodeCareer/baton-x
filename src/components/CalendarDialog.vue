@@ -12,7 +12,7 @@
                 td {{data.amount}}
                 td {{data.platform}}
                 td
-                  i.icon-batonx.icon-remind
+                  i.icon-batonx.icon-remind(@click.stop='')
                     el-date-picker(type="datetime",v-model="value")
 </template>
 <script>

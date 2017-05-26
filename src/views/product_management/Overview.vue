@@ -60,7 +60,7 @@
             el-tab-pane.jd-bg(name="first")
               a(slot="label")
                 img(src="../../assets/images/ov-jd.png")
-                span 2
+                span {{filterProducts.length}}
               .ov-content-table
                 table.ov-table-y
                   tbody
@@ -70,30 +70,30 @@
                         table.ov-table-n
                           tbody
                             tr.first_tr(v-for="type in filterProduct.type")
-                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
-                              td
+                              td(width="50",:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']",) {{type.assetType}}
+                              td(width="50")
                                 .afp(v-for="state of type.state") {{state}}
                                 //- .redeem 赎回数据已更新
-                              td
+                              td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
-                              td
+                              td(width="150")
                                 .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
-                              td.afp-num  {{type.Surplus | ktCurrency}}
-                              td
+                              td(width="150").afp-num  {{type.Surplus | ktCurrency}}
+                              td(width="70")
                                 .in-approval(v-for="stated in type.stated")
                                   span(:class="stated | filterColor") {{stated}}
                                   i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
-                              td 最晚明日12：00执行
+                              td 明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
                                   span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog(type,be=false)") 操作
+                                  span(@click="assetsDialog(type,be=false)") 操作
                             //- tr
                             //-   td.ov-table-zc 资产
                             //-   td
@@ -158,30 +158,30 @@
                         table.ov-table-n
                           tbody
                             tr.first_tr(v-for="type in filterProduct.type")
-                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
-                              td
+                              td(width="50",:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']",) {{type.assetType}}
+                              td(width="50")
                                 .afp(v-for="state of type.state") {{state}}
                                 //- .redeem 赎回数据已更新
-                              td
+                              td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
-                              td
+                              td(width="150")
                                 .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
-                              td.afp-num  {{type.Surplus | ktCurrency}}
-                              td
+                              td(width="150").afp-num  {{type.Surplus | ktCurrency}}
+                              td(width="70")
                                 .in-approval(v-for="stated in type.stated")
                                   span(:class="stated | filterColor") {{stated}}
                                   i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
-                              td 最晚明日12：00执行
+                              td 明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
                                   span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog(type,be=false)") 操作
+                                  span(@click="assetsDialog(type,be=false)") 操作
 
             el-tab-pane(name="third")
               a(slot="label")
@@ -196,30 +196,30 @@
                         table.ov-table-n
                           tbody
                             tr.first_tr(v-for="type in filterProduct.type")
-                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
-                              td
+                              td(width="50",:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']",) {{type.assetType}}
+                              td(width="50")
                                 .afp(v-for="state of type.state") {{state}}
                                 //- .redeem 赎回数据已更新
-                              td
+                              td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
-                              td
+                              td(width="150")
                                 .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
-                              td.afp-num  {{type.Surplus | ktCurrency}}
-                              td
+                              td(width="150").afp-num  {{type.Surplus | ktCurrency}}
+                              td(width="70")
                                 .in-approval(v-for="stated in type.stated")
                                   span(:class="stated | filterColor") {{stated}}
                                   i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
-                              td 最晚明日12：00执行
+                              td 明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
                                   span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog(type,be=false)") 操作
+                                  span(@click="assetsDialog(type,be=false)") 操作
             el-tab-pane(name="fourth")
               a(slot="label")
                 img(src="../../assets/images/ov-ncf.png")
@@ -233,30 +233,30 @@
                         table.ov-table-n
                           tbody
                             tr.first_tr(v-for="type in filterProduct.type")
-                              td(:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']") {{type.assetType}}
-                              td
+                              td(width="50",:class="[type.assetType === '资金' ? 'capitalColor' : 'assetColor']",) {{type.assetType}}
+                              td(width="50")
                                 .afp(v-for="state of type.state") {{state}}
                                 //- .redeem 赎回数据已更新
-                              td
+                              td(width="200")
                                 .gs(v-for="company in type.company") {{company}}
-                              td
+                              td(width="150")
                                 .afp-num(v-for="account in type.accounts") {{account | ktCurrency}}
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
-                              td.afp-num  {{type.Surplus | ktCurrency}}
-                              td
+                              td(width="150").afp-num  {{type.Surplus | ktCurrency}}
+                              td(width="70")
                                 .in-approval(v-for="stated in type.stated")
                                   span(:class="stated | filterColor") {{stated}}
                                   i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                                 //- .executed.afp-num(v-if="false") 已执行
                                 //- .unexecuted.redeem-num(v-if="false") 待执行
-                              td 最晚明日12：00执行
+                              td 明日12：00执行
                               td.ov-table-last-td
                                 .n-operation
-                                  span(@click="findDialog(type,boole=true)") 操作
+                                  span(@click="findDialog(type,be=true)") 操作
                                 .y-operation
-                                  span(@click="findDialog(type,boole=false)") 操作
+                                  span(@click="assetsDialog(type,be=false)") 操作
     .ov-remind
       h3 提醒
       .ov-remind-table
@@ -401,9 +401,9 @@ export default {
       // this.calendardatas = data
       this.$refs.calendarDialog.lookDialog(data)
     },
-    // assetsDialog(data, boole) {
-    //   this.$refs.assetDialog.showDialog(data, boole)
-    // },
+    assetsDialog(data, boole) {
+      this.$refs.assetDialog.showDialog(data, boole)
+    },
     closeRemarks() {
       this.isclose = false
     },
@@ -1103,7 +1103,7 @@ export default {
         }
         .ov-table-n {
           width: 100%;
-          table-layout: fixed;
+          // table-layout: fixed;
           border-collapse: collapse;
           td {
             padding: 10px 0;
@@ -1114,9 +1114,11 @@ export default {
           }
           .capitalColor {
             color: #f55923;
+            width:50px;
           }
           .assetColor {
             color: #1f98d9;
+            width:50px;
           }
           .afp,
           .redeem {

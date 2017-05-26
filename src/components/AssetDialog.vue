@@ -22,7 +22,7 @@
           .now-state
             .mes-title
               h4 当前状态
-                span 审批中
+                span {{dialogData.stated[0]}}
                 i.icon-batonx.icon-shenpi
             .mes-body
               table
@@ -30,8 +30,8 @@
                   tr
                     th 买入金额：
                     td
-                      span ￥
-                      span.product-rate 33,816,000.00
+                      //- span ￥
+                      span.product-rate {{dialogData.accounts[0] | ktCurrency}}
                     th 已更新
                     td
                   //- tr
@@ -83,7 +83,8 @@
                         th 开户行：
                         td 招商银行天津滨海新区支行
       .dialog-footer(slot="footer")
-        el-button(type="primary", size="small", @click="goEaa", v-if="!static") 确认审批
+        el-button(type="primary", size="small", @click="goEaa", v-if="!static && disabled") 确认审批
+        el-button(type="primary", size="small", @click="goEaa", v-if="!static && !disabled" ,disabled="disabled") 确认审批
         el-button(type="gray", size="small", @click="closeDialog", v-if="!static") 驳回
         el-button(type="gray", size="small", @click="closeDialog", v-if="static") 关闭
 </template>
@@ -107,6 +108,7 @@ export default {
   methods: {
     showDialog(data, boole) {
       console.log('1111')
+      this.disabled = boole
       this.dialogData = merge({}, data)
       this.visible = true
     },
@@ -121,7 +123,17 @@ export default {
   data() {
     return {
       visible: false,
-      dialogData: {}
+      dialogData: {
+        productName: '丰银宝A',
+        assetType: '资金',
+        state: ['已更新', '已更新'],
+        company: [],
+        accounts: [1235325236, 435346632],
+        Surplus: 799978640,
+        boole: true,
+        stated: ['审批中']
+      },
+      disabled: false
     }
   }
 }

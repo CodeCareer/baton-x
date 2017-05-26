@@ -156,14 +156,14 @@ export default {
         sizes: [10, 20, 30, 50]
       },
       logs: [{
-        userName: '张二',
+        userName: '李鑫',
         phone: '13520552699',
         role: '运营人员',
         type: '备注',
         action: '为<em>粤股交丰银宝理财计划B</em>备注（创建时间   2017-02-20 21:25）设置了提醒，提醒时间：[空] → 2017-03-25 15:38:10',
         createDate: '2017-01-15 18:44:13'
       }, {
-        userName: '张二',
+        userName: '周进发',
         addition: 'asset',
         phone: '13520552699',
         role: '运营人员',
@@ -171,7 +171,7 @@ export default {
         action: '对<em>粤股交丰银宝理财计划B</em>执行了清算',
         createDate: '2016-12-07 18:22:27'
       }, {
-        userName: '王一',
+        userName: '张旭东',
         addition: 'product',
         phone: '13520552698',
         role: '运营人员',
@@ -179,49 +179,49 @@ export default {
         action: '对<em>粤股交丰银宝理财计划B</em>执行了审批（审批流程：资金清算审批流程A1，审批角色：项目组长）',
         createDate: '2016-12-07 18:22:27'
       }, {
-        userName: '王一',
+        userName: '刘强',
         phone: '13520552698',
         role: '运营人员',
         type: '编辑产品/资产',
         action: '对<em>粤股交丰银宝理财计划B</em>执行了编辑： 产品名称: 典范-L-HNGJ-219-01 -> 典范-L-HNGJ-219-02 起息日: 2016-12-05 16:00:00 ,UTC -> 2016 - 12 - 08 16: 00: 00, UTC',
         createDate: '2016-12-07 18:19:40'
       }, {
-        userName: '王一',
+        userName: '王中闲',
         phone: '13520552698',
         role: '市场人员',
         type: '其它',
         action: '最近登录: 2017-01-25 15:38:10 UTC 登录次数: 238 →239',
         createDate: '2016-12-07 17:59:47'
       }, {
-        userName: '张三',
+        userName: '雷磊',
         phone: '13520552697',
         role: '市场人员',
         type: '其它',
         action: '最近退出: 2016-12-02 03:40:59 UTC 退出次数: 34 → 35',
         createDate: '2016-12-07 16:10:12'
       }, {
-        userName: '张三',
+        userName: '陈克',
         phone: '13520552697',
         role: '市场人员',
         type: '其它',
         action: '修改密码',
         createDate: '2016-12-06 16:10:10'
       }, {
-        userName: '张三',
+        userName: '范久久',
         phone: '13520552697',
         role: '管理员',
         type: '其它',
         action: '对 王一 执行了编辑： 部门: 运营部 →市场部 角色: 运营人员 →市场人员',
         createDate: '2016-12-06 16:10:12'
       }, {
-        userName: '张三',
+        userName: '张亮',
         phone: '13520552697',
         role: '运营人员',
         type: '编辑产品/资产',
         action: '对<em>粤股交丰银宝理财计划A</em>执行了编辑： 起息日： 2016-12-05 16:00:00 -> 2016-12-08 16:00:00',
         createDate: '2016-12-06 16:10:10'
       }, {
-        userName: '张三',
+        userName: '杨旭东',
         phone: '13520552697',
         role: '运营人员',
         type: '清算',

@@ -138,18 +138,18 @@ export default {
         code: 'F0000DWJ0101',
         amount: '¥ 10,300,000.00  ',
         rate: '3.00%',
-        endDate: '2017-06-05',
-        term: '96天',
+        endDate: '-',
+        term: '-',
         productType: '活期',
         platform: '京东金融',
         num: '146',
-        productName: '定期'
+        productName: '活期'
       }, {
         code: 'F0000CF0000D',
         amount: '¥ 11,000,080.00',
         rate: '5.10% ',
-        endDate: '2017-07-05',
-        term: '26天',
+        endDate: '-',
+        term: '-',
         productType: '活期',
         platform: '蚂蚁金服',
         num: '146',
@@ -160,7 +160,7 @@ export default {
         rate: '3.60% ',
         endDate: '2017-04-20',
         term: '56天',
-        productType: '活期',
+        productType: '定期',
         platform: '京东金融',
         num: '146',
         productName: '定期'
@@ -170,7 +170,7 @@ export default {
         rate: '4.90%',
         endDate: '2017-05-22',
         term: '87天',
-        productType: '活期',
+        productType: '定期',
         platform: '蚂蚁金服',
         num: '146',
         productName: '定期'
@@ -180,7 +180,7 @@ export default {
         rate: ' 7.00% ',
         endDate: '2017-02-28',
         term: '4天',
-        productType: '活期',
+        productType: '定期',
         platform: '京东金融',
         num: '146',
         productName: '定期'
@@ -190,7 +190,7 @@ export default {
         rate: '  5.00%  ',
         endDate: '2017-06-30',
         term: '26天',
-        productType: '活期',
+        productType: '定期',
         platform: '蚂蚁金服',
         num: '146',
         productName: '定期'
@@ -200,7 +200,7 @@ export default {
         rate: ' 5.02%  ',
         endDate: '2017-07-05',
         term: '31天',
-        productType: '活期',
+        productType: '定期',
         platform: '京东金融',
         num: '146',
         productName: '定期'
@@ -210,7 +210,7 @@ export default {
         rate: '5.20%',
         endDate: '2017-04-15',
         term: '50天',
-        productType: '活期',
+        productType: '定期',
         platform: '蚂蚁金服',
         num: '146',
         productName: '定期'
@@ -220,7 +220,7 @@ export default {
         rate: '3.50%',
         endDate: '2017-03-18',
         term: '22天',
-        productType: '活期',
+        productType: '定期',
         platform: '甜橙理财',
         num: '146',
         productName: '定期'
@@ -230,7 +230,7 @@ export default {
         rate: '4.30%',
         endDate: '2018-02-24',
         term: '10天',
-        productType: '活期',
+        productType: '定期',
         platform: '财富宝',
         num: '146',
         productName: '定期'
@@ -240,7 +240,7 @@ export default {
         rate: ' 5.50% ',
         endDate: '2018-02-24',
         term: '10天',
-        productType: '活期',
+        productType: '定期',
         platform: '360你财富',
         num: '146',
         productName: '定期'
@@ -250,7 +250,7 @@ export default {
         rate: ' 6.80%',
         endDate: '2018-02-24',
         term: '10天',
-        productType: '活期',
+        productType: '定期',
         platform: '蚂蚁金服',
         num: '146',
         productName: '定期'
