@@ -836,7 +836,7 @@ export default {
         company: [],
         accounts: [200184258],
         Surplus: '',
-        boole: true,
+        boole: false,
         stated: ['审批中']
       }, {
         assetType: '资产',
@@ -844,6 +844,7 @@ export default {
         company: ['广发货币基金', '15北京城投债'],
         accounts: [245742, 81084134],
         Surplus: '',
+        boole: false,
         stated: ['已执行', '未执行']
       }],
       producttype2: [{
@@ -860,6 +861,7 @@ export default {
         company: ['鹏华添利宝货币基金', '小定宝-财富-海航商业控股项目'],
         accounts: [245742, 81084134],
         Surplus: '',
+        boole: false,
         stated: ['已执行', '未执行']
       }]
     }
