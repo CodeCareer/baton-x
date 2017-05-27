@@ -115,6 +115,9 @@
                   div(v-for="(account, index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'amount-color ' : 'gColor'") {{account | ktCurrency}}
                   //- span.amount-color 200,184,258.00
                 td
+                  i.i.icon-batonx.icon-brackets(v-if="type.boole")
+                td.amount-color {{type.Surplus}}
+                td
                   div(v-for="stated in type.stated", :class="stated | filterAmountColor") {{stated}}
                     i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                 td 最晚明日12：00执行
@@ -125,7 +128,7 @@
                   //-   a(@click="productDatail") 操作
                 td(v-else)
                   .y-operation
-                    a(@click="assetDialog(type,be=true,id=1)") 操作
+                    a(@click="assetDialog(type,be=true,id=0)") 操作
                   .n-operation
                     a(@click="assetDialog(type,be=false,id=1)") 操作
               //- tr
@@ -164,6 +167,9 @@
                   div(v-for="(account, index) in type.accounts", :class="~'买入申购已更新'.indexOf(type.state[index]) ? 'amount-color ' : 'gColor'") {{account | ktCurrency}}
                   //- span.amount-color 200,184,258.00
                 td
+                  i.i.icon-batonx.icon-brackets(v-if="type.boole")
+                td.amount-color {{type.Surplus | ktCurrency}}
+                td
                   div(v-for="stated in type.stated", :class="stated | filterAmountColor") {{stated}}
                     i.icon-batonx.icon-shenpi(v-if="stated === '审批中'")
                 td 最晚明日12：00执行
@@ -171,10 +177,10 @@
                   .y-operation
                     a(@click="productDialog(type,be=true,id=0)") 操作
                   .n-operation
-                    a(@click="productDialog(type,be=false,id=0)") 操作
+                    a(@click="productDialog(type,be=false,id=1)") 操作
                 td(v-else)
                   .y-operation
-                    a(@click="assetDialog(type,be=true,id=1)") 操作
+                    a(@click="assetDialog(type,be=true,id=0)") 操作
                   .n-operation
                     a(@click="assetDialog(type,be=false,id=1)") 操作
     .box.box-normal
@@ -1344,5 +1350,12 @@ export default {
 }
 .negative{
   color:#16a474;
+}
+.amount-color{
+  color:#de3569;
+}
+.icon-brackets{
+  font-size: 25px;
+  color: #d8dadd;
 }
 </style>

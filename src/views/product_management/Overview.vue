@@ -82,7 +82,7 @@
                                 //- .redeem-num {{16200234 | ktCurrency}}
                               td(style="text-align:center",width="50")
                                 i.icon-batonx.icon-brackets(v-if="type.boole")
-                              td(width="150").afp-num  {{type.Surplus | ktCurrency}}
+                              td.afp-num(width="150")  {{type.Surplus | ktCurrency}}
                               td(width="70")
                                 .in-approval(v-for="stated in type.stated")
                                   span(:class="stated | filterColor") {{stated}}

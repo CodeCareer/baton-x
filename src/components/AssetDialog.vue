@@ -33,7 +33,7 @@
                       //- span ￥
                     th
                     td
-                      span.product-rate {{dialogData.accounts[id] | ktCurrency}}
+                      span(:class="~'卖出赎回到期'.indexOf(dialogData.state[id]) ? 'gColor' : 'product-rate'") {{dialogData.accounts[id] | ktCurrency}}
                   //- tr
                   //-   th 赎回数据：
                   //-   td
